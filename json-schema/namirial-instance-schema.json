@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/namirial/main/json-schema/namirial-instance-schema.json",
+  "title": "Instance",
+  "x-generated": "2026-10-18",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/namirial-connectors-openapi.yml#/components/schemas/Instance",
+  "type": "object",
+  "properties": {
+    "eSawDomainUri": {
+      "type": "string",
+      "description": "The instance eSaw uri"
+    },
+    "eSawVersion": {
+      "type": "string",
+      "description": "The instance eSaw version"
+    },
+    "description": {
+      "type": "string",
+      "description": "The instance description"
+    },
+    "externalIdentifier": {
+      "type": "string",
+      "description": "The instance external identifier"
+    },
+    "esawClientId": {
+      "type": "string",
+      "description": "The eSaw clientId"
+    },
+    "esawClientSecret": {
+      "type": "string",
+      "description": "The eSaw clientSecret"
+    }
+  }
+}

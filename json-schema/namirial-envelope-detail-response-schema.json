@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/namirial/main/json-schema/namirial-envelope-detail-response-schema.json",
+  "title": "EnvelopeDetailResponse",
+  "x-generated": "2026-10-18",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/namirial-connectors-openapi.yml#/components/schemas/EnvelopeDetailResponse",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "The Envelope status"
+    },
+    "auditDocument": {
+      "type": "string",
+      "description": "The Envelope Audit Document Id"
+    },
+    "envelopeJsonStatus": {
+      "type": "string",
+      "description": "The Envelope Json Status"
+    },
+    "completedDocuments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/CompletedDocuments"
+      }
+    },
+    "documentList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DocumentDetail"
+      }
+    },
+    "recipientStatus": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/RecipientsStatus"
+      }
+    }
+  },
+  "$defs": {
+    "CompletedDocuments": {
+      "type": "object",
+      "properties": {
+        "auditDocument": {
+          "type": "string",
+          "description": "Audit document"
+        },
+        "documentId": {
+          "type": "string",
+          "description": "The document identifier"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name"
+        }
+      }
+    },
+    "DocumentDetail": {
+      "type": "object",
+      "properties": {
+        "pageSizesInPoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PageSizePoint"
+          }
+        },
+        "docRefNumber": {
+          "type": "integer",
+          "description": "The document reference number"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name"
+        },
+        "formFields": {
+          "type": "array"
+        }
+      }
+    },
+    "PageSizePoint": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number",
+          "description": "Page Height"
+        },
+        "width": {
+          "type": "number",
+          "description": "Page Width"
+        }
+      }
+    },
+    "RecipientsStatus": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The recipient identifier"
+        },
+        "email": {
+          "type": "string",
+          "description": "The recipient email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The recipient first name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The recipient last name"
+        },
+        "orderIndex": {
+          "type": "integer",
+          "description": "The recipient order index"
+        },
+        "signedDate": {
+          "type": "string",
+          "description": "The recipient signed date"
+        },
+        "status": {
+          "type": "string",
+          "description": "The recipient status"
+        },
+        "workstepRedirectUrl": {
+          "type": "string",
+          "description": "The recipient workstep redirect url"
+        }
+      }
+    }
+  }
+}

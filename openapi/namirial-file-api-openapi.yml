@@ -1,0 +1,1607 @@
+openapi: 3.2.0
+info:
+  title: Namirial File API
+  version: v6
+  description: 'Operations tagged File across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: File
+paths:
+  /v6/file/{fileId}:
+    get:
+      tags:
+      - File
+      summary: Download a file belonging to a completed envelope
+      operationId: File_DownloadCompleted
+      parameters:
+      - name: fileId
+        in: path
+        description: The identifier of the file.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+            text/json:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: BadRequest
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/octet-stream:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/file/delete:
+    post:
+      tags:
+      - File
+      summary: Delete an uploaded file
+      operationId: File_Delete
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileDeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FileDeleteRequest'
+        description: The model containing the delete options.
+        required: true
+    servers:
+    - url: /api
+  /v6/file/upload:
+    post:
+      tags:
+      - File
+      summary: Upload a file for temporary use
+      operationId: File_Upload
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+        '400':
+          description: 'HTTP 400: Bad Request. E.g. a HTTP 400 with error information ERR0067 will be thrown when trying to upload a file format not supported, or rejected by the FileContentValidationPlugin.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '415':
+          description: UnsupportedMediaType
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                File:
+                  type: string
+                  description: 'Upload a file which is later-on referenced in other API calls by its fileId (e.g. documents of an envelope). Supported file types: PDF (by default), or other formats which can be converted to PDF (docx and others) in case the (optional) document converter is installed and configured. File content might be validated server-side by a FileContentValidationPlugin.'
+                  format: binary
+              required:
+              - File
+    servers:
+    - url: /api
+  /v6/file/prepare:
+    post:
+      tags:
+      - File
+      summary: Prepare uploaded files by extracting contained elements, advanced document tags…
+      operationId: File_Prepare
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilePrepareResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FilePrepareResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilePrepareRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FilePrepareRequest'
+        description: The model containing the prepare options.
+        required: true
+    servers:
+    - url: /api
+components:
+  schemas:
+    FilePrepareSwedishBankIdSignatureType:
+      description: The configuration of the signature.
+      type: object
+      properties:
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareSwedishBankIdStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareCheckBoxDefinition:
+      description: The configuration of a check box.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the check box when it is checked.
+          type: string
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    FilePrepareOneTimePasswordSignatureType:
+      description: The configuration of the OneTimePassword signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the password in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareOneTimePasswordStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareRemoteCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareCheckBox:
+      description: The configuration of the check box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        IsChecked:
+          description: If true, the check box is checked.
+          type: boolean
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareCheckBoxDefinition'
+          description: The definition of the check box.
+    FileDeleteRequest:
+      description: The request model to delete an uploaded file.
+      required:
+      - FileId
+      type: object
+      properties:
+        FileId:
+          description: The identifier of the file.
+          maxLength: 36
+          minLength: 36
+          type: string
+    FilePrepareLocalCertificateSignatureType:
+      description: The configuration of the LocalCertificate signature.
+      type: object
+      properties:
+        EnforcePreferredHashAlgorithm:
+          description: If true, the usage of the preferred hash algorithm is enforced.
+          type: boolean
+        PreferredHashAlgorithm:
+          description: The preferred hash algorithm.
+          enum:
+          - Sha256
+          - Sha512
+          type: string
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareLocalCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareOneTimePasswordStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayTransactionToken:
+          description: If true, the transaction token is displayed.
+          type: boolean
+        DisplayPhoneNumber:
+          description: If true, the phone number of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareAllowedSignatureTypes:
+      description: The definition of the allowed signature types for the signature.
+      type: object
+      properties:
+        ClickToSign:
+          $ref: '#/components/schemas/FilePrepareClickToSignSignatureType'
+          description: Allow signing with "click to sign".
+        DrawToSign:
+          $ref: '#/components/schemas/FilePrepareDrawToSignSignatureType'
+          description: Allow signing with "draw to sign".
+        TypeToSign:
+          $ref: '#/components/schemas/FilePrepareTypeToSignSignatureType'
+          description: Allow signing with "type to sign".
+        LocalCertificate:
+          $ref: '#/components/schemas/FilePrepareLocalCertificateSignatureType'
+          description: Allow signing with a local certificate.
+        DisposableCertificate:
+          $ref: '#/components/schemas/FilePrepareDisposableCertificateSignatureType'
+          description: Allow signing with a disposable certificate.
+        SwissComOnDemand:
+          $ref: '#/components/schemas/FilePrepareSwissComOnDemandSignatureType'
+          description: Allow signing with a Swisscom On-Demand certificate.
+        ATrustCertificate:
+          $ref: '#/components/schemas/FilePrepareATrustCertificateSignatureType'
+          description: Allow signing with an A-Trust certificate.
+        Biometric:
+          $ref: '#/components/schemas/FilePrepareBiometricSignatureType'
+          description: Allow signing with a biometric signature.
+        RemoteCertificate:
+          $ref: '#/components/schemas/FilePrepareRemoteCertificateSignatureType'
+          description: Allow signing with a remote certificate.
+        OneTimePassword:
+          $ref: '#/components/schemas/FilePrepareOneTimePasswordSignatureType'
+          description: Allow signing with a one time password (SMS-OTP).
+        SwedishBankId:
+          $ref: '#/components/schemas/FilePrepareSwedishBankIdSignatureType'
+          description: Allow signing with Swedish BankID.
+        SignaturePlugins:
+          description: Allow signing with signature plugins.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareSignaturePluginSignatureType'
+    FilePrepareComboBoxDefinition:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/FilePrepareTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareChoiceItem'
+        IsEditable:
+          description: If true, the combo box is editable.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePrepareTextFormat:
+      description: The configuration of the text format.
+      type: object
+      properties:
+        TextColor:
+          description: 'The color of the text.
+
+            Six digit hexadecimal color starting with # in #RRGGBB format according to CSS Color Module Level 4, paragraph 5.2.'
+          type: string
+        FontSizeInPt:
+          format: double
+          description: The size of the font in points.
+          type: number
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        Bold:
+          description: If true, the bold font is used.
+          type: boolean
+        Italic:
+          description: If true, the italic font is used.
+          type: boolean
+        TextAlign:
+          description: The alignment of the text. The default alignment is left.
+          enum:
+          - Left
+          - Center
+          - Right
+          type: string
+          x-ms-enum:
+            name: TextAlignment
+            modelAsString: false
+    FilePrepareNumberValidationConfiguration:
+      description: The validation rules for numbers.
+      type: object
+      properties:
+        DecimalDigits:
+          format: int32
+          description: The expected amount of decimal digits.
+          type: integer
+        Symbol:
+          description: The expected symbol.
+          type: string
+        SymbolLocation:
+          description: The defined symbol location.
+          enum:
+          - Start
+          - StartWithBlank
+          - End
+          - EndWithBlank
+          type: string
+          x-ms-enum:
+            name: SymbolLocationType
+            modelAsString: false
+        GroupSeparator:
+          description: The expected thousands separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - Blank
+          - None
+          type: string
+        DecimalSeparator:
+          description: The expected decimal separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - None
+          type: string
+          x-ms-enum:
+            name: DecimalSeparatorType
+            modelAsString: false
+        Range:
+          $ref: '#/components/schemas/FilePrepareFieldValidationRange'
+          description: The range of the values.
+    FilePrepareTextBoxDefinition:
+      description: The configuration of the text box.
+      type: object
+      properties:
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        MaxLength:
+          format: int32
+          description: The maximum length of the text.
+          type: integer
+        IsMultiline:
+          description: If true, the text box can have multiple lines.
+          type: boolean
+        IsPassword:
+          description: If true, the text box behaves like a password input field and does not show the actually entered characters.
+          type: boolean
+        TextFormat:
+          $ref: '#/components/schemas/FilePrepareTextFormat'
+          description: The configuration of the text format.
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePrepareListBox:
+      description: The configuration of the list box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        PreSelectedItems:
+          description: The export values of the items which should be initially selected.
+          type: array
+          items:
+            type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareListBoxDefinition'
+          description: The definition of the list box field.
+    FilePrepareHyperLink:
+      description: The definition of the hyperlink element.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the hyperlink.
+          type: string
+        Uri:
+          description: The URI of the hyperlink.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareLinkDefinition'
+          description: The definition of the hyperlink element.
+    FilePrepareStampImprintDateConfiguration:
+      description: The configuration of the stamp imprint date
+      type: object
+      properties:
+        UseLocalTimezone:
+          description: If true, the local timezone is used.
+          type: boolean
+        DateTimeFormat:
+          description: The format of the timestamp.
+          type: string
+    FilePrepareSignaturePluginSignatureType:
+      description: The configuration of the signature plugin.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the plugin.
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePreparePluginStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareBiometricSignatureType:
+      description: The configuration of the Biometric signature.
+      type: object
+      properties:
+        BiometricVerification:
+          description: If true, a biometric verification is performed.
+          type: boolean
+        AllowBiometricStoringOnly:
+          description: If true, the biometric signature might be stored without verification.
+          type: boolean
+        StoreSignedResponseWithoutBioData:
+          description: If true, the signed response is stored without biometric data.
+          type: boolean
+        BiometricServerUserId:
+          description: The identifier of the user on the biometric server.
+          type: string
+        SignaturePositioning:
+          description: The allowed positioning of the biometric signature.
+          enum:
+          - WithinField
+          - OnPage
+          - IntersectsWithField
+          type: string
+          x-ms-enum:
+            name: BiometricSignaturePositioning
+            modelAsString: false
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+    FilePrepareComboBox:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The selected value of the combo box.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareComboBoxDefinition'
+          description: The definition of the combo box.
+    FilePrepareSwedishBankIdStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareSignatureTaskConfiguration:
+      description: The configuration of the signature task.
+      type: object
+      properties:
+        StampImprintDateConfiguration:
+          $ref: '#/components/schemas/FilePrepareStampImprintDateConfiguration'
+          description: The configuration of the stamp imprint date.
+        BatchGroup:
+          description: The batch group.
+          type: string
+    FilePrepareDisposableCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareListBoxDefinition:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/FilePrepareTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareChoiceItem'
+        IsMultiSelect:
+          description: If true, multiple values of the list box can be selected.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePrepareLinkDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePreparePhoneValidationConfiguration:
+      description: The validation rules for phone numbers.
+      type: object
+      properties:
+        Type:
+          description: The format of the phone numbers.
+          enum:
+          - International
+          - InternationalLeadingZeros
+          - InternationalLeadingPlus
+          type: string
+          x-ms-enum:
+            name: PhoneType
+            modelAsString: false
+    FilePrepareRemoteCertificateSignatureType:
+      description: The configuration of the RemoteCertificate signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareRemoteCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareTimeValidationConfiguration:
+      description: The validation rules for time values.
+      type: object
+      properties:
+        TimeFormat:
+          description: The format of the time values.
+          type: string
+        Range:
+          $ref: '#/components/schemas/FilePrepareFieldValidationRange'
+          description: The range of the values.
+    FilePrepareClickToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareTextBox:
+      description: The configuration of the text box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The value of the text box.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        Validation:
+          $ref: '#/components/schemas/FilePrepareFieldValidation'
+          description: The configuration of the validation rules for the text box value.
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareTextBoxDefinition'
+          description: The definition of the text box.
+    FilePrepareAttachment:
+      description: The configuration of the attachment element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DisplayName:
+          description: The displayed name.
+          type: string
+        DisplayIconType:
+          description: The type of the displayed icon.
+          enum:
+          - Paperclip
+          - Graph
+          - PushPin
+          - Tag
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareAttachmentDefinition'
+          description: The definition of the attachment element.
+    FilePrepareElements:
+      description: The configurable elements of the documents.
+      type: object
+      properties:
+        TextBoxes:
+          description: The text boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareTextBox'
+        CheckBoxes:
+          description: The check boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareCheckBox'
+        ComboBoxes:
+          description: The combo boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareComboBox'
+        RadioButtons:
+          description: The radio buttons.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareRadioButtonGroup'
+        ListBoxes:
+          description: The list boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareListBox'
+        Signatures:
+          description: The signatures.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareSignatureField'
+        Attachments:
+          description: The attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareAttachment'
+        LinkConfiguration:
+          $ref: '#/components/schemas/FilePrepareLinkConfiguration'
+          description: The links in the documents.
+    FilePrepareSignatureFieldDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FileUploadResponse:
+      description: The response model after a file was successfully uploaded.
+      type: object
+      properties:
+        FileId:
+          description: The identifier of the file.
+          type: string
+    FilePrepareDrawToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareDrawToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareLinkConfiguration:
+      description: The configuration of the link elements.
+      type: object
+      properties:
+        HyperLinks:
+          description: The list of hyperlink elements.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareHyperLink'
+    FilePrepareRadioButtonGroup:
+      description: The configuration of the radio button group.
+      type: object
+      properties:
+        GroupName:
+          description: The name of the radio button group.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        SelectedItem:
+          description: The export value of the selected item of the radio button group.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareRadioButtonDefinition'
+          description: The definition of the radio button group.
+    FilePrepareClickToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareClickToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePreparePosition:
+      description: The position of an element on the document.
+      type: object
+      properties:
+        PageNumber:
+          format: int32
+          description: The number of the page where the element is located. It starts with 1.
+          type: integer
+        X:
+          format: double
+          description: The X coordinate in points. It starts from the left.
+          type: number
+        Y:
+          format: double
+          description: The Y coordinate in points. It starts from the bottom.
+          type: number
+    FilePrepareAttachmentDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePrepareChoiceItem:
+      description: The configuration of the choice item.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the choice item is selected.
+          type: string
+        DisplayValue:
+          description: The displayed value of the choice item.
+          type: string
+    FilePrepareFieldValidationRange:
+      description: The validation rules for a value range.
+      type: object
+      properties:
+        From:
+          description: The lower boundary of the range.
+          type: string
+        To:
+          description: The upper boundary of the range.
+          type: string
+    FilePrepareRadioButtonItemDefinition:
+      description: The configuration of the radio button.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the radio button is checked.
+          type: string
+        IsChecked:
+          description: If true, the radio button is checked by default.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        Position:
+          $ref: '#/components/schemas/FilePreparePosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/FilePrepareSize'
+          description: The size of the form field.
+    FilePrepareSignAutomatic:
+      description: An automatic signing action.
+      type: object
+      properties:
+        VisibleSignatures:
+          description: 'The visible signatures define the optional visual representations for automatic signatures.
+
+            If none are defined, the automatic signatures are applied to the documents without a visual element.'
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareVisibleSignature'
+    FilePrepareResponse:
+      description: The response model after parsing the pdf file.
+      type: object
+      properties:
+        UnassignedElements:
+          $ref: '#/components/schemas/FilePrepareElements'
+          description: The elements which are not assigned to any action.
+        Activities:
+          description: 'The steps for the envelope.
+
+            One activity may contain elements from multiple documents assigned to the same recipient.
+
+            The activities will only be generated for advanced document tags.'
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareActivity'
+    FilePrepareDateValidationConfiguration:
+      description: The validation rules for dates.
+      type: object
+      properties:
+        DateFormat:
+          description: The format of the dates.
+          type: string
+        Range:
+          $ref: '#/components/schemas/FilePrepareFieldValidationRange'
+          description: The range of the values.
+    FilePrepareSigStringConfiguration:
+      description: The configuration for parsing of a SigString.
+      required:
+      - StartPattern
+      type: object
+      properties:
+        StartPattern:
+          description: Define the start pattern.
+          maxLength: 500
+          minLength: 0
+          type: string
+        EndPattern:
+          description: Define the end pattern.
+          maxLength: 500
+          minLength: 0
+          type: string
+        ClearSigString:
+          description: If true, the parsed SigString is deleted from the document
+          type: boolean
+        SearchEntireWordOnly:
+          description: If true, the patterns are only matched as a whole word.
+          type: boolean
+    FilePrepareTypeToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareTypeToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareSignatureField:
+      description: The configuration of the signature field.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the signature.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          type: string
+        FieldDescription:
+          description: The description of the signature.
+          type: string
+        UseExternalTimestampServer:
+          description: If true, an timestamp from an external server is embedded into the signature.
+          type: boolean
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FoundSigStringPattern:
+          description: Contains the actual pattern found, if this signature field was created from parsing a SigString
+          type: string
+        AllowedSignatureTypes:
+          $ref: '#/components/schemas/FilePrepareAllowedSignatureTypes'
+          description: The allowed types for the signature.
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareSignatureFieldDefinition'
+          description: The definition of the signature field.
+        TaskConfiguration:
+          $ref: '#/components/schemas/FilePrepareSignatureTaskConfiguration'
+          description: The configuration of the task.
+    FilePrepareVisibleSignature:
+      description: An automatic signature with a visual appearance on the document.
+      type: object
+      properties:
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Id:
+          description: The identifier of the signature field.
+          type: string
+        UseExternalTimestampServer:
+          description: If true, a timestamp from an external server is embedded into the signature.
+          type: boolean
+        FieldDefinition:
+          $ref: '#/components/schemas/FilePrepareSignatureFieldDefinition'
+          description: The definition of the signature field.
+    FilePrepareSwissComOnDemandStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareLocalCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareRequest:
+      description: The request model for parsing documents.
+      required:
+      - FileIds
+      type: object
+      properties:
+        FileIds:
+          description: The identifiers of the uploaded files.
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            maxLength: 36
+            minLength: 36
+            type: string
+        ClearAdvancedDocumentTags:
+          description: If true, the parsed advanced document tags are deleted from the document.
+          type: boolean
+        SigStringConfigurations:
+          description: The configurations for the parsing of SigString. The default [`sig`] is always added.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareSigStringConfiguration'
+    FilePrepareDrawToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareDisposableCertificateSignatureType:
+      description: The configuration of the DisposableCertificate signature.
+      type: object
+      properties:
+        IsLongLived:
+          description: If true, the disposable certificate is long lived.
+          type: boolean
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareDisposableCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePreparePluginStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareATrustCertificateSignatureType:
+      description: The configuration of the A-Trust certificate signature.
+      type: object
+      properties:
+        TemplateId:
+          description: The identifier of the A-Trust template.
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+    FilePrepareTypeToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    FilePrepareRadioButtonDefinition:
+      description: The configuration of the radio button group definition.
+      type: object
+      properties:
+        IsSelectUnison:
+          description: If true, radio buttons with the same <code>ExportValue</code> are checked and unchecked together.
+          type: boolean
+        Items:
+          description: The list of radiobuttons that belong to the same group.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilePrepareRadioButtonItemDefinition'
+    FilePrepareAction:
+      description: The action of the activity.
+      type: object
+      properties:
+        SignAutomatic:
+          $ref: '#/components/schemas/FilePrepareSignAutomatic'
+          description: The definition of the automatic sign action.
+        Sign:
+          $ref: '#/components/schemas/FilePrepareSign'
+          description: The definition of the sign action.
+    FilePrepareSwissComOnDemandSignatureType:
+      description: The configuration of the Swisscom On-Demand signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The certificate validity in seconds.
+          type: integer
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/FilePrepareSwissComOnDemandStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    FilePrepareActivity:
+      description: Defines an activity in the process.
+      type: object
+      properties:
+        Action:
+          $ref: '#/components/schemas/FilePrepareAction'
+          description: The action assigned to the activity.
+    FilePrepareFieldValidation:
+      description: The configuration of the field validation rules.
+      type: object
+      properties:
+        Type:
+          description: The type of the value.
+          enum:
+          - None
+          - Date
+          - Email
+          - Number
+          - Phone
+          - Time
+          type: string
+          x-ms-enum:
+            name: FieldValidationType
+            modelAsString: false
+        DateValidationConfiguration:
+          $ref: '#/components/schemas/FilePrepareDateValidationConfiguration'
+          description: The validation rules for dates.
+        NumberValidationConfiguration:
+          $ref: '#/components/schemas/FilePrepareNumberValidationConfiguration'
+          description: The validation rules for numbers.
+        PhoneValidationConfiguration:
+          $ref: '#/components/schemas/FilePreparePhoneValidationConfiguration'
+          description: The validation rules for phone numbers.
+        TimeValidationConfiguration:
+          $ref: '#/components/schemas/FilePrepareTimeValidationConfiguration'
+          description: The validation rules for time values.
+    FilePrepareSign:
+      description: The elements, which are assigned to actions.
+      type: object
+      properties:
+        Elements:
+          $ref: '#/components/schemas/FilePrepareElements'
+          description: The definition of the assigned elements.
+    FilePrepareSize:
+      description: The definition of the size of an element.
+      type: object
+      properties:
+        Width:
+          format: double
+          description: The width of the element in points.
+          type: number
+        Height:
+          format: double
+          description: The height of the element in points.
+          type: number
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

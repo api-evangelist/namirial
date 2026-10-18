@@ -1,23 +1,801 @@
 aid: namirial
+
 name: Namirial
-description: 'Namirial is a company surfaced via the API Evangelist harvest backlog (source: kin-score-markets)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: Namirial is a European digital trust services company and qualified trust service provider. Its own site describes products for customer
+  identification and identity verification (Namirial Onboarding), electronic signatures, digital identity wallets (Wallet Gateway, Wallet App),
+  and related trust and compliance services for large enterprises, SMEs and public administration. It publishes product documentation, developer
+  SDK docs (Android, iOS, Windows) and a Connectors APIs reference.
+
 url: https://raw.githubusercontent.com/api-evangelist/namirial/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:kin-score-markets
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-18 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-18'
+
 modified: '2026-10-18'
+
 tags:
 - Company
-apis: []
+- Digital Trust
+- Electronic Signature
+- Identity Verification
+- Digital Identity
+- Trust Services
+- Compliance
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://www.namirial.com/wp-content/uploads/cropped-favicon-namirial-360x360.png
+
 common:
+- type: AgenticAccess
+  url: agentic-access/namirial-agentic-access.yml
+- type: Plans
+  url: plans/namirial-plans-pricing.yml
+- type: Spectral
+  url: rules/namirial-rules.yml
+- type: JSONLD
+  url: json-ld/namirial-context.jsonld
+- type: Vocabulary
+  url: vocabulary/namirial-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/namirial-data-model.yml
+- type: Components
+  url: components/namirial-components.yml
+- type: ChangeLog
+  url: changelog/namirial-changelog.yml
+- type: Conventions
+  url: conventions/namirial-conventions.yml
+- type: Sandbox
+  url: sandbox/namirial-sandbox.yml
+- type: Deprecation
+  url: lifecycle/namirial-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/namirial-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/namirial-problem-types.yml
+- type: Conformance
+  url: conformance/namirial-conformance.yml
+- type: Overlay
+  url: overlays/namirial-connectors-overlay.yaml
+- type: LLMsTxt
+  url: llms/namirial-llms.txt
+- type: AgentCard
+  url: a2a/namirial-a2a.yml
+- type: WellKnown
+  url: well-known/namirial-well-known.yml
+- type: Hosts
+  url: hosts/namirial-hosts.yml
+- type: IntegrationEdges
+  url: integrations/namirial-integration-edges.yml
+- type: Vendors
+  url: vendors/namirial-vendors.yml
+- type: SDKs
+  url: packages/namirial-packages.yml
+- type: Packages
+  url: packages/namirial-packages.yml
+- type: TrustCenter
+  url: https://www.namirial.com/en/blog/trust/
+- type: GettingStarted
+  url: https://documentation.namirial.com/onboarding
+- type: OAuthScopes
+  url: scopes/namirial-scopes.yml
+- type: Authentication
+  url: authentication/namirial-authentication.yml
+- type: DomainSecurity
+  url: security/namirial-domain-security.yml
 - type: Website
-  url: https://namirial.com
+  url: https://www.namirial.com/en/
+- type: Documentation
+  url: https://documentation.namirial.com/
+- type: DeveloperPortal
+  url: https://doc.namirial.com/
+- type: APIReference
+  url: https://doc.namirial.com/connectors-apis/latest/
+- type: Support
+  url: https://servicedesk.namirial.com/hc/en-gb
+- type: Blog
+  url: https://www.namirial.com/en/blog/
+- type: Newsroom
+  url: https://www.namirial.com/en/news/
+- type: StatusPage
+  url: https://status.namirial.com/
+- type: Security
+  url: https://www.namirial.com/en/security/
+- type: PrivacyPolicy
+  url: https://www.namirial.com/en/privacy-policy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/namirial/
+
+apis:
+- aid: namirial:namirial-auth-api
+  name: Namirial Auth API
+  description: Access to authentication endpoints
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-auth-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-authorization-api
+  name: Namirial Authorization API
+  description: The Authorization API from Namirial — 2 operation(s) for authorization.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-automaticprofile-api
+  name: Namirial Automatic Profile API
+  description: The AutomaticProfile API from Namirial — 1 operation(s) for automaticprofile.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - AutomaticProfile
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-automaticprofile-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-clients-api
+  name: Namirial Clients API
+  description: Manage clients
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Clients
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-clients-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-clientsinstances-api
+  name: Namirial Clients Instances API
+  description: Manage association between clients and instances
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - ClientsInstances
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-clientsinstances-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-documents-api
+  name: Namirial Documents API
+  description: Manage documents
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-documents-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-draft-api
+  name: Namirial Draft API
+  description: The Draft API from Namirial — 10 operation(s) for draft.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Draft
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-draft-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-draftactivity-api
+  name: Namirial Draft Activity API
+  description: The DraftActivity API from Namirial — 1 operation(s) for draftactivity.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - DraftActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-draftactivity-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-envelope-api
+  name: Namirial Envelope API
+  description: The Envelope API from Namirial — 13 operation(s) for envelope.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Envelope
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-envelope-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-envelopeactivity-api
+  name: Namirial Envelope Activity API
+  description: The EnvelopeActivity API from Namirial — 2 operation(s) for envelopeactivity.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - EnvelopeActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-envelopeactivity-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-envelopebulk-api
+  name: Namirial Envelope Bulk API
+  description: The EnvelopeBulk API from Namirial — 7 operation(s) for envelopebulk.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - EnvelopeBulk
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-envelopebulk-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-envelopes-api
+  name: Namirial Envelopes API
+  description: Manage eSignAnyWhere envelope
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Envelopes
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-envelopes-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-file-api
+  name: Namirial File API
+  description: The File API from Namirial — 4 operation(s) for file.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-file-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-instances-api
+  name: Namirial Instances API
+  description: Manage instances
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-instances-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-license-api
+  name: Namirial License API
+  description: The License API from Namirial — 1 operation(s) for license.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - License
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-license-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-organizations-api
+  name: Namirial Organizations API
+  description: Manage connector organizations
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-organizationsinstances-api
+  name: Namirial Organizations Instances API
+  description: Manage association between organizations and instances
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - OrganizationsInstances
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-organizationsinstances-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-processes-api
+  name: Namirial Processes API
+  description: Manage process signature
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Processes
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-processes-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-sealingcertificate-api
+  name: Namirial Sealing Certificate API
+  description: The SealingCertificate API from Namirial — 1 operation(s) for sealingcertificate.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - SealingCertificate
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-sealingcertificate-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-system-api
+  name: Namirial System API
+  description: The System API from Namirial — 1 operation(s) for system.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-system-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-team-api
+  name: Namirial Team API
+  description: The Team API from Namirial — 2 operation(s) for team.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Team
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-team-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+- aid: namirial:namirial-template-api
+  name: Namirial Template API
+  description: The Template API from Namirial — 6 operation(s) for template.
+  humanURL: https://www.esignanywhere.net/en/esignature-api/
+  baseURL: https://saas.esignanywhere.net/api
+  tags:
+  - Template
+  properties:
+  - type: OpenAPI
+    url: openapi/namirial-template-api-openapi.yml
+  - type: Documentation
+    url: https://service.esignanywhere.net/help/#X-Web_ApiDocumentation
+  - type: APIReference
+    url: https://demo.esignanywhere.net/Api/swagger/ui/index
+  - type: Documentation
+    url: https://doc.namirial.com/connectors-apis/latest/
+  - type: ChangeLog
+    url: https://doc.namirial.com/connectors-apis/latest/changelog/
+  - type: JSONSchema
+    url: json-schema/namirial-create-process-draft-request-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-envelope-detail-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-get-process-response-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-instance-no-id-schema.json
+  - type: JSONSchema
+    url: json-schema/namirial-organization-schema.json
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: Website and pointers taken from links on www.namirial.com/en/ (pre-flight site_links + own fetch, 2026-10-18).
+  evidence:
+  - url: https://www.namirial.com/en/
+    status: 200
+  - url: https://doc.namirial.com/connectors-apis/latest/
+    status: 200
+  - url: https://status.namirial.com/
+    status: 200
+x-enrichment:
+  date: '2026-10-18'
+  status: enriched
+  artifacts_added: 55
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=deepseek,regulatory=anthropic

@@ -1,0 +1,32 @@
+generated: '2026-10-18'
+method: derived
+source: openapi/namirial-connectors-openapi.yml, openapi/namirial-esignanywhere-openapi.yml
+auth_style:
+  - OAuth2 with authorization code flow for web applications
+  - OAuth2 with client credentials flow for backend systems
+  - API key authentication (eSignAnyWhere)
+  - Basic authentication
+idempotency:
+  coverage: none
+  note: No idempotency key parameter found in mutating operations
+pagination:
+  style: offset-based
+  parameters:
+    - pageNumber: Number of selected page
+    - pageSize: Number of items per page
+  response_fields: Returns paginated lists with page metadata
+error_envelope:
+  format: Standard HTTP error codes with JSON error responses
+  note: No RFC 9457 (application/problem+json) support detected
+versioning:
+  scheme: semantic
+  location: URL path and documentation
+  current: "1.5.1 (Connectors APIs)"
+request_id_tracing:
+  note: Not explicitly documented in OpenAPI specs
+rate_limit_signaling:
+  note: Not explicitly documented in OpenAPI specs
+reversibility:
+  note: Electronic signature processes may have cancellation/reversal windows but not documented in API specs
+dry_run_mode:
+  note: Not documented in API specifications

@@ -1,0 +1,302 @@
+openapi: 3.2.0
+info:
+  title: Namirial Instances API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Instances across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Instances
+  description: Manage instances
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/instances
+paths:
+  /instances:
+    get:
+      tags:
+      - Instances
+      summary: Get the instance list
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: query
+        name: pageSize
+        schema:
+          type: string
+        required: false
+        description: Number of items per page
+        example: 10
+      - in: query
+        name: pageNumber
+        schema:
+          type: string
+        required: false
+        description: Number of selected page
+        example: 1
+      responses:
+        '200':
+          description: The instance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getInstances
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Instances
+      summary: Create new instance
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      requestBody:
+        description: A JSON object containing new instance information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/CreateInstance'
+      responses:
+        '201':
+          description: New Instance created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+              examples:
+                detail:
+                  $ref: '#/components/examples/InstanceResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: postInstances
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /instances/{instanceId}:
+    get:
+      tags:
+      - Instances
+      summary: Get instance detail
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: instanceId
+        schema:
+          type: string
+        required: true
+        description: Instance Identifier
+        example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      responses:
+        '200':
+          description: The instance detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: getInstancesByInstanceId
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Instances
+      summary: Edit selected Instance
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: instanceId
+        schema:
+          type: string
+        required: true
+        description: Instance Identifier
+        example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      requestBody:
+        description: A JSON object containing instance information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/UpdateInstance'
+      responses:
+        '200':
+          description: The edited instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+              examples:
+                detail:
+                  $ref: '#/components/examples/InstanceResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: putInstancesByInstanceId
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Instances
+      summary: Delete selected Instance
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: instanceId
+        schema:
+          type: string
+        required: true
+        description: Instance Identifier
+        example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      responses:
+        '200':
+          description: Instance Deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: deleteInstancesByInstanceId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  examples:
+    UpdateInstance:
+      summary: Instance updated
+      value:
+        ESawDomainUri: https://beta4.testlab.xyzmo.com/
+        ESawVersion: '20.52'
+        Description: Beta 4 eSaw instance
+        ESawClientId: 2b4d822f-5eb5-43fb-9a7e-e14282ac0e04
+        ESawClientSecret: S46F3iXMHqZxjgwbahs89niqXBd7Hkg3
+    CreateInstance:
+      summary: Instance created
+      value:
+        ESawDomainUri: https://beta4.testlab.xyzmo.com/
+        ESawVersion: '20.52'
+        Description: Beta 4 eSaw instance
+        ESawClientId: 2b4d822f-5eb5-43fb-9a7e-e14282ac0e04
+        ESawClientSecret: S46F3iXMHqZxjgwbahs89niqXBd7Hkg3
+    InstanceResponseExample:
+      value:
+        ExternaIdentifier: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+        ESawDomainUri: https://beta4.testlab.xyzmo.com/
+        ESawVersion: '20.52'
+        Description: Beta 4 eSaw instance
+        ESawClientId: 2b4d822f-5eb5-43fb-9a7e-e14282ac0e04
+        ESawClientSecret: S46F3iXMHqZxjgwbahs89niqXBd7Hkg3
+  schemas:
+    InstanceListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    Instance:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        externalIdentifier:
+          type: string
+          description: The instance external identifier
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+    InstanceNoId:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    InvalidInputError:
+      description: Input Entity is invalid
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/namirial/main/json-schema/namirial-organization-schema.json",
+  "title": "Organization",
+  "x-generated": "2026-10-18",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/namirial-connectors-openapi.yml#/components/schemas/Organization",
+  "type": "object",
+  "properties": {
+    "externalIdentifier": {
+      "type": "string",
+      "description": "The organization external identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "The organization name"
+    },
+    "domainIdentifier": {
+      "type": "string",
+      "description": "The organization email or domain"
+    },
+    "secondaryDomainIdentifier": {
+      "type": "string",
+      "description": "The organization multiple email or domain"
+    }
+  }
+}

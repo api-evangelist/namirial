@@ -1,0 +1,145 @@
+openapi: 3.2.0
+info:
+  title: Namirial Clients Instances API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged ClientsInstances across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: ClientsInstances
+  description: Manage association between clients and instances
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/clientsInstances
+paths:
+  /clientsInstances:
+    post:
+      tags:
+      - ClientsInstances
+      summary: Assign an instance to a client
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      requestBody:
+        description: A JSON object containing client and instance information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientInstance'
+            examples:
+              detail:
+                $ref: '#/components/examples/ClientInstance'
+      responses:
+        '200':
+          description: An instance was assigned to a client
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: postClientsInstances
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /clientsInstances/{clientId}/{instanceId}:
+    delete:
+      tags:
+      - ClientsInstances
+      summary: Remove instance from a client
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: clientId
+        schema:
+          type: string
+        required: true
+        description: Client Id
+        example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      - in: path
+        name: instanceId
+        schema:
+          type: string
+        required: true
+        description: Instance Identifier
+        example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      responses:
+        '201':
+          description: An instance was removed from a client
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: deleteClientsInstancesByClientIdByInstanceId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    InvalidInputError:
+      description: Input Entity is invalid
+  examples:
+    ClientInstance:
+      value:
+        clientId: 6492771b-4576-4ed4-88e0-4bb6163c8bf6
+        instanceId: 21fc40b4-f415-4902-abca-5cdf042142c9
+  schemas:
+    ClientInstance:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Id of selected client
+        instanceId:
+          type: string
+          description: Id of selected instance
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

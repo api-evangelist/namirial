@@ -1,0 +1,319 @@
+openapi: 3.2.0
+info:
+  title: Namirial Organizations API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Organizations across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Organizations
+  description: Manage connector organizations
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/organizations
+paths:
+  /organizations:
+    get:
+      tags:
+      - Organizations
+      summary: Get The organization by Email
+      parameters:
+      - in: query
+        name: email
+        schema:
+          type: string
+        required: true
+        description: An email or a domain to search for a connector organization
+        example: sample@mail.com - sampledomain.com
+      responses:
+        '200':
+          description: The envelope list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+      operationId: getOrganizations
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /auth/organizations:
+    get:
+      tags:
+      - Organizations
+      summary: Get the organization list
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: query
+        name: pageSize
+        schema:
+          type: string
+        required: false
+        description: Number of items per page
+        example: 10
+      - in: query
+        name: pageNumber
+        schema:
+          type: string
+        required: false
+        description: Number of selected page
+        example: 1
+      responses:
+        '200':
+          description: The organization list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getAuthOrganizations
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Organizations
+      summary: Create new organization
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      requestBody:
+        description: A JSON object containing new organization information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/CreateOrganization'
+      responses:
+        '201':
+          description: New organization created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: postAuthOrganizations
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /auth/organizations/{organizationId}:
+    get:
+      tags:
+      - Organizations
+      summary: Get organization detail
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: organizationId
+        schema:
+          type: string
+        required: true
+        description: Organization Identifier
+        example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      responses:
+        '200':
+          description: The organization detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: getAuthOrganizationsByOrganizationId
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Organizations
+      summary: Edit selected organization
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: organizationId
+        schema:
+          type: string
+        required: true
+        description: Organization Identifier
+        example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      requestBody:
+        description: A JSON object containing organization information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/UpdateOrganization'
+      responses:
+        '200':
+          description: The edited organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: putAuthOrganizationsByOrganizationId
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Organizations
+      summary: Delete selected organization
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: organizationId
+        schema:
+          type: string
+        required: true
+        description: Organization Identifier
+        example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      responses:
+        '200':
+          description: Organization Deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: deleteAuthOrganizationsByOrganizationId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  schemas:
+    OrganizationResponse:
+      type: object
+      properties:
+        externalIdentifier:
+          type: string
+          description: The organization external identifier
+    Organization:
+      type: object
+      properties:
+        externalIdentifier:
+          type: string
+          description: The organization external identifier
+        name:
+          type: string
+          description: The organization name
+        domainIdentifier:
+          type: string
+          description: The organization email or domain
+        secondaryDomainIdentifier:
+          type: string
+          description: The organization multiple email or domain
+    OrganizationNoId:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The organization name
+        domainIdentifier:
+          type: string
+          description: The organization email or domain
+        secondaryDomainIdentifier:
+          type: string
+          description: The organization multiple email or domain
+    OrganizationListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organization'
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    InvalidInputError:
+      description: Input Entity is invalid
+  examples:
+    UpdateOrganization:
+      summary: Organization updated
+      value:
+        name: Namirial
+        domainIdentifier: m.rossi@namirial.com
+        secondaryDomainIdentifier: namirial.com
+    CreateOrganization:
+      value:
+        name: Namirial
+        domainIdentifier: m.rossi@namirial.com
+        secondaryDomainIdentifier: namirial.com
+    OrganizationResponseExample:
+      value:
+        externaIdentifier: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+        name: Namirial
+        domainIdentifier: m.rossi@namirial.com
+        secondaryDomainIdentifier: namirial.com
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

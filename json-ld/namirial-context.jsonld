@@ -1,0 +1,307 @@
+{
+  "@context": {
+    "@vocab": "https://namirial.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "namirial": "https://namirial.com/schema#",
+    "EmailAction": "namirial:EmailAction",
+    "type": {
+      "@id": "namirial:type",
+      "@type": "xsd:string"
+    },
+    "to": {
+      "@id": "namirial:to",
+      "@type": "xsd:string"
+    },
+    "cc": {
+      "@id": "namirial:cc",
+      "@type": "xsd:string"
+    },
+    "ccn": {
+      "@id": "namirial:ccn",
+      "@type": "xsd:string"
+    },
+    "subject": {
+      "@id": "namirial:subject",
+      "@type": "xsd:string"
+    },
+    "body": {
+      "@id": "namirial:body",
+      "@type": "xsd:string"
+    },
+    "UserDetail": "namirial:UserDetail",
+    "firstName": {
+      "@id": "namirial:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "namirial:lastName",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "namirial:email",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "namirial:id",
+      "@type": "xsd:string"
+    },
+    "Client": "namirial:Client",
+    "clientId": {
+      "@id": "namirial:clientId",
+      "@type": "xsd:string"
+    },
+    "ClientDetail": "namirial:ClientDetail",
+    "instanceList": {
+      "@id": "namirial:instanceList",
+      "@container": "@list"
+    },
+    "UpdateClient": "namirial:UpdateClient",
+    "clientSecret": {
+      "@id": "namirial:clientSecret",
+      "@type": "xsd:string"
+    },
+    "CreateClient": "namirial:CreateClient",
+    "Instance": "namirial:Instance",
+    "eSawDomainUri": {
+      "@id": "namirial:eSawDomainUri",
+      "@type": "xsd:string"
+    },
+    "eSawVersion": {
+      "@id": "namirial:eSawVersion",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "namirial:description",
+      "@type": "xsd:string"
+    },
+    "externalIdentifier": {
+      "@id": "namirial:externalIdentifier",
+      "@type": "xsd:string"
+    },
+    "esawClientId": {
+      "@id": "namirial:esawClientId",
+      "@type": "xsd:string"
+    },
+    "esawClientSecret": {
+      "@id": "namirial:esawClientSecret",
+      "@type": "xsd:string"
+    },
+    "InstanceNoId": "namirial:InstanceNoId",
+    "Organization": "namirial:Organization",
+    "name": {
+      "@id": "namirial:name",
+      "@type": "xsd:string"
+    },
+    "domainIdentifier": {
+      "@id": "namirial:domainIdentifier",
+      "@type": "xsd:string"
+    },
+    "secondaryDomainIdentifier": {
+      "@id": "namirial:secondaryDomainIdentifier",
+      "@type": "xsd:string"
+    },
+    "OrganizationNoId": "namirial:OrganizationNoId",
+    "OrganizationResponse": "namirial:OrganizationResponse",
+    "ClientInstance": "namirial:ClientInstance",
+    "instanceId": {
+      "@id": "namirial:instanceId",
+      "@type": "xsd:string"
+    },
+    "OrganizationInstance": "namirial:OrganizationInstance",
+    "organizationId": {
+      "@id": "namirial:organizationId",
+      "@type": "xsd:string"
+    },
+    "HttpAction": "namirial:HttpAction",
+    "callbackUrl": {
+      "@id": "namirial:callbackUrl",
+      "@type": "xsd:string"
+    },
+    "method": {
+      "@id": "namirial:method",
+      "@type": "xsd:string"
+    },
+    "envelopeGuidRequired": {
+      "@id": "namirial:envelopeGuidRequired",
+      "@type": "xsd:boolean"
+    },
+    "documentIds": {
+      "@id": "namirial:documentIds",
+      "@type": "xsd:boolean"
+    },
+    "FindEnvelopeItem": "namirial:FindEnvelopeItem",
+    "status": {
+      "@id": "namirial:status",
+      "@type": "xsd:string"
+    },
+    "metaDataXml": {
+      "@id": "namirial:metaDataXml",
+      "@type": "xsd:string"
+    },
+    "bulk": {
+      "@id": "namirial:bulk",
+      "@type": "xsd:string"
+    },
+    "CreateProcessDraftRequest": "namirial:CreateProcessDraftRequest",
+    "templateId": {
+      "@id": "namirial:templateId",
+      "@type": "xsd:string"
+    },
+    "documents": {
+      "@id": "namirial:documents",
+      "@container": "@list"
+    },
+    "events": {
+      "@id": "namirial:events",
+      "@container": "@list"
+    },
+    "recipients": {
+      "@id": "namirial:recipients",
+      "@container": "@list"
+    },
+    "messageData": {
+      "@id": "namirial:messageData"
+    },
+    "Recipient": "namirial:Recipient",
+    "languageCode": {
+      "@id": "namirial:languageCode",
+      "@type": "xsd:string"
+    },
+    "disableEmail": {
+      "@id": "namirial:disableEmail",
+      "@type": "xsd:boolean"
+    },
+    "overrideOptions": {
+      "@id": "namirial:overrideOptions"
+    },
+    "ProcessFinishedEvent": "namirial:ProcessFinishedEvent",
+    "actions": {
+      "@id": "namirial:actions",
+      "@container": "@list"
+    },
+    "eventType": {
+      "@id": "namirial:eventType",
+      "@type": "xsd:string"
+    },
+    "CreateProcessResponse": "namirial:CreateProcessResponse",
+    "signingUri": {
+      "@id": "namirial:signingUri",
+      "@type": "xsd:string"
+    },
+    "processId": {
+      "@id": "namirial:processId",
+      "@type": "xsd:string"
+    },
+    "UploadDocumentResponse": "namirial:UploadDocumentResponse",
+    "sspIds": {
+      "@id": "namirial:sspIds",
+      "@container": "@list"
+    },
+    "EnvelopeDetailResponse": "namirial:EnvelopeDetailResponse",
+    "auditDocument": {
+      "@id": "namirial:auditDocument",
+      "@type": "xsd:string"
+    },
+    "envelopeJsonStatus": {
+      "@id": "namirial:envelopeJsonStatus",
+      "@type": "xsd:string"
+    },
+    "completedDocuments": {
+      "@id": "namirial:completedDocuments",
+      "@container": "@list"
+    },
+    "documentList": {
+      "@id": "namirial:documentList",
+      "@container": "@list"
+    },
+    "recipientStatus": {
+      "@id": "namirial:recipientStatus",
+      "@container": "@list"
+    },
+    "DocumentDetail": "namirial:DocumentDetail",
+    "pageSizesInPoints": {
+      "@id": "namirial:pageSizesInPoints",
+      "@container": "@list"
+    },
+    "docRefNumber": {
+      "@id": "namirial:docRefNumber",
+      "@type": "xsd:integer"
+    },
+    "fileName": {
+      "@id": "namirial:fileName",
+      "@type": "xsd:string"
+    },
+    "formFields": {
+      "@id": "namirial:formFields",
+      "@container": "@list"
+    },
+    "PageSizePoint": "namirial:PageSizePoint",
+    "height": {
+      "@id": "namirial:height",
+      "@type": "xsd:decimal"
+    },
+    "width": {
+      "@id": "namirial:width",
+      "@type": "xsd:decimal"
+    },
+    "GetProcessResponse": "namirial:GetProcessResponse",
+    "recipientsStatus": {
+      "@id": "namirial:recipientsStatus",
+      "@container": "@list"
+    },
+    "CompletedDocuments": "namirial:CompletedDocuments",
+    "documentId": {
+      "@id": "namirial:documentId",
+      "@type": "xsd:string"
+    },
+    "RecipientsStatus": "namirial:RecipientsStatus",
+    "orderIndex": {
+      "@id": "namirial:orderIndex",
+      "@type": "xsd:integer"
+    },
+    "signedDate": {
+      "@id": "namirial:signedDate",
+      "@type": "xsd:string"
+    },
+    "workstepRedirectUrl": {
+      "@id": "namirial:workstepRedirectUrl",
+      "@type": "xsd:string"
+    },
+    "JWTBearerResponse": "namirial:JWTBearerResponse",
+    "access_token": {
+      "@id": "namirial:access_token",
+      "@type": "xsd:string"
+    },
+    "refresh_token": {
+      "@id": "namirial:refresh_token",
+      "@type": "xsd:string"
+    },
+    "token_type": {
+      "@id": "namirial:token_type",
+      "@type": "xsd:string"
+    },
+    "expires_in": {
+      "@id": "namirial:expires_in",
+      "@type": "xsd:integer"
+    },
+    "ApiResponse": "namirial:ApiResponse",
+    "code": {
+      "@id": "namirial:code",
+      "@type": "xsd:integer"
+    },
+    "message": {
+      "@id": "namirial:message",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Namirial API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Namirial's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-18) from openapi/namirial-connectors-openapi.yml, openapi/namirial-esignanywhere-openapi.yml.",
+  "dcterms:created": "2026-10-18",
+  "dcterms:source": [
+    "openapi/namirial-connectors-openapi.yml",
+    "openapi/namirial-esignanywhere-openapi.yml"
+  ]
+}

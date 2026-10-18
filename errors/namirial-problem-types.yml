@@ -1,0 +1,50 @@
+generated: '2026-10-18'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/namirial-connectors-openapi.yml
+- openapi/namirial-esignanywhere-openapi.yml
+format: custom
+envelope:
+  media_type: null
+  schema: ErrorResponse
+coverage:
+  operations: 81
+  statuses_declared: 6
+problems:
+- status: 400
+  title: Bad Request
+  description: BadRequest
+  operations: 67
+  media_types: []
+  schema: ErrorResponse
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 77
+  media_types: []
+  schema: null
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 50
+  media_types: []
+  schema: ErrorResponse
+- status: 404
+  title: Not Found
+  description: NotFound
+  operations: 45
+  media_types: []
+  schema: ErrorResponse
+- status: 405
+  title: Method Not Allowed
+  description: Invalid input
+  operations: 1
+  media_types: []
+  schema: null
+- status: 415
+  title: Unsupported Media Type
+  description: UnsupportedMediaType
+  operations: 1
+  media_types: []
+  schema: ErrorResponse

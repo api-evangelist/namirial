@@ -1,0 +1,13 @@
+generated: '2026-10-18'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=namirial
+families:
+  - name: Web Components
+    description: Self-contained web components for embedding in web applications
+    components:
+      - name: "@namirial-spa/synapse-chat-ui"
+        description: Self-contained Synapse chat Web Component for embedding in web applications
+        url: https://www.npmjs.com/package/@namirial-spa/synapse-chat-ui
+        loader: npm package
+        official: true
+    note: Web component for chat functionality, part of Namirial's digital trust services ecosystem

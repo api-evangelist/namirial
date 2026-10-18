@@ -1,0 +1,11 @@
+generated: '2026-10-18'
+method: searched
+source: https://doc.namirial.com/connectors-apis/latest/changelog/
+versioning:
+  scheme: semantic
+  current: "1.5.1"
+  policy: Versioned releases with changelog documentation
+deprecation:
+  policy: Not explicitly documented
+status_page: https://status.namirial.com/
+note: Status page available but deprecation policy not explicitly documented in API documentation

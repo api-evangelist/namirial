@@ -1,0 +1,45 @@
+generated: '2026-10-18'
+method: derived
+source: openapi/namirial-connectors-openapi.yml, openapi/namirial-esignanywhere-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: oAuth2AuthCode
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/authorize
+    tokenUrl: /auth/token
+    scopes: 5
+  description: This API uses OAuth 2 with the authorization code grant flow.
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- name: oAuth2ClientCredentials
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /auth/token
+    scopes: 5
+  description: This API uses OAuth 2 with the client credentials grant flow.
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- name: apiToken
+  type: apiKey
+  in: header
+  parameter: apiToken
+  description: API Key Authentication
+  sources:
+  - openapi/namirial-esignanywhere-openapi.yml

@@ -1,0 +1,93 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://zapier.com/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://mcp.zapier.com/mcp",
+          "title": "Zapier MCP"
+        },
+        {
+          "href": "https://api.zapier.com/actions/v1",
+          "title": "Actions API"
+        },
+        {
+          "href": "https://api.zapier.com/connections/v1",
+          "title": "Connections API"
+        },
+        {
+          "href": "https://api.zapier.com/trigger-inbox/v1",
+          "title": "Trigger Inbox API"
+        }
+      ]
+    },
+    {
+      "anchor": "https://mcp.zapier.com/mcp",
+      "service-desc": [
+        {
+          "href": "https://zapier.com/.well-known/mcp/server-card.json",
+          "type": "application/json",
+          "title": "Zapier MCP server card"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.zapier.com/mcp/home",
+          "type": "text/html",
+          "title": "Zapier MCP documentation"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.zapier.com/actions/v1",
+      "service-desc": [
+        {
+          "href": "https://docs.zapier.com/api-reference/specs/actions.yaml",
+          "type": "text/yaml",
+          "title": "Actions API OpenAPI spec"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.zapier.com/powered-by-zapier/running-actions/getting-started",
+          "type": "text/html",
+          "title": "Getting started running actions"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.zapier.com/connections/v1",
+      "service-desc": [
+        {
+          "href": "https://docs.zapier.com/api-reference/specs/connections.yaml",
+          "type": "text/yaml",
+          "title": "Connections API OpenAPI spec"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.zapier.com/white-label/connection-webhooks/what-is-connection-webhooks",
+          "type": "text/html",
+          "title": "What is Connection Webhooks"
+        }
+      ]
+    },
+    {
+      "anchor": "https://api.zapier.com/trigger-inbox/v1",
+      "service-desc": [
+        {
+          "href": "https://docs.zapier.com/api-reference/specs/trigger-inbox.yaml",
+          "type": "text/yaml",
+          "title": "Trigger Inbox API OpenAPI spec"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://docs.zapier.com/white-label/trigger-inbox/what-is-trigger-inbox-api",
+          "type": "text/html",
+          "title": "What is Trigger Inbox API"
+        }
+      ]
+    }
+  ]
+}

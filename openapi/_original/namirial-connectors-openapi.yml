@@ -1,0 +1,1629 @@
+# x-archived-from: namirial-connectors-openapi.yml
+# x-archived-on: 2026-10-18
+openapi: 3.0.0
+
+# INFO SECTION
+info:
+  title: Namirial Connectors APIs
+  version: 1.5.1
+  description: "Connectors APIs technical reference."
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# TAGS
+tags:
+  - name: Auth
+    description: Access to authentication endpoints
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/auth
+  - name: Clients
+    description: Manage clients
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/clients    
+  - name: ClientsInstances
+    description: Manage association between clients and instances
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/clientsInstances
+  - name: Documents
+    description: Manage documents
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/documents
+  - name: Envelopes
+    description: Manage eSignAnyWhere envelope
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/envelopes
+  - name: Instances
+    description: Manage instances
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/instances 
+  - name: Processes
+    description: Manage process signature
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/processes
+  - name: Organizations
+    description: Manage connector organizations
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/organizations
+  - name: OrganizationsInstances
+    description: Manage association between organizations and instances
+    externalDocs:
+      description: Documentation
+      url: https://doc.namirial.com/esaw-connectors/organizationsInstances
+
+# PATHS
+paths:
+  # AUTH
+  /auth/authorize:
+    get:
+      tags:
+        -  Auth
+      summary: Starts an authorization code flow
+      parameters:
+        - in: query
+          name: client_id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: Client identifier. Its the application that needs to authenticate a user in eSAW
+          example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+        - in: query
+          name: redirect_uri
+          schema:
+            type: string
+          required: true
+          description: Uri to be redirected after eSAW successfull credentials validation
+          example: https://localhost/oauth/callback
+        - in: query
+          name: state
+          schema:
+            type: string
+          required: false
+          description: Parameter used to pass values during authentication redirect flow
+      responses:
+        '302':
+          description: Document identifier
+          headers:
+            Location:
+              description: The redirected Uri
+        '405':
+          description: Invalid input
+  /auth/token:
+    post:
+      tags:
+        - Auth
+      security:
+        - Basic: []
+      summary: Returns the Access and Refresh JWT bearer tokens
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: OAuth2 authentication grant type (authorization_code, client_credentials, refresh_token)
+                redirect_uri:
+                  type: string
+                  description: Redirect Uri. It has to be equal to the one specified at the beginning of the authentication flow
+                code:
+                  type: string
+                  description: Authorization code returned from authorize. Used only with grant_type equal to authorization_code
+                refresh_token:
+                  type: string
+                  description: Refresh token returned from token endpoint. Used only with grant_type equal to refresh_token
+              required:
+                - grant_type
+                - redirect_uri
+      responses:
+        '200':
+          description: JWT Bearer Access and Refresh tokens created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: Invalid input
+  /auth/instances/find:
+    post:
+      tags:
+        - Auth
+      summary: Return the instance list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organizationId:
+                  type: string
+                  description: The connector organization id
+                clientId:
+                  type: string
+                  description: The client Id              
+              required:
+                - clientId
+      responses:
+        '200':
+          description: The instance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceListResponse'
+        '400':
+          description: Invalid input
+  /auth/userinfo:
+    get:
+      tags:
+        - Auth
+      summary: Get user information
+      security:
+        - oAuth2AuthCode: []
+        - oAuth2ClientCredentials: []
+      responses:
+        '200':
+          description: User detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  #CLIENTS
+  /clients:
+    get:
+      tags:
+        - Clients
+      summary: Get the client list
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: query
+          name: pageSize
+          schema:
+            type: string
+          required: false
+          description: Number of items per page
+          example: 10
+        - in: query
+          name: pageNumber
+          schema:
+            type: string
+          required: false
+          description: Number of selected page
+          example: 1
+      responses:
+        '200':
+          description: The client list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+        - Clients
+      summary: Create new client
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ] 
+      responses:
+        '201':
+          description: New Client created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClient'
+              examples:
+                detail:
+                  $ref: '#/components/examples/CreateClient'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'  
+        '400':
+          $ref: '#/components/responses/EntityFoundError'
+  /clients/{clientId}:
+    get:
+      tags:
+        - Clients
+      summary: Get client detail
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: string
+          required: true
+          description: Client Id
+          example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: The client detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDetail'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError' 
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+    put:
+      tags:
+        - Clients
+      summary: Edit password of selected Client
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: string
+          required: true
+          description: Client Id
+          example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: Client with new password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClient'
+              examples: 
+                detail:
+                  $ref: '#/components/examples/CreateClient'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'  
+    delete:
+      tags:
+        - Clients
+      summary: Delete selected Client
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: string
+          required: true
+          description: Client Id
+          example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: Client Deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'  
+                  
+  #INSTANCES
+  /instances:
+    get:
+      tags:
+        - Instances
+      summary: Get the instance list
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: query
+          name: pageSize
+          schema:
+            type: string
+          required: false
+          description: Number of items per page
+          example: 10       
+        - in: query
+          name: pageNumber
+          schema:
+            type: string
+          required: false
+          description: Number of selected page
+          example: 1    
+      responses:
+          '200':
+            description: The instance list
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/InstanceListResponse'
+          '401':
+            $ref: '#/components/responses/UnauthorizedError'         
+    post:
+        tags: 
+          - Instances
+        summary: Create new instance
+        security:
+          - oAuth2AuthCode: [ ]
+          - oAuth2ClientCredentials: [ ]
+        requestBody:
+          description: A JSON object containing new instance information
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceNoId'
+              examples:
+                detail:
+                  $ref: '#/components/examples/CreateInstance'              
+        responses:
+            '201':
+              description: New Instance created
+              content:
+                application/json:
+                  schema: 
+                    $ref: '#/components/schemas/Instance'
+                  examples:
+                    detail:
+                     $ref: '#/components/examples/InstanceResponseExample'
+            '401':
+              $ref: '#/components/responses/UnauthorizedError'
+            '400':
+              $ref: '#/components/responses/InvalidInputError'
+  /instances/{instanceId}:
+    get: 
+      tags: 
+        - Instances
+      summary: Get instance detail
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: instanceId
+          schema:
+            type: string
+          required: true
+          description: Instance Identifier
+          example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      responses:   
+        '200':
+          description: The instance detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':  
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+    put:
+      tags:
+        - Instances
+      summary: Edit selected Instance
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]    
+      parameters:
+        - in: path
+          name: instanceId
+          schema:
+            type: string
+          required: true
+          description: Instance Identifier
+          example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+      requestBody:
+        description: A JSON object containing instance information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/UpdateInstance'
+      responses:
+        '200':
+          description: The edited instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+              examples: 
+                detail:
+                  $ref: '#/components/examples/InstanceResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+            $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+    delete:
+      tags:
+        - Instances
+      summary: Delete selected Instance
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: instanceId
+          schema:
+            type: string
+          required: true
+          description: Instance Identifier
+          example: 86bba44d-e14d-44a5-8662-4edaa3eebb83   
+      responses:
+        '200':
+          description: Instance Deleted   
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+
+
+  #CLIENTS INSTANCES        
+  /clientsInstances:
+    post:
+      tags:
+        - ClientsInstances
+      summary: Assign an instance to a client
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        description: A JSON object containing client and instance information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientInstance'
+            examples:
+              detail:
+                $ref: '#/components/examples/ClientInstance'
+      responses:
+        '200':
+          description: An instance was assigned to a client
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+  /clientsInstances/{clientId}/{instanceId}:        
+    delete:
+        tags:
+          - ClientsInstances
+        summary: Remove instance from a client
+        security:
+          - oAuth2AuthCode: [ ]
+          - oAuth2ClientCredentials: [ ]
+        parameters:
+          - in: path
+            name: clientId
+            schema:
+              type: string
+            required: true
+            description: Client Id
+            example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+          - in: path
+            name: instanceId
+            schema:
+              type: string
+            required: true
+            description: Instance Identifier
+            example: 86bba44d-e14d-44a5-8662-4edaa3eebb83
+        responses:
+          '201':
+            description: An instance was removed from a client
+          '401':
+            $ref: '#/components/responses/UnauthorizedError'
+          '404':
+            $ref: '#/components/responses/EntityNotFoundError'
+          '400':
+            $ref: '#/components/responses/InvalidInputError'
+  # DOCUMENTS    
+  /documents/{documentId}:
+    get:
+      tags:
+        - Documents
+      summary: Download the document from eSAW
+      security:
+        - oAuth2AuthCode: []
+        - oAuth2ClientCredentials: []
+      parameters:
+        - in: path
+          name: documentId
+          schema:
+            type: string
+          required: true
+          description: Document identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Document in PDF format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  /documents/urls:
+    get:
+      tags:
+        - Documents
+      summary: Retrieve a list of presigned urls
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileToUploadNumber:
+                  type: integer
+                  description: Number to object to download
+      responses:
+        '200':
+          description: A list of urls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  # ORGANIZATIONS
+  /organizations:
+    get:
+      tags:
+        - Organizations
+      summary: Get The organization by Email
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+          required: true
+          description: An email or a domain to search for a connector organization
+          example: sample@mail.com - sampledomain.com
+      responses:
+        '200':
+          description: The envelope list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationResponse'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+  /auth/organizations:
+    get:
+      tags:
+        - Organizations
+      summary: Get the organization list
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: query
+          name: pageSize
+          schema:
+            type: string
+          required: false
+          description: Number of items per page
+          example: 10
+        - in: query
+          name: pageNumber
+          schema:
+            type: string
+          required: false
+          description: Number of selected page
+          example: 1
+      responses:
+        '200':
+          description: The organization list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    post:
+      tags:
+        - Organizations
+      summary: Create new organization
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        description: A JSON object containing new organization information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/CreateOrganization'
+      responses:
+        '201':
+          description: New organization created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError' 
+
+  /auth/organizations/{organizationId}:
+    get:
+      tags:
+        - Organizations
+      summary: Get organization detail
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: organizationId
+          schema:
+            type: string
+          required: true
+          description: Organization Identifier
+          example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      responses:
+        '200':
+          description: The organization detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'  
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+    put:
+      tags:
+        - Organizations
+      summary: Edit selected organization
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: organizationId
+          schema:
+            type: string
+          required: true
+          description: Organization Identifier
+          example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      requestBody:
+        description: A JSON object containing organization information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationNoId'
+            examples:
+              detail:
+                $ref: '#/components/examples/UpdateOrganization'
+      responses:
+        '200':
+          description: The edited organization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+              examples:
+                detail:
+                  $ref: '#/components/examples/OrganizationResponseExample'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+    delete:
+      tags:
+        - Organizations
+      summary: Delete selected organization
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: organizationId
+          schema:
+            type: string
+          required: true
+          description: Organization Identifier
+          example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+      responses:
+        '200':
+          description: Organization Deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError' 
+  # ORGANIZATIONS INSTANCES 
+  /auth/organizationsInstances:
+    post:
+      tags:
+        - OrganizationsInstances
+      summary: Assign an instance to an organization
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        description: A JSON object containing organization and instance information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationInstance'
+            examples:
+              detail:
+                $ref: '#/components/examples/OrganizationInstanceExample'
+      responses:
+        '201':
+          description: An instance was assigned to an organization
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+          
+  /auth/organizationsInstances/{organizationId}/{instanceId}:        
+    delete:
+      tags:
+        - OrganizationsInstances
+      summary: Remove an instance from an organization
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: organizationId
+          schema:
+            type: string
+          required: true
+          description: Organization Identifier
+          example: d6c908d0-bce6-40e1-a5cd-1152a18a5054
+        - in: path
+          name: instanceId
+          schema:
+            type: string
+          required: true
+          description: Instance Identifier
+          example: 86bba44d-e14d-44a5-8662-4edaa3eebb83  
+      responses:
+        '200':
+          description: An instance was removed from an organization
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'        
+  # ENVELOPES
+  /envelopes:
+    post:
+      tags:
+        - Envelopes
+      summary: Get the envelope list
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  description: If set, filters for envelopes by status. = ['Draft', 'Canceled', 'Completed', 'Expired', 'Rejected', 'Template', 'ActionRequired', 'WaitingForOthers', 'ExpiringSoon', 'Active']
+                name:
+                  type: string
+                  description: If set, filters for the given text in envelope name.
+                caseSensitive:
+                  type: boolean
+                  description: If set, uses a case-sensitive filter for the given text in envelope name.
+#      parameters:
+#        - in: path
+#          name: processId
+#          schema:
+#            type: string
+#          required: true
+#          description: Document identifier
+#          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: The envelope list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindEnvelopeListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /envelopes/{envelopeId}:
+    get:
+      tags:
+        - Envelopes
+      summary: Get the envelope detail
+      security:
+        - oAuth2AuthCode: [ ]
+        - oAuth2ClientCredentials: [ ]
+      parameters:
+        - in: path
+          name: envelopeId
+          schema:
+            type: string
+          required: true
+          description: Envelope identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: The envelope detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvelopeDetailResponse'
+              examples:
+                detail:
+                  $ref: '#/components/examples/EnvelopeDetailResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+    
+
+  # PROCESSES
+  /processes/create/draft:
+    post:
+      tags:
+        - Processes
+      summary: Define the process by creating a draft envelope in eSAW
+      security:
+        - oAuth2AuthCode: []
+        - oAuth2ClientCredentials: []
+      requestBody:
+        description: A JSON object containing **draft envelope** information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessDraftRequest'
+            examples:
+              draft:
+                $ref: '#/components/examples/CreateDraftProcess'
+              template:
+                $ref: "#/components/examples/CreateDraftFromTemplate"
+      responses:
+        '201':
+          description: Process created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProcessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /processes/{processId}:
+    get:
+      tags:
+        - Processes
+      summary: Get the process detail
+      security:
+        - oAuth2AuthCode: []
+        - oAuth2ClientCredentials: []
+      parameters:
+        - in: path
+          name: processId
+          schema:
+            type: string
+          required: true
+          description: Document identifier
+          example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Process response in PDF format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProcessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+servers:
+  - url: https://esaw-conn-test.namirialtsp.com
+    description: (Development)
+components:
+  examples:
+    EnvelopeDetailResponse:
+      summary: Envelope detail
+      value: 
+        status: "InProgress"
+        auditDocument: "a3ec27f2-26a2-493a-974f-3ec6908fae84"
+        envelopeJsonStatus: "jsonobject"
+        completedDocuments:
+          - auditDocument: "fe324172-3353-4f25-bc80-51f7a4d2919c"
+            documentId: "57f2aab6-794b-494b-a9f5-1e2de05c2eae"
+            fileName: "name.pdf"
+        recipientStatus:
+          - id: "4fa2709b-c312-455c-b050-ad174c8b7fbb"
+            email: "nikola@tesla.com"
+            firstName: "Nikola"
+            lastName: "Tesla"
+            orderIndex: 1
+            signedDate: "2021-01-01:18:01:32Z"
+            status: "Signed"
+            workstepRedirectUrl: "https://testuri.com/callback"
+        documentList:
+          - docRefNumber: 1
+            fileName: "test.pdf"
+            formFields: [ ]
+            pageSizesInPoints:
+            - height: 304.2
+              width: 332.6
+    CreateInstance:
+      summary: Instance created
+      value: 
+        ESawDomainUri: "https://beta4.testlab.xyzmo.com/"
+        ESawVersion: "20.52"
+        Description: "Beta 4 eSaw instance"
+        ESawClientId: "2b4d822f-5eb5-43fb-9a7e-e14282ac0e04"
+        ESawClientSecret: "S46F3iXMHqZxjgwbahs89niqXBd7Hkg3"
+    UpdateInstance:
+      summary: Instance updated
+      value:
+        ESawDomainUri: "https://beta4.testlab.xyzmo.com/"
+        ESawVersion: "20.52"
+        Description: "Beta 4 eSaw instance"
+        ESawClientId: "2b4d822f-5eb5-43fb-9a7e-e14282ac0e04"
+        ESawClientSecret: "S46F3iXMHqZxjgwbahs89niqXBd7Hkg3"
+    InstanceResponseExample:
+      value:
+        ExternaIdentifier: "86bba44d-e14d-44a5-8662-4edaa3eebb83"
+        ESawDomainUri: "https://beta4.testlab.xyzmo.com/"
+        ESawVersion: "20.52"
+        Description: "Beta 4 eSaw instance"
+        ESawClientId: "2b4d822f-5eb5-43fb-9a7e-e14282ac0e04"
+        ESawClientSecret: "S46F3iXMHqZxjgwbahs89niqXBd7Hkg3"
+    UpdateOrganization:
+      summary: Organization updated
+      value:
+        name: "Namirial"
+        domainIdentifier: "m.rossi@namirial.com"
+        secondaryDomainIdentifier: "namirial.com"
+    OrganizationResponseExample:
+      value:
+        externaIdentifier: "d6c908d0-bce6-40e1-a5cd-1152a18a5054"
+        name: "Namirial"
+        domainIdentifier: "m.rossi@namirial.com"
+        secondaryDomainIdentifier: "namirial.com"
+    OrganizationInstanceExample:
+      value:
+        organizationId: "19bdadc5-47d0-4d6b-a97a-98fc307a2843"
+        instanceId: "21fc40b4-f415-4902-abca-5cdf042142c9"
+    CreateClient:
+      value:
+        clientId: "8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618"
+        clientSecret: "$2a$11$PX5SxBCr.KXbQRIJdDhy4eBowj0fbJHAsMnqsL5nNKDh30k3G7qCe"      
+    ClientInstance:
+      value:
+        clientId: "6492771b-4576-4ed4-88e0-4bb6163c8bf6"
+        instanceId: "21fc40b4-f415-4902-abca-5cdf042142c9"
+    CreateOrganization:
+      value:
+        name: "Namirial"
+        domainIdentifier: "m.rossi@namirial.com"
+        secondaryDomainIdentifier: "namirial.com"
+    CreateDraftProcess:
+      summary: Draft process - multiple documents
+      value:
+        name: "Draft process"
+        documents:
+          - "a3ec27f2-26a2-493a-974f-3ec6908fae84/fe324172-3353-4f25-bc80-51f7a4d2919c"
+          - "57f2aab6-794b-494b-a9f5-1e2de05c2eae/0dbbe5ed-b42e-468c-8cf8-cdf0f6f5b2a0"
+        recipients:
+          - firstName: "name"
+            lastName: "surname"
+            email: "email@email.com"
+            languageCode: "en"
+        messageData:
+          emailSubject: "subject"
+          emailBody: "body"
+    CreateDraftFromTemplate:
+      summary: Draft process from template
+      value:
+        name: "Draft process from template"
+        templateId: "fe324172-3353-4f25-bc80-51f7a4d2919c"
+        recipients:
+          - firstName: "name"
+            lastName: "surname"
+            email: "email@email.com"
+            languageCode: "en"
+            disposable:
+              countryResidence: "IT"
+              documentExpiryDate: "2020-01-01"
+              documentIssuedBy: "SINDACO"
+              documentIssuedOn: "2014-05-22"
+              documentNumber: "B239904074"
+              documentType: "CI"
+              identificationCountry: "IT"
+              identificationType: "ITALIAN_TAX_CODE"
+              phoneMobile: "6667788414"
+              serialNumber: "SVTLRB23H24H501T"
+            overrideOptions: 
+              orderIndex: 1
+              email: "Placeholder:ToReplace"
+        messageData:
+          emailSubject: "subject"
+          emailBody: "body"
+
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:   # <---- OAuth flow(authorizationCode)
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials: # <---- OAuth flow(clientCredentials)
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:     # <-- arbitrary name for the security scheme
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    EntityFoundError:
+      description: Entity described by identifier already exists
+    InvalidInputError:
+      description: Input Entity is invalid
+  schemas:
+    EmailAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Action type
+          example: "email"
+        to:
+          type: string
+          description: List of recipients emails separed by semicolon (;)
+          example: "f.last@mail.com;s.name@mail.com"
+          maximum: 500
+        cc:
+          type: string
+          description: List of carbon copy emails separed by semicolon (;)
+          example: "f.last@mail.com;s.name@mail.com"
+          maximum: 500
+        ccn:
+          type: string
+          description: List of blind carbon copy emails separed by semicolon (;)
+          example: "f.last@mail.com;s.name@mail.com"
+          maximum: 200
+        subject:
+          type: string
+          description: The email subject
+          maximum: 100
+        body:
+          type: string
+          description: The email body
+          maximum: 500
+      required:
+        - type
+        - to
+        - subject
+        - body
+    UserDetail:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "The esaw user first name that called the API"
+        lastName:
+          type: string
+          description: "The esaw user last name that called the API"
+        email:
+          type: string
+          description: "The esaw user email that called the API"
+        id:
+          type: string
+          description: "The esaw user id that called the API"
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Client Identifier
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+    ClientDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Client Identifier
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+        instanceList:
+          type: array
+          description: Instance list associated to client
+          items:
+            $ref: '#/components/schemas/Instance'
+    UpdateClient:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+#          example: "8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618"
+        clientSecret:
+          type: string
+          description: Client Secret
+#          example: "$2a$11$PX5SxBCr.KXbQRIJdDhy4eBowj0fbJHAsMnqsL5nNKDh30k3G7qCe"
+    CreateClient:
+      type: object
+      properties:
+          clientId:
+            type: string
+            description: Connector OAuth Client Id
+          clientSecret:
+            type: string
+            description: Client Secret 
+    Instance:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        externalIdentifier:
+          type: string
+          description: The instance external identifier
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+    InstanceNoId:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+    Organization:
+      type: object
+      properties:
+        externalIdentifier:
+          type: string
+          description: The organization external identifier
+        name:
+          type: string
+          description: The organization name
+        domainIdentifier:
+          type: string
+          description: The organization email or domain
+        secondaryDomainIdentifier:
+          type: string
+          description: The organization multiple email or domain
+    OrganizationNoId:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The organization name
+        domainIdentifier:
+          type: string
+          description: The organization email or domain
+        secondaryDomainIdentifier:
+          type: string
+          description: The organization multiple email or domain
+    OrganizationResponse:
+      type: object
+      properties:
+        externalIdentifier:
+          type: string
+          description: The organization external identifier
+    InstanceListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    ClientListResponse:
+      type: array
+      items: 
+        $ref: '#/components/schemas/Client'
+    OrganizationListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Organization'
+    ClientInstance:
+      type: object
+      properties: 
+        clientId:
+          type: string
+          description: Id of selected client 
+        instanceId:
+          type: string
+          description: Id of selected instance
+    OrganizationInstance:
+      type: object
+      properties:
+        organizationId:
+          type: string
+          description: Id of selected organization
+        instanceId:
+          type: string
+          description: Id of selected instance      
+    HttpAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Action type
+          example: "http"
+        callbackUrl:
+          type: string
+          description: The url to call
+          example: "https://testuri.sample.com"
+          maximum: 250
+        method:
+          type: string
+          description: The request HTTP Method (GET, POST are only supported)
+          example: "POST"
+        envelopeGuidRequired:
+          type: boolean
+          description: Specify if the envelope guid must be add to the callback request
+          example: false
+        documentIds:
+          type: boolean
+          description: Specify if the document guids must be add to the callback request
+          example: true
+      required:
+        - type
+        - callbackUrl
+        - method
+        - envelopeGuidRequired
+        - documentIds
+    FindEnvelopeItem:
+      type: object
+      properties: 
+        status:
+          type: string
+          description: The status of the envelope. = ['Draft', 'Started', 'InProgress', 'Canceled', 'Completed', 'Expired', 'Rejected', 'Template', 'CompletedWithWarnings', 'BulkCompleted', 'BulkPartlyCompleted']
+        id:
+          type: string
+          description: The envelope identifier (guid format)
+        name:
+          type: string
+          description: The envelope name
+        metaDataXml:
+          type: string
+          description: The envelope Xml metadata
+        bulk:
+          type: string
+          description:  The bulk id. Only set if the envelope is part of a bulk.
+    Document:
+      type: string
+    CreateProcessDraftRequest:
+      type: object
+      properties:
+        templateId:
+          type: string
+          description: Template Id
+        name:
+          type: string
+          description: Process name
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        events:
+          type: array
+          maxItems: 2
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/ProcessFinishedEvent'
+            discriminator:
+              propertyName: objectType
+        recipients:
+          type: array
+          maxItems: 5
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/Recipient'
+            discriminator:
+              propertyName: objectType
+        messageData:
+          type: object
+          properties:
+            emailSubject:
+              type: string
+              description: "The subject specified in the email message sent to the recipients"
+            emailBody:
+              type: string
+              description: "The body specified in the email message sent to the recipients"
+
+    Recipient:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: "The recipient first name for the draft"
+        lastName:
+          type: string
+          description: "The recipient last name for the draft"
+        email:
+          type: string
+          description: "The recipient email for the draft"
+        languageCode:
+          type: string
+          description: "The recipient language code for the draft"
+          example: "en"
+        disableEmail:
+          type: boolean
+          description: "Describe if the recipient receive or not email notification"
+        overrideOptions:
+          type: object
+          properties:
+            orderIndex:
+              type: integer
+              description: Recipient to override order index
+            email:
+              type: string
+              description: Recipient to override email
+    ProcessFinishedEvent:
+      type: object
+      properties:
+        actions:
+          type: array
+          maxItems: 5
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/EmailAction'
+              - $ref: '#/components/schemas/HttpAction'
+          discriminator:
+            propertyName: type
+            mapping:
+              http: '#/components/schemas/HttpAction'
+              email: '#/components/schemas/EmailAction'
+        eventType:
+          type: string
+          description: "The Esaw Callback event type (The supported event are : envelopeFinished,workstepFinished)"
+          example: "envelopeFinished"
+      required:
+        - eventType
+    CreateProcessResponse:
+      type: object
+      properties:
+        signingUri:
+          type: string
+          description: eSAW Viewer Uri
+          example: https://saas.esignanywhere.net/
+        processId:
+          type: string
+          description: Process identifier
+          example: 1c66d972-6eeb-429d-add2-948ccafe58da
+    UploadDocumentResponse:
+      type: object
+      properties:
+        sspIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+    FindEnvelopeListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindEnvelopeItem'
+    EnvelopeDetailResponse:
+      type: object
+      properties: 
+        status:
+          type: string
+          description: "The Envelope status"
+        auditDocument:
+          type: string
+          description: "The Envelope Audit Document Id"
+        envelopeJsonStatus:
+          type: string
+          description: "The Envelope Json Status"
+        completedDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompletedDocuments'
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentDetail'
+        recipientStatus:
+          type: array
+          items: 
+            $ref: '#/components/schemas/RecipientsStatus'
+    DocumentDetail:
+      type: object
+      properties:
+        pageSizesInPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageSizePoint'
+        docRefNumber:
+          type: integer
+          description: The document reference number
+        fileName:
+          type: string
+          description: The file name
+        formFields:
+          type: array
+    PageSizePoint:
+      type: object
+      properties:
+        height:
+          type: number
+          description: Page Height
+        width:
+          type: number
+          description: Page Width
+    GetProcessResponse:
+      type: object
+      properties:
+        auditDocument:
+          type: string
+          description: "The Audit document of the sign process"
+        envelopeJsonStatus:
+          type: string
+          description: "The envelope status in Json"
+        status:
+          type: string
+          description: "The envelope status"
+        completedDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompletedDocuments'
+        recipientsStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipientsStatus'
+    CompletedDocuments:
+      type: object
+      properties:
+        auditDocument:
+          type: string
+          description: "Audit document"
+        documentId:
+          type: string
+          description: "The document identifier"
+        fileName:
+          type: string
+          description: "The file name"
+    RecipientsStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "The recipient identifier"
+        email:
+          type: string
+          description: "The recipient email"
+        firstName:
+          type: string
+          description: "The recipient first name"
+        lastName:
+          type: string
+          description: "The recipient last name"
+        orderIndex:
+          type: integer
+          description: "The recipient order index"
+        signedDate:
+          type: string
+          description: "The recipient signed date"
+        status:
+          type: string
+          description: "The recipient status"
+        workstepRedirectUrl:
+          type: string
+          description: "The recipient workstep redirect url"
+    JWTBearerResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Access token
+        refresh_token:
+          type: string
+          description: Refresh token
+        token_type:
+          type: string
+          description: Token type
+        expires_in:
+          type: integer
+          description: The life time of token in seconds
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: string
+        type:
+          type: string
+        message:
+          type: string

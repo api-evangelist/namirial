@@ -1,0 +1,142 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Namirial Connectors APIs
+  version: 1.0.0
+extends: ../openapi/_original/namirial-connectors-openapi.yml
+x-generated: '2026-10-18'
+x-method: generated
+x-source: openapi/namirial-connectors-openapi.yml (original openapi/_original/namirial-connectors-apis.yaml)
+x-rationale: The captured Connectors spec (OpenAPI 3.0.0, v1.5.1) defines no operationIds on any of its 30 operations and references an undefined `Basic` scheme on POST /auth/token. This overlay adds deterministic
+  operationIds derived from method+path (used by tooling and the candidate MCP manifest) and fixes the scheme reference, without mutating the original.
+actions:
+- target: $.paths['/auth/authorize'].get
+  description: 'Add operationId (spec ships none) for: Starts an authorization code flow'
+  update:
+    operationId: get_auth_authorize
+- target: $.paths['/auth/token'].post
+  description: 'Add operationId (spec ships none) for: Returns the Access and Refresh JWT bearer tokens'
+  update:
+    operationId: post_auth_token
+- target: $.paths['/auth/instances/find'].post
+  description: 'Add operationId (spec ships none) for: Return the instance list'
+  update:
+    operationId: post_auth_instances_find
+- target: $.paths['/auth/userinfo'].get
+  description: 'Add operationId (spec ships none) for: Get user information'
+  update:
+    operationId: get_auth_userinfo
+- target: $.paths['/clients'].get
+  description: 'Add operationId (spec ships none) for: Get the client list'
+  update:
+    operationId: get_clients
+- target: $.paths['/clients'].post
+  description: 'Add operationId (spec ships none) for: Create new client'
+  update:
+    operationId: post_clients
+- target: $.paths['/clients/{clientId}'].get
+  description: 'Add operationId (spec ships none) for: Get client detail'
+  update:
+    operationId: get_clients_by_clientid
+- target: $.paths['/clients/{clientId}'].put
+  description: 'Add operationId (spec ships none) for: Edit password of selected Client'
+  update:
+    operationId: put_clients_by_clientid
+- target: $.paths['/clients/{clientId}'].delete
+  description: 'Add operationId (spec ships none) for: Delete selected Client'
+  update:
+    operationId: delete_clients_by_clientid
+- target: $.paths['/instances'].get
+  description: 'Add operationId (spec ships none) for: Get the instance list'
+  update:
+    operationId: get_instances
+- target: $.paths['/instances'].post
+  description: 'Add operationId (spec ships none) for: Create new instance'
+  update:
+    operationId: post_instances
+- target: $.paths['/instances/{instanceId}'].get
+  description: 'Add operationId (spec ships none) for: Get instance detail'
+  update:
+    operationId: get_instances_by_instanceid
+- target: $.paths['/instances/{instanceId}'].put
+  description: 'Add operationId (spec ships none) for: Edit selected Instance'
+  update:
+    operationId: put_instances_by_instanceid
+- target: $.paths['/instances/{instanceId}'].delete
+  description: 'Add operationId (spec ships none) for: Delete selected Instance'
+  update:
+    operationId: delete_instances_by_instanceid
+- target: $.paths['/clientsInstances'].post
+  description: 'Add operationId (spec ships none) for: Assign an instance to a client'
+  update:
+    operationId: post_clients_instances
+- target: $.paths['/clientsInstances/{clientId}/{instanceId}'].delete
+  description: 'Add operationId (spec ships none) for: Remove instance from a client'
+  update:
+    operationId: delete_clients_instances_by_clientid_by_instanceid
+- target: $.paths['/documents/{documentId}'].get
+  description: 'Add operationId (spec ships none) for: Download the document from eSAW'
+  update:
+    operationId: get_documents_by_documentid
+- target: $.paths['/documents/urls'].get
+  description: 'Add operationId (spec ships none) for: Retrieve a list of presigned urls'
+  update:
+    operationId: get_documents_urls
+- target: $.paths['/organizations'].get
+  description: 'Add operationId (spec ships none) for: Get The organization by Email'
+  update:
+    operationId: get_organizations
+- target: $.paths['/auth/organizations'].get
+  description: 'Add operationId (spec ships none) for: Get the organization list'
+  update:
+    operationId: get_auth_organizations
+- target: $.paths['/auth/organizations'].post
+  description: 'Add operationId (spec ships none) for: Create new organization'
+  update:
+    operationId: post_auth_organizations
+- target: $.paths['/auth/organizations/{organizationId}'].get
+  description: 'Add operationId (spec ships none) for: Get organization detail'
+  update:
+    operationId: get_auth_organizations_by_organizationid
+- target: $.paths['/auth/organizations/{organizationId}'].put
+  description: 'Add operationId (spec ships none) for: Edit selected organization'
+  update:
+    operationId: put_auth_organizations_by_organizationid
+- target: $.paths['/auth/organizations/{organizationId}'].delete
+  description: 'Add operationId (spec ships none) for: Delete selected organization'
+  update:
+    operationId: delete_auth_organizations_by_organizationid
+- target: $.paths['/auth/organizationsInstances'].post
+  description: 'Add operationId (spec ships none) for: Assign an instance to an organization'
+  update:
+    operationId: post_auth_organizations_instances
+- target: $.paths['/auth/organizationsInstances/{organizationId}/{instanceId}'].delete
+  description: 'Add operationId (spec ships none) for: Remove an instance from an organization'
+  update:
+    operationId: delete_auth_organizations_instances_by_organizationid_by_instanceid
+- target: $.paths['/envelopes'].post
+  description: 'Add operationId (spec ships none) for: Get the envelope list'
+  update:
+    operationId: post_envelopes
+- target: $.paths['/envelopes/{envelopeId}'].get
+  description: 'Add operationId (spec ships none) for: Get the envelope detail'
+  update:
+    operationId: get_envelopes_by_envelopeid
+- target: $.paths['/processes/create/draft'].post
+  description: 'Add operationId (spec ships none) for: Define the process by creating a draft envelope in eSAW'
+  update:
+    operationId: post_processes_create_draft
+- target: $.paths['/processes/{processId}'].get
+  description: 'Add operationId (spec ships none) for: Get the process detail'
+  update:
+    operationId: get_processes_by_processid
+- target: $.paths['/auth/token'].post
+  description: The spec's POST /auth/token references a security scheme named `Basic`, which is not defined; components.securitySchemes defines it as `basicAuth`. Point the requirement at the defined scheme.
+  update:
+    security:
+    - basicAuth: []
+- target: $
+  description: Add a root security requirement matching the two OAuth 2 flows the spec defines (operations without per-operation security otherwise appear unauthenticated).
+  update:
+    security:
+    - oAuth2AuthCode: []
+    - oAuth2ClientCredentials: []

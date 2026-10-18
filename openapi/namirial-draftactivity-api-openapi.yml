@@ -1,0 +1,3391 @@
+openapi: 3.2.0
+info:
+  title: Namirial Draft Activity API
+  version: v6
+  description: 'Operations tagged DraftActivity across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: DraftActivity
+paths:
+  /v6/draft/activity/replace:
+    post:
+      tags:
+      - DraftActivity
+      summary: Replace an existing activity of a draft with a new one
+      operationId: DraftActivity_Replace
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DraftActivityReplaceRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DraftActivityReplaceRequest'
+        description: The definition of the new activity.
+        required: true
+    servers:
+    - url: /api
+components:
+  schemas:
+    DraftActivityReplaceReadingAreaDefinition:
+      description: The settings of a positionable element.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplacePredefinedElementDefinition:
+      description: The configuration of the predefined element.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/DraftActivityReplaceTextFormat'
+          description: The configuration of the text format.
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceDrawToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceDrawToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceSignaturePluginParameter:
+      description: The definition of a signature plugin parameter.
+      type: object
+      properties:
+        Key:
+          description: The identifier of the parameter.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Value:
+          description: The value of the parameter.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceReadAreaConfirmation:
+      description: The area that has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          maxLength: 500
+          minLength: 0
+          type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        Definition:
+          $ref: '#/components/schemas/DraftActivityReplaceReadingAreaDefinition'
+          description: 'The definition of the area.
+
+            When adding a new element, it has to be specified .
+
+            When the field already exists, it must not be specified.'
+    DraftActivityReplaceGeneralPoliciesForViewAction:
+      description: Define the general policies allowed for view action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+    DraftActivityReplaceEmail:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceSignBulk:
+      description: A sign action for multiple recipients.
+      type: object
+      properties:
+        BulkRecipients:
+          description: The recipients that are part of the bulk.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceBulkRecipient'
+        SequenceMode:
+          description: The sequence mode.
+          enum:
+          - NoSequenceEnforced
+          - SequenceEnforced
+          type: string
+        Elements:
+          $ref: '#/components/schemas/DraftActivityReplaceElements'
+          description: The elements in the document (e.g. form fields) assigned to the recipient.
+        FinishActionConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceFinishAction'
+          description: Defines what happens in the signing clients, after an action has been finished.
+        BatchConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceBatchConfiguration'
+          description: The configuration of a signing batch.
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/DraftActivityReplaceGeneralPoliciesForSignAction'
+          description: Viewer policy settings for override.
+    DraftActivityReplaceLinkDefinition:
+      description: The settings of a positionable element.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceSwedishBankIdStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceVisibilityOption:
+      description: The options defining the document visibility.
+      type: object
+      properties:
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        IsHidden:
+          description: If true, the referenced document is hidden for the activity.
+          type: boolean
+    DraftActivityReplaceInitials:
+      description: The configuration of the predefined element showing the initials.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        IncludeMiddleNameInitials:
+          description: "If true, the initials from the middle names are included as well. \nThe initials are read from the given name. Additional names are expected to be separated by a space."
+          type: boolean
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceClickToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplacePredefinedFieldElements:
+      description: Define the predefined fields which will be added and filled by the system.
+      type: object
+      properties:
+        TextFields:
+          description: The predefined text fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplacePredefinedText'
+        EmailFields:
+          description: The recipient's email fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceEmail'
+        InitialsFields:
+          description: The recipient's initials fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceInitials'
+        GivenNameFields:
+          description: The recipient's given name fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceGivenName'
+        SurnameFields:
+          description: The recipient's surname fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSurname'
+        FullNameFields:
+          description: The recipient's full name fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceFullName'
+        DateFields:
+          description: The current date fields.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceDate'
+    DraftActivityReplaceAllowedSignatureTypes:
+      description: The definition of the allowed signature types for the signature.
+      type: object
+      properties:
+        ClickToSign:
+          $ref: '#/components/schemas/DraftActivityReplaceClickToSignSignatureType'
+          description: Allow signing with "click to sign".
+        DrawToSign:
+          $ref: '#/components/schemas/DraftActivityReplaceDrawToSignSignatureType'
+          description: Allow signing with "draw to sign".
+        TypeToSign:
+          $ref: '#/components/schemas/DraftActivityReplaceTypeToSignSignatureType'
+          description: Allow signing with "type to sign".
+        LocalCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceLocalCertificateSignatureType'
+          description: Allow signing with a local certificate.
+        DisposableCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceDisposableCertificateSignatureType'
+          description: Allow signing with a disposable certificate.
+        SwissComOnDemand:
+          $ref: '#/components/schemas/DraftActivityReplaceSwissComOnDemandSignatureType'
+          description: Allow signing with a Swisscom On-Demand certificate.
+        ATrustCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceATrustCertificateSignatureType'
+          description: Allow signing with an A-Trust certificate.
+        Biometric:
+          $ref: '#/components/schemas/DraftActivityReplaceBiometricSignatureType'
+          description: Allow signing with a biometric signature.
+        RemoteCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceRemoteCertificateSignatureType'
+          description: Allow signing with a remote certificate.
+        OneTimePassword:
+          $ref: '#/components/schemas/DraftActivityReplaceOneTimePasswordSignatureType'
+          description: Allow signing with a one time password (SMS-OTP).
+        SwedishBankId:
+          $ref: '#/components/schemas/DraftActivityReplaceSwedishBankIdSignatureType'
+          description: Allow signing with Swedish BankID.
+        SignaturePlugins:
+          description: Allow signing with signature plugins.
+          maxItems: 20
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSignaturePluginSignatureType'
+    DraftActivityReplaceFieldValidation:
+      description: The configuration of the field validation rules.
+      type: object
+      properties:
+        Type:
+          description: The type of the value.
+          enum:
+          - None
+          - Date
+          - Email
+          - Number
+          - Phone
+          - Time
+          type: string
+          x-ms-enum:
+            name: FieldValidationType
+            modelAsString: false
+        DateValidationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceDateValidationConfiguration'
+          description: The validation rules for dates.
+        NumberValidationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceNumberValidationConfiguration'
+          description: The validation rules for numbers.
+        PhoneValidationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplacePhoneValidationConfiguration'
+          description: The validation rules for phone numbers.
+        TimeValidationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceTimeValidationConfiguration'
+          description: The validation rules for time values.
+    DraftActivityReplaceSize:
+      description: The definition of the size of an element.
+      required:
+      - Width
+      - Height
+      type: object
+      properties:
+        Width:
+          format: double
+          description: The width of the element in points.
+          type: number
+        Height:
+          format: double
+          description: The height of the element in points.
+          type: number
+    DraftActivityReplaceLocalCertificateSignatureType:
+      description: The configuration of the LocalCertificate signature.
+      type: object
+      properties:
+        EnforcePreferredHashAlgorithm:
+          description: If true, the usage of the preferred hash algorithm is enforced.
+          type: boolean
+        PreferredHashAlgorithm:
+          description: The preferred hash algorithm.
+          enum:
+          - Sha256
+          - Sha512
+          type: string
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceLocalCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceRemoteCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceP7MSignatureMethods:
+      description: The recipient configuration for signing with P7M.
+      type: object
+      properties:
+        LocalCertificate:
+          description: If true, a local certificate can be used.
+          type: boolean
+        DisposableCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceDisposableCertificateSignatureData'
+          description: The disposable certificate configuration for the action.
+        RemoteCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceRemoteCertificateSignatureData'
+          description: The remote certificate configuration for the action.
+        SignaturePluginData:
+          description: The signature plugin configurations for the action.
+          maxItems: 20
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSignaturePluginSignatureData'
+    DraftActivityReplaceSwedishBankIdSignatureType:
+      description: The configuration of the signature.
+      type: object
+      properties:
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceSwedishBankIdStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceAuthenticationConfiguration:
+      description: The definition of the authentications of the recipient.
+      type: object
+      properties:
+        AccessCode:
+          $ref: '#/components/schemas/DraftActivityReplaceAccessCodeAuthentication'
+          description: The configuration of the authentication with an access code.
+        SmsOneTimePassword:
+          $ref: '#/components/schemas/DraftActivityReplaceSmsOneTimePasswordAuthentication'
+          description: The configuration of the authentication with one time password over SMS.
+        SwedishBankId:
+          $ref: '#/components/schemas/DraftActivityReplaceSwedishBankIdAuthentication'
+          description: The configuration of the authentication with Swedish BankID.
+        OAuthAuthentications:
+          description: The configurations of the authentication with OAuth.
+          maxItems: 20
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceOAuthAuthentication'
+        SamlAuthentications:
+          description: The configurations of the authentication with SAML.
+          maxItems: 20
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSamlAuthentication'
+    DraftActivityReplaceDisposableCertificateSignatureType:
+      description: The configuration of the DisposableCertificate signature.
+      type: object
+      properties:
+        IsLongLived:
+          description: If true, the disposable certificate is long lived.
+          type: boolean
+        ValidityInSeconds:
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceDisposableCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceOneTimePasswordSignatureType:
+      description: The configuration of the OneTimePassword signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          description: The validity of the password in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceOneTimePasswordStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    DraftActivityReplaceRadioButtonGroupDefinition:
+      description: The configuration of the radio button group definition.
+      type: object
+      properties:
+        IsSelectUnison:
+          description: If true, radiobuttons with the same <code>ExportValue</code> are checked and unchecked together.
+          type: boolean
+        Items:
+          description: The list of radio buttons that belong to the same group.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceRadioButtonItemDefinition'
+    DraftActivityReplaceAccessCodeAuthentication:
+      description: The configuration for authentication with a predefined access code.
+      type: object
+      properties:
+        Code:
+          description: The code for authenticating the recipient.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceDrawToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceFinishAction:
+      description: Define what happens in the signing clients, after an action has been finished.
+      type: object
+      properties:
+        SignAnyWhereViewer:
+          $ref: '#/components/schemas/DraftActivityReplaceClientFinishAction'
+          description: The actions for the SAW Viewer.
+        SignificantClientSignatureCaptureForIos:
+          $ref: '#/components/schemas/DraftActivityReplaceAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for iOS.
+        SignificantClientSignatureCaptureForAndroid:
+          $ref: '#/components/schemas/DraftActivityReplaceAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for Android.
+        SignificantClientSignatureCaptureForWindows:
+          $ref: '#/components/schemas/DraftActivityReplaceAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for Windows.
+        KioskSdk:
+          $ref: '#/components/schemas/DraftActivityReplaceKioskFinishAction'
+          description: The actions for the SIGNificant Kiosk SDK.
+    DraftActivityReplaceAttachmentDefinition:
+      description: The settings of a positionable element.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceContactInformation:
+      description: Define the contact information for the recipient.
+      type: object
+      properties:
+        Email:
+          description: The email address of the recipient.
+          maxLength: 250
+          minLength: 0
+          pattern: ^[a-zA-Z\u00A0-\uD7FF\uE000-\uFFFF0-9.!#$%&'*+\-\/=?^_`{|}~]+@(?=[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF])(?:[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF]|(?<![.-])\.|(?<!\.)-)*[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF]$
+          type: string
+        GivenName:
+          description: The given name of the recipient.
+          maxLength: 200
+          minLength: 0
+          type: string
+        Surname:
+          description: The surname of the recipient.
+          maxLength: 200
+          minLength: 0
+          type: string
+        PhoneNumber:
+          description: The phone number of the recipient.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+        LanguageCode:
+          description: The language of the recipient.
+          enum:
+          - AF
+          - AF_ZA
+          - AR
+          - AR_AE
+          - AR_BH
+          - AR_DZ
+          - AR_EG
+          - AR_IQ
+          - AR_JO
+          - AR_KW
+          - AR_LB
+          - AR_LY
+          - AR_MA
+          - AR_OM
+          - AR_QA
+          - AR_SA
+          - AR_SY
+          - AR_TN
+          - AR_YE
+          - AZ
+          - BE
+          - BE_BY
+          - BG
+          - BG_BG
+          - CA
+          - CA_ES
+          - CS
+          - CS_CZ
+          - CY
+          - CY_GB
+          - DA
+          - DA_DK
+          - DE
+          - DE_AT
+          - DE_CH
+          - DE_DE
+          - DE_LI
+          - DE_LU
+          - DV
+          - DV_MV
+          - EL
+          - EL_GR
+          - EN
+          - EN_AU
+          - EN_BZ
+          - EN_CA
+          - EN_GB
+          - EN_IE
+          - EN_JM
+          - EN_NZ
+          - EN_PH
+          - EN_TT
+          - EN_US
+          - EN_ZA
+          - EN_ZW
+          - ES
+          - ES_AR
+          - ES_BO
+          - ES_CL
+          - ES_CO
+          - ES_CR
+          - ES_DO
+          - ES_EC
+          - ES_ES
+          - ES_GT
+          - ES_HN
+          - ES_MX
+          - ES_NI
+          - ES_PA
+          - ES_PE
+          - ES_PR
+          - ES_PY
+          - ES_SV
+          - ES_UY
+          - ES_VE
+          - ET
+          - ET_EE
+          - EU
+          - EU_ES
+          - FA
+          - FA_IR
+          - FI
+          - FI_FI
+          - FO
+          - FO_FO
+          - FR
+          - FR_BE
+          - FR_CA
+          - FR_CH
+          - FR_FR
+          - FR_LU
+          - FR_MC
+          - GL
+          - GL_ES
+          - GU
+          - GU_IN
+          - HE
+          - HE_IL
+          - HI
+          - HI_IN
+          - HR
+          - HR_BA
+          - HR_HR
+          - HU
+          - HU_HU
+          - HY
+          - HY_AM
+          - ID
+          - ID_ID
+          - IS
+          - IS_IS
+          - IT
+          - IT_CH
+          - IT_IT
+          - JA
+          - JA_JP
+          - KA
+          - KA_GE
+          - KK
+          - KK_KZ
+          - KN
+          - KN_IN
+          - KO
+          - KO_KR
+          - KOK
+          - KOK_IN
+          - KY
+          - KY_KG
+          - LT
+          - LT_LT
+          - LV
+          - LV_LV
+          - MI
+          - MI_NZ
+          - MK
+          - MK_MK
+          - MN
+          - MN_MN
+          - MR
+          - MR_IN
+          - MS
+          - MS_BN
+          - MS_MY
+          - MT
+          - MT_MT
+          - NB
+          - NB_NO
+          - NL
+          - NL_BE
+          - NL_NL
+          - NN_NO
+          - PA
+          - PA_IN
+          - PL
+          - PL_PL
+          - PS
+          - PT
+          - PT_BR
+          - PT_PT
+          - RO
+          - RO_RO
+          - RU
+          - RU_RU
+          - SA
+          - SA_IN
+          - SE
+          - SE_FI
+          - SE_NO
+          - SE_SE
+          - SK
+          - SK_SK
+          - SL
+          - SL_SI
+          - SQ
+          - SQ_AL
+          - SV
+          - SV_FI
+          - SV_SE
+          - SW
+          - SW_KE
+          - SYR
+          - SYR_SY
+          - TA
+          - TA_IN
+          - TE
+          - TE_IN
+          - TH
+          - TH_TH
+          - TN
+          - TN_ZA
+          - TR
+          - TR_TR
+          - TT
+          - TT_RU
+          - TS
+          - UK
+          - UK_UA
+          - UR
+          - UR_PK
+          - UZ
+          - VI
+          - VI_VN
+          - XH
+          - XH_ZA
+          - ZH
+          - ZH_CN
+          - ZH_HK
+          - ZH_MO
+          - ZH_SG
+          - ZH_TW
+          - ZU
+          - ZU_ZA
+          - AM
+          - AM_ET
+          - ARN
+          - ARN_CL
+          - AS
+          - AS_IN
+          - AZ_CYRL
+          - AZ_CYRL_AZ
+          - AZ_LATN
+          - AZ_LATN_AZ
+          - BA
+          - BA_RU
+          - BN
+          - BN_BD
+          - BN_IN
+          - BO
+          - BO_CN
+          - BR
+          - BR_FR
+          - BS
+          - BS_CYRL
+          - BS_CYRL_BA
+          - BS_LATN
+          - BS_LATN_BA
+          - CA_ES_VALENCIA
+          - CHR
+          - CHR_CHER
+          - CHR_CHER_US
+          - CO
+          - CO_FR
+          - DSB
+          - DSB_DE
+          - EN_029
+          - EN_HK
+          - EN_IN
+          - EN_MY
+          - EN_SG
+          - ES_419
+          - ES_US
+          - FF
+          - FF_LATN
+          - FF_LATN_SN
+          - FIL
+          - FIL_PH
+          - FR_CD
+          - FR_CI
+          - FR_CM
+          - FR_HT
+          - FR_MA
+          - FR_ML
+          - FR_RE
+          - FR_SN
+          - FY
+          - FY_NL
+          - GA
+          - GA_IE
+          - GD
+          - GD_GB
+          - GN
+          - GN_PY
+          - GSW
+          - GSW_FR
+          - HA
+          - HA_LATN
+          - HA_LATN_NG
+          - HAW
+          - HAW_US
+          - HSB
+          - HSB_DE
+          - IG
+          - IG_NG
+          - II
+          - II_CN
+          - IU
+          - IU_CANS
+          - IU_CANS_CA
+          - IU_LATN
+          - IU_LATN_CA
+          - JV
+          - JV_LATN
+          - JV_LATN_ID
+          - KL
+          - KL_GL
+          - KM
+          - KM_KH
+          - KU
+          - KU_ARAB
+          - KU_ARAB_IQ
+          - LB
+          - LB_LU
+          - LO
+          - LO_LA
+          - MG
+          - MG_MG
+          - ML
+          - ML_IN
+          - MN_CYRL
+          - MN_MONG
+          - MN_MONG_CN
+          - MN_MONG_MN
+          - MOH
+          - MOH_CA
+          - MY
+          - MY_MM
+          - NE
+          - NE_IN
+          - NE_NP
+          - NN
+          - 'NO'
+          - NQO
+          - NQO_GN
+          - NSO
+          - NSO_ZA
+          - OC
+          - OC_FR
+          - OM
+          - OM_ET
+          - OR
+          - OR_IN
+          - PA_ARAB
+          - PA_ARAB_PK
+          - PRS
+          - PRS_AF
+          - PS_AF
+          - PT_AO
+          - QUT
+          - QUT_GT
+          - QUZ
+          - QUZ_BO
+          - QUZ_EC
+          - QUZ_PE
+          - RM
+          - RM_CH
+          - RO_MD
+          - RW
+          - RW_RW
+          - SAH
+          - SAH_RU
+          - SD
+          - SD_ARAB
+          - SD_ARAB_PK
+          - SI
+          - SI_LK
+          - SMA
+          - SMA_NO
+          - SMA_SE
+          - SMJ
+          - SMJ_NO
+          - SMJ_SE
+          - SMN
+          - SMN_FI
+          - SMS
+          - SMS_FI
+          - SN
+          - SN_LATN
+          - SN_LATN_ZW
+          - SO
+          - SO_SO
+          - SR
+          - SR_CYRL
+          - SR_CYRL_BA
+          - SR_CYRL_CS
+          - SR_CYRL_ME
+          - SR_CYRL_RS
+          - SR_LATN
+          - SR_LATN_BA
+          - SR_LATN_CS
+          - SR_LATN_ME
+          - SR_LATN_RS
+          - ST
+          - ST_ZA
+          - TA_LK
+          - TG
+          - TG_CYRL
+          - TG_CYRL_TJ
+          - TI
+          - TI_ER
+          - TI_ET
+          - TK
+          - TK_TM
+          - TN_BW
+          - TS_ZA
+          - TZM
+          - TZM_LATN
+          - TZM_LATN_DZ
+          - TZM_TFNG
+          - TZM_TFNG_MA
+          - UG
+          - UG_CN
+          - UR_IN
+          - UZ_CYRL
+          - UZ_CYRL_UZ
+          - UZ_LATN
+          - UZ_LATN_UZ
+          - WO
+          - WO_SN
+          - YO
+          - YO_NG
+          - ZGH
+          - ZGH_TFNG
+          - ZGH_TFNG_MA
+          - ZH_HANS
+          - ZH_HANT
+          - ZH_CHS
+          - ZH_CHT
+          type: string
+    DraftActivityReplaceSamlAuthentication:
+      description: The configuration for authentication with a SAML provider.
+      type: object
+      properties:
+        ProviderName:
+          description: The name of the SAML provider.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Validations:
+          description: The validation rules for the SAML response.
+          maxItems: 100
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceAuthenticationValidation'
+    DraftActivityReplaceRecipientConfiguration:
+      description: The configuration of the recipient.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/DraftActivityReplaceContactInformation'
+          description: The contact information of the recipient.
+        PersonalMessage:
+          description: The personal message for the recipient.
+          maxLength: 204800
+          minLength: 0
+          type: string
+        AuthenticationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceAuthenticationConfiguration'
+          description: The configuration for the authentication of the recipient.
+        SendEmails:
+          description: 'Obsolete: If true, emails will be sent out for this recipient.
+
+            Use NotificationChannel property instead, which also allows sending with other notification channels than Email.
+
+            NotificationChannel.None is the equivalent of sending false.
+
+            NotificationChannel.Email is the equivalent of sending true.
+
+            If the NotificationChannel property is used/sent this property will be ignored.'
+          type: boolean
+        NotificationChannel:
+          description: 'Which channel is used for sending notifications to the recipient.
+
+            Default Email if not specified.'
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+        AllowAccessAfterFinish:
+          description: 'If true, the recipient is allowed to access the action after it has been finished.
+
+            It is required that the organization has the AllowAccessFinishedWorkstep feature enabled.
+
+            The default value is taken from the OrganizationSettings.'
+          type: boolean
+    DraftActivityReplaceATrustCertificateSignatureType:
+      description: The configuration of the A-Trust certificate signature.
+      type: object
+      properties:
+        TemplateId:
+          description: The identifier of the A-Trust template.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+    DraftActivityReplaceAdvancedRecipientConfiguration:
+      description: The advanced configuration for the recipient.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/DraftActivityReplaceContactInformation'
+          description: The contact information of the recipient.
+        PersonalMessage:
+          description: The personal message for the recipient.
+          maxLength: 204800
+          minLength: 0
+          type: string
+        AuthenticationConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceAuthenticationConfiguration'
+          description: The configuration for the authentication of the recipient.
+        SendEmails:
+          description: 'Obsolete: If true, emails will be sent out for this recipient.
+
+            Use NotificationChannel property instead, which also allows sending with other notification channels than Email.
+
+            NotificationChannel.None is the equivalent of sending false.
+
+            NotificationChannel.Email is the equivalent of sending true.
+
+            If the NotificationChannel property is used/sent this property will be ignored.'
+          type: boolean
+        NotificationChannel:
+          description: 'Which channel is used for sending notifications to the recipient.
+
+            Default Email if not specified.'
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+        AllowAccessAfterFinish:
+          description: 'If true, the recipient is allowed to access the action after it has been finished.
+
+            It is required that the organization has the AllowAccessFinishedWorkstep feature enabled.
+
+            The default value is taken from the OrganizationSettings.'
+          type: boolean
+        IncludedEmailAppLinks:
+          $ref: '#/components/schemas/DraftActivityReplaceEmailAppLinks'
+          description: The configuration for mobile app links in email messages.
+        AllowDelegation:
+          description: If true, the recipient may delegate this activity to another person.
+          type: boolean
+        RequireViewContentBeforeFormFilling:
+          description: If true, the signer has to confirm the reading of all documents as first task.
+          type: boolean
+    DraftActivityReplaceSmsOneTimePasswordSignatureData:
+      description: The recipient configuration for signing with a one time password sent via SMS.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number to which the one time password will be sent.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+    DraftActivityReplaceClickToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceClickToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceSwissComOnDemandSignatureData:
+      description: The recipient configuration for signing with a Swisscom On-Demand certificate.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+        CommonName:
+          description: The name of the certificate that is created or checked.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Country:
+          description: The country.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Locality:
+          description: The locality.
+          maxLength: 500
+          minLength: 0
+          type: string
+        OrganizationUnits:
+          description: The organizational units.
+          maxItems: 228
+          type: array
+          items:
+            maxLength: 500
+            type: string
+        Organization:
+          description: The organization.
+          maxLength: 500
+          minLength: 0
+          type: string
+        SerialNumber:
+          description: The serial number.
+          maxLength: 500
+          minLength: 0
+          type: string
+        StateOrProvince:
+          description: The state or province.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Pseudonym:
+          description: A name or key that uniquely identifies the user.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceAppFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RemoveDocumentFromRecentDocumentList:
+          description: If true, the document will be removed from the recent document list.
+          type: boolean
+        CallClientActionOnlyAfterSuccessfulSync:
+          description: If true, the client action will be called only after a successful sync.
+          type: boolean
+        CloseApp:
+          description: If true, the app will be closed.
+          type: boolean
+        RedirectUri:
+          description: The redirect uri.
+          maxLength: 8000
+          minLength: 0
+          type: string
+    DraftActivityReplaceHyperLink:
+      description: The definition of the hyperlink element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Uri:
+          description: The URI of the hyperlink.
+          maxLength: 8000
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceLinkDefinition'
+          description: 'The definition of the hyperlink element.
+
+            It must be specified when the hyperlink element is added.
+
+            It must not be specified when the hyperlink element already exists.'
+    DraftActivityReplaceAction:
+      description: The action of the activity with the possibility to define a bulk. Exactly one definition must be used!
+      type: object
+      properties:
+        SendCopy:
+          $ref: '#/components/schemas/DraftActivityReplaceSendCopy'
+          description: The definition of the copy action.
+        SignAutomatic:
+          $ref: '#/components/schemas/DraftActivityReplaceSignAutomatic'
+          description: The definition of the automatic sign action.
+        Sign:
+          $ref: '#/components/schemas/DraftActivityReplaceSign'
+          description: The definition of the sign action.
+        View:
+          $ref: '#/components/schemas/DraftActivityReplaceView'
+          description: The definition of the view action.
+        SignAsP7M:
+          $ref: '#/components/schemas/DraftActivityReplaceSignAsP7M'
+          description: The definition of the P7M sign action.
+        SignBulk:
+          $ref: '#/components/schemas/DraftActivityReplaceSignBulk'
+          description: The definition of the bulk.
+    DraftActivityReplaceTypeToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceTypeToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceSignatureFieldDefinition:
+      description: The settings of a positionable element.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplacePosition:
+      description: The position of an element on the document.
+      required:
+      - X
+      - Y
+      type: object
+      properties:
+        PageNumber:
+          format: int32
+          description: The number of the page where the element is located. It starts with 1.
+          type: integer
+        X:
+          format: double
+          description: The X coordinate in points. It starts from the left.
+          type: number
+        Y:
+          format: double
+          description: The Y coordinate in points. It starts from the bottom.
+          type: number
+    DraftActivityReplaceLinkConfiguration:
+      description: The configuration of the link elements.
+      type: object
+      properties:
+        HyperLinks:
+          description: The list of hyperlink elements.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceHyperLink'
+    DraftActivityReplaceRemoteCertificateSignatureType:
+      description: The configuration of the RemoteCertificate signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceRemoteCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceBiometricSignatureType:
+      description: The configuration of the Biometric signature.
+      type: object
+      properties:
+        BiometricVerification:
+          description: If true, a biometric verification is performed.
+          type: boolean
+        AllowBiometricStoringOnly:
+          description: If true, the biometric signature might be stored without verification.
+          type: boolean
+        StoreSignedResponseWithoutBioData:
+          description: If true, the signed response is stored without biometric data.
+          type: boolean
+        BiometricServerUserId:
+          description: The identifier of the user on the biometric server.
+          maxLength: 50
+          minLength: 0
+          type: string
+        SignaturePositioning:
+          description: The allowed positioning of the biometric signature.
+          enum:
+          - WithinField
+          - OnPage
+          - IntersectsWithField
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+    DraftActivityReplacePredefinedText:
+      description: The configuration of the element showing the predefined text.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Value:
+          description: The value of the predefined text.
+          maxLength: 1000
+          minLength: 0
+          type: string
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceCheckBox:
+      description: The configuration of the check box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        IsChecked:
+          description: If true, the check box is checked.
+          type: boolean
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceCheckBoxDefinition'
+          description: 'The definition of the check box.
+
+            It must be specified when the check box is added.
+
+            It must not be specified when the check box already exists.'
+    DraftActivityReplaceSwissComOnDemandStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplacePluginStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceTypeToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceBatchConfiguration:
+      description: The configuration of a signing batch.
+      type: object
+      properties:
+        Mode:
+          description: The mode, that will be used for batch signing.
+          enum:
+          - Basic
+          - OptIn
+          - OptOut
+          - OptOutWithRequiredAlwaysSelected
+          - OptInWithRequiredAlwaysSelected
+          type: string
+          x-ms-enum:
+            name: BatchMode
+            modelAsString: false
+        RequireScrollingOverAllSignaturesBeforeSigning:
+          description: 'If true, the user has to review all signatures in the batch signing dialog before signing.
+
+            This is only applicable when the <code>Mode</code> is set to <code>OptIn</code> or <code>OptOut</code>.'
+          type: boolean
+    DraftActivityReplaceSignAsP7M:
+      description: An action to sign the documents with P7M.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        SignatureMethods:
+          $ref: '#/components/schemas/DraftActivityReplaceP7MSignatureMethods'
+          description: The configuration of recipient data for P7M signatures.
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/DraftActivityReplacePoliciesForP7MAction'
+          description: Viewer policy settings for override.
+    DraftActivityReplaceReadPagesConfirmation:
+      description: The page which has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          maxLength: 500
+          minLength: 0
+          type: string
+        PageNumber:
+          format: int32
+          description: The number of the page that needs to be read. Starting with 1.
+          type: integer
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+    DraftActivityReplaceFullName:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceSmsOneTimePasswordAuthentication:
+      description: The configuration for authentication with a one time password sent over SMS.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number to which the one time password will be sent.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+    DraftActivityReplaceListBoxDefinition:
+      description: The configuration of the list box.
+      required:
+      - Items
+      - Position
+      - Size
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/DraftActivityReplaceTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceChoiceItem'
+        IsMultiSelect:
+          description: If true, multiple values of the list box can be selected.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceSignAutomatic:
+      description: An automatic signing action.
+      type: object
+      properties:
+        ProfileId:
+          description: The identifier of the profile for the automatic signatures.
+          maxLength: 500
+          minLength: 0
+          type: string
+        RenderingLanguageCode:
+          description: The rendering language for the automatic signatures.
+          enum:
+          - AF
+          - AF_ZA
+          - AR
+          - AR_AE
+          - AR_BH
+          - AR_DZ
+          - AR_EG
+          - AR_IQ
+          - AR_JO
+          - AR_KW
+          - AR_LB
+          - AR_LY
+          - AR_MA
+          - AR_OM
+          - AR_QA
+          - AR_SA
+          - AR_SY
+          - AR_TN
+          - AR_YE
+          - AZ
+          - BE
+          - BE_BY
+          - BG
+          - BG_BG
+          - CA
+          - CA_ES
+          - CS
+          - CS_CZ
+          - CY
+          - CY_GB
+          - DA
+          - DA_DK
+          - DE
+          - DE_AT
+          - DE_CH
+          - DE_DE
+          - DE_LI
+          - DE_LU
+          - DV
+          - DV_MV
+          - EL
+          - EL_GR
+          - EN
+          - EN_AU
+          - EN_BZ
+          - EN_CA
+          - EN_GB
+          - EN_IE
+          - EN_JM
+          - EN_NZ
+          - EN_PH
+          - EN_TT
+          - EN_US
+          - EN_ZA
+          - EN_ZW
+          - ES
+          - ES_AR
+          - ES_BO
+          - ES_CL
+          - ES_CO
+          - ES_CR
+          - ES_DO
+          - ES_EC
+          - ES_ES
+          - ES_GT
+          - ES_HN
+          - ES_MX
+          - ES_NI
+          - ES_PA
+          - ES_PE
+          - ES_PR
+          - ES_PY
+          - ES_SV
+          - ES_UY
+          - ES_VE
+          - ET
+          - ET_EE
+          - EU
+          - EU_ES
+          - FA
+          - FA_IR
+          - FI
+          - FI_FI
+          - FO
+          - FO_FO
+          - FR
+          - FR_BE
+          - FR_CA
+          - FR_CH
+          - FR_FR
+          - FR_LU
+          - FR_MC
+          - GL
+          - GL_ES
+          - GU
+          - GU_IN
+          - HE
+          - HE_IL
+          - HI
+          - HI_IN
+          - HR
+          - HR_BA
+          - HR_HR
+          - HU
+          - HU_HU
+          - HY
+          - HY_AM
+          - ID
+          - ID_ID
+          - IS
+          - IS_IS
+          - IT
+          - IT_CH
+          - IT_IT
+          - JA
+          - JA_JP
+          - KA
+          - KA_GE
+          - KK
+          - KK_KZ
+          - KN
+          - KN_IN
+          - KO
+          - KO_KR
+          - KOK
+          - KOK_IN
+          - KY
+          - KY_KG
+          - LT
+          - LT_LT
+          - LV
+          - LV_LV
+          - MI
+          - MI_NZ
+          - MK
+          - MK_MK
+          - MN
+          - MN_MN
+          - MR
+          - MR_IN
+          - MS
+          - MS_BN
+          - MS_MY
+          - MT
+          - MT_MT
+          - NB
+          - NB_NO
+          - NL
+          - NL_BE
+          - NL_NL
+          - NN_NO
+          - PA
+          - PA_IN
+          - PL
+          - PL_PL
+          - PS
+          - PT
+          - PT_BR
+          - PT_PT
+          - RO
+          - RO_RO
+          - RU
+          - RU_RU
+          - SA
+          - SA_IN
+          - SE
+          - SE_FI
+          - SE_NO
+          - SE_SE
+          - SK
+          - SK_SK
+          - SL
+          - SL_SI
+          - SQ
+          - SQ_AL
+          - SV
+          - SV_FI
+          - SV_SE
+          - SW
+          - SW_KE
+          - SYR
+          - SYR_SY
+          - TA
+          - TA_IN
+          - TE
+          - TE_IN
+          - TH
+          - TH_TH
+          - TN
+          - TN_ZA
+          - TR
+          - TR_TR
+          - TT
+          - TT_RU
+          - TS
+          - UK
+          - UK_UA
+          - UR
+          - UR_PK
+          - UZ
+          - VI
+          - VI_VN
+          - XH
+          - XH_ZA
+          - ZH
+          - ZH_CN
+          - ZH_HK
+          - ZH_MO
+          - ZH_SG
+          - ZH_TW
+          - ZU
+          - ZU_ZA
+          - AM
+          - AM_ET
+          - ARN
+          - ARN_CL
+          - AS
+          - AS_IN
+          - AZ_CYRL
+          - AZ_CYRL_AZ
+          - AZ_LATN
+          - AZ_LATN_AZ
+          - BA
+          - BA_RU
+          - BN
+          - BN_BD
+          - BN_IN
+          - BO
+          - BO_CN
+          - BR
+          - BR_FR
+          - BS
+          - BS_CYRL
+          - BS_CYRL_BA
+          - BS_LATN
+          - BS_LATN_BA
+          - CA_ES_VALENCIA
+          - CHR
+          - CHR_CHER
+          - CHR_CHER_US
+          - CO
+          - CO_FR
+          - DSB
+          - DSB_DE
+          - EN_029
+          - EN_HK
+          - EN_IN
+          - EN_MY
+          - EN_SG
+          - ES_419
+          - ES_US
+          - FF
+          - FF_LATN
+          - FF_LATN_SN
+          - FIL
+          - FIL_PH
+          - FR_CD
+          - FR_CI
+          - FR_CM
+          - FR_HT
+          - FR_MA
+          - FR_ML
+          - FR_RE
+          - FR_SN
+          - FY
+          - FY_NL
+          - GA
+          - GA_IE
+          - GD
+          - GD_GB
+          - GN
+          - GN_PY
+          - GSW
+          - GSW_FR
+          - HA
+          - HA_LATN
+          - HA_LATN_NG
+          - HAW
+          - HAW_US
+          - HSB
+          - HSB_DE
+          - IG
+          - IG_NG
+          - II
+          - II_CN
+          - IU
+          - IU_CANS
+          - IU_CANS_CA
+          - IU_LATN
+          - IU_LATN_CA
+          - JV
+          - JV_LATN
+          - JV_LATN_ID
+          - KL
+          - KL_GL
+          - KM
+          - KM_KH
+          - KU
+          - KU_ARAB
+          - KU_ARAB_IQ
+          - LB
+          - LB_LU
+          - LO
+          - LO_LA
+          - MG
+          - MG_MG
+          - ML
+          - ML_IN
+          - MN_CYRL
+          - MN_MONG
+          - MN_MONG_CN
+          - MN_MONG_MN
+          - MOH
+          - MOH_CA
+          - MY
+          - MY_MM
+          - NE
+          - NE_IN
+          - NE_NP
+          - NN
+          - 'NO'
+          - NQO
+          - NQO_GN
+          - NSO
+          - NSO_ZA
+          - OC
+          - OC_FR
+          - OM
+          - OM_ET
+          - OR
+          - OR_IN
+          - PA_ARAB
+          - PA_ARAB_PK
+          - PRS
+          - PRS_AF
+          - PS_AF
+          - PT_AO
+          - QUT
+          - QUT_GT
+          - QUZ
+          - QUZ_BO
+          - QUZ_EC
+          - QUZ_PE
+          - RM
+          - RM_CH
+          - RO_MD
+          - RW
+          - RW_RW
+          - SAH
+          - SAH_RU
+          - SD
+          - SD_ARAB
+          - SD_ARAB_PK
+          - SI
+          - SI_LK
+          - SMA
+          - SMA_NO
+          - SMA_SE
+          - SMJ
+          - SMJ_NO
+          - SMJ_SE
+          - SMN
+          - SMN_FI
+          - SMS
+          - SMS_FI
+          - SN
+          - SN_LATN
+          - SN_LATN_ZW
+          - SO
+          - SO_SO
+          - SR
+          - SR_CYRL
+          - SR_CYRL_BA
+          - SR_CYRL_CS
+          - SR_CYRL_ME
+          - SR_CYRL_RS
+          - SR_LATN
+          - SR_LATN_BA
+          - SR_LATN_CS
+          - SR_LATN_ME
+          - SR_LATN_RS
+          - ST
+          - ST_ZA
+          - TA_LK
+          - TG
+          - TG_CYRL
+          - TG_CYRL_TJ
+          - TI
+          - TI_ER
+          - TI_ET
+          - TK
+          - TK_TM
+          - TN_BW
+          - TS_ZA
+          - TZM
+          - TZM_LATN
+          - TZM_LATN_DZ
+          - TZM_TFNG
+          - TZM_TFNG_MA
+          - UG
+          - UG_CN
+          - UR_IN
+          - UZ_CYRL
+          - UZ_CYRL_UZ
+          - UZ_LATN
+          - UZ_LATN_UZ
+          - WO
+          - WO_SN
+          - YO
+          - YO_NG
+          - ZGH
+          - ZGH_TFNG
+          - ZGH_TFNG_MA
+          - ZH_HANS
+          - ZH_HANT
+          - ZH_CHS
+          - ZH_CHT
+          type: string
+        VisibleSignatures:
+          description: 'The visible signatures define the optional visual representations for automatic signatures.
+
+            If none are defined, the automatic signatures are applied to the documents without a visual element.'
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceVisibleSignature'
+    DraftActivityReplaceBasicRecipientConfiguration:
+      description: The configuration of the recipient.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/DraftActivityReplaceContactInformation'
+          description: The contact information of the recipient.
+        PersonalMessage:
+          description: The personal message for the recipient.
+          maxLength: 204800
+          minLength: 0
+          type: string
+        NotificationChannel:
+          description: 'Which channel is used for sending notifications to the recipient.
+
+            Default Email if not specified.'
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+    DraftActivityReplacePoliciesForP7MAction:
+      description: Define the general policies allowed for P7M action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+        AllowAdhocPdfAttachments:
+          description: If true, the client is allowed to append adhoc documents.
+          type: boolean
+        AllowRejectWorkstep:
+          description: If true, the client is allowed to reject the workstep.
+          type: boolean
+        AllowUndoLastAction:
+          description: If true, the client is allowed to undo actions.
+          type: boolean
+        AllowDownloadOfSignedP7MFiles:
+          description: If true, the client is allowed to download signed p7m files.
+          type: boolean
+    DraftActivityReplaceClientFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RedirectUri:
+          description: The redirect uri.
+          maxLength: 8000
+          minLength: 0
+          type: string
+    DraftActivityReplaceSwedishBankIdAuthentication:
+      description: The configuration for Swedish BankID authentication.
+      type: object
+      properties:
+        PersonalNumber:
+          description: The personal number for the authentication.
+          maxLength: 500
+          minLength: 0
+          type: string
+        AllowAnyPersonalNumber:
+          description: 'If true, the personal number can be edited by the recipient.
+
+            If the personal number is empty and can be edited, a QR code for scanning is provided.'
+          type: boolean
+    DraftActivityReplaceDisposableCertificateSignatureData:
+      description: The recipient configuration for signing with a disposable certificate.
+      type: object
+      properties:
+        DocumentIssuingCountry:
+          description: 'The issuing country of the document.
+
+            Will be used as country of residence, if lean is disabled.'
+          maxLength: 500
+          minLength: 0
+          type: string
+        IdentificationIssuingCountry:
+          description: The issuing country of the identification.
+          maxLength: 500
+          minLength: 0
+          type: string
+        IdentificationType:
+          description: The type of identification in use.
+          enum:
+          - None
+          - ForeignTaxCode
+          - PersonalNumber
+          - Passport
+          - NationalIdentityCard
+          - ItalianTaxCode
+          - NoSerialNumber
+          - DrivingLicense
+          - ResidencePermit
+          - TemporaryResidencePermit
+          - EmbassyDocument
+          - AML
+          type: string
+          x-ms-enum:
+            name: DisposableCertificateIdentificationType
+            modelAsString: false
+        PhoneNumber:
+          description: The phone number registered for identification.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+        DocumentType:
+          description: The type of document used for the identification.
+          enum:
+          - IdentityCard
+          - DriverLicense
+          - Passport
+          - ResidencePermit
+          - NationalElectronicIdentityCard
+          - TemporaryResidencePermit
+          - EmbassyDocument
+          type: string
+        DocumentIssuedBy:
+          description: The authority that issued the document.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentIssuedOn:
+          format: date
+          description: 'The date when the document has been issued.
+
+            A date in the format RFC 3339, section 5.6, ''full-date'' (e.g. 2017-07-21).'
+          maxLength: 10
+          minLength: 10
+          type: string
+        DocumentExpiryDate:
+          format: date
+          description: 'The expiration date of the document.
+
+            A date in the format RFC 3339, section 5.6, ''full-date'' (e.g. 2017-07-21).'
+          maxLength: 10
+          minLength: 10
+          type: string
+        SerialNumber:
+          description: The serial number of the certificate.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          description: The identifier of the document.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceOAuthAuthentication:
+      description: The configuration for authentication with an OAuth provider.
+      type: object
+      properties:
+        ProviderName:
+          description: The name of the OAuth provider.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Validations:
+          description: The validation rules for the OAuth response.
+          maxItems: 100
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceAuthenticationValidation'
+    DraftActivityReplaceKioskFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RedirectUri:
+          description: The redirect uri.
+          maxLength: 8000
+          minLength: 0
+          type: string
+    DraftActivityReplaceRemoteCertificateSignatureData:
+      description: The recipient configuration for signing with a remote certificate.
+      type: object
+      properties:
+        UserId:
+          description: The identifier of the user.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DeviceId:
+          description: The identifier of the device.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceSignatureField:
+      description: The configuration of the signature field.
+      required:
+      - ElementId
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the signature.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          maxLength: 500
+          minLength: 0
+          type: string
+        FieldDescription:
+          description: The description of the signature.
+          maxLength: 500
+          minLength: 0
+          type: string
+        UseExternalTimestampServer:
+          description: If true, a timestamp from an external server is embedded into the signature.
+          type: boolean
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        AllowedSignatureTypes:
+          $ref: '#/components/schemas/DraftActivityReplaceAllowedSignatureTypes'
+          description: The allowed types for the signature.
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceSignatureFieldDefinition'
+          description: 'The definition of the signature field.
+
+            It must be specified when the signature field is added.
+
+            It must not be specified when the signature field already exists.'
+        TaskConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceSignatureTaskConfiguration'
+          description: The configuration of the task.
+    DraftActivityReplaceTextBox:
+      description: The configuration of the text box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The value of the text box.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        Validation:
+          $ref: '#/components/schemas/DraftActivityReplaceFieldValidation'
+          description: The configuration of the validation rules for the text box value.
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceTextBoxDefinition'
+          description: 'The definition of the text box.
+
+            It must be specified when the check box is added.
+
+            It must not be specified when the check box already exists.'
+    DraftActivityReplaceSurname:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceChoiceItem:
+      description: The configuration of the choice item.
+      required:
+      - DisplayValue
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the choice item is selected.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DisplayValue:
+          description: The displayed value of the choice item.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceDisposableCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplaceRequest:
+      description: Define an activity with the possibility of bulk.
+      required:
+      - ActivityId
+      type: object
+      properties:
+        ActivityId:
+          description: The identifier of the activity.
+          maxLength: 36
+          minLength: 36
+          type: string
+        Action:
+          $ref: '#/components/schemas/DraftActivityReplaceAction'
+          description: The action assigned to the activity.
+        VisibilityOptions:
+          description: The document visibility options for the activity.
+          maxItems: 100
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceVisibilityOption'
+    DraftActivityReplaceSwissComOnDemandSignatureType:
+      description: The configuration of the Swisscom On-Demand signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          description: The validity of the certificate in seconds.
+          type: integer
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceSwissComOnDemandStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceReadDocumentConfirmation:
+      description: The document which has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          maxLength: 500
+          minLength: 0
+          type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+    DraftActivityReplaceSign:
+      description: A sign action for the recipient.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        SequenceMode:
+          description: The sequence mode.
+          enum:
+          - NoSequenceEnforced
+          - SequenceEnforced
+          type: string
+        Elements:
+          $ref: '#/components/schemas/DraftActivityReplaceElements'
+          description: The elements in the document (e.g. form fields) assigned to the recipient.
+        FinishActionConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceFinishAction'
+          description: Defines what happens in the signing clients, after an action has been finished.
+        SignatureDataConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceSignatureDataConfiguration'
+          description: The configuration of recipient data for special signatures.
+        BatchConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceBatchConfiguration'
+          description: The configuration of a signing batch.
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/DraftActivityReplaceGeneralPoliciesForSignAction'
+          description: Viewer policy settings for override.
+    DraftActivityReplaceATrustCertificateSignatureData:
+      description: The recipient configuration for signing with an A-Trust certificate.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number of the recipient.
+          maxLength: 250
+          minLength: 0
+          pattern: ^(\+|00){1}\(?([0-9]{2,})\)?([\-. ]?([0-9]{2,})){1,}$
+          type: string
+    DraftActivityReplaceSignaturePluginSignatureData:
+      description: The recipient configuration for signing with a signature plugin.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the signature plugin.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Fields:
+          description: The plugin parameters referred to as the GSP sender data fields.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSignaturePluginParameter'
+    DraftActivityReplaceStampImprintDateConfiguration:
+      description: The configuration of the stamp imprint date.
+      type: object
+      properties:
+        UseLocalTimezone:
+          description: If true, the local timezone is used.
+          type: boolean
+        DateTimeFormat:
+          description: The format of the timestamp.
+          maxLength: 50
+          minLength: 0
+          type: string
+    DraftActivityReplaceAuthenticationValidation:
+      description: A validation rule for an authentication response.
+      type: object
+      properties:
+        FieldReferenceId:
+          description: The identifier of the field.
+          maxLength: 500
+          minLength: 0
+          type: string
+        ExpectedValue:
+          description: The expected value of the field.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceDate:
+      description: The configuration of the predefined element showing the date.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DateFormat:
+          description: The format of the date.
+          maxLength: 50
+          minLength: 0
+          type: string
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceSwedishBankIdSignatureData:
+      description: The recipient configuration for signing with Swedish BankID.
+      type: object
+      properties:
+        PersonalNumber:
+          description: The personal number for signing.
+          maxLength: 500
+          minLength: 0
+          type: string
+        AllowAnyPersonalNumber:
+          description: 'If true, the personal number can be edited by the recipient.
+
+            If the personal number is empty and can be edited, a QR code for scanning is provided.'
+          type: boolean
+    DraftActivityReplaceSignatureTaskConfiguration:
+      description: The configuration of the signature task.
+      type: object
+      properties:
+        StampImprintDateConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceStampImprintDateConfiguration'
+          description: The configuration of the stamp imprint date.
+        BatchGroup:
+          description: The batch group.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceBulkRecipient:
+      description: The definition of the recipient including the signature data.
+      required:
+      - RecipientConfiguration
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        SignatureDataConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceSignatureDataConfiguration'
+          description: The configuration of the signature data for the recipient.
+    DraftActivityReplaceSendCopy:
+      description: An action to send a copy of the documents to the recipient.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceBasicRecipientConfiguration'
+          description: The configuration of the recipient.
+        CopyingGroup:
+          description: The group for defining parallel copy actions.
+          maxLength: 500
+          minLength: 0
+          type: string
+    DraftActivityReplaceSignaturePluginSignatureType:
+      description: The configuration of the signature plugin.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the plugin.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Preferred:
+          description: 'If true, the signature type is set as preferred.
+
+            Only one signature type may be marked.'
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplacePluginStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    DraftActivityReplaceComboBox:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The selected value of the combo box.
+          maxLength: 500
+          minLength: 0
+          type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceComboBoxDefinition'
+          description: 'The definition of the combo box.
+
+            It must be specified when the combo box is added.
+
+            It must not be specified when the combo box already exists.'
+    DraftActivityReplaceVisibleSignature:
+      description: A signature with a visual appearance on the document.
+      required:
+      - FieldDefinition
+      type: object
+      properties:
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        UseExternalTimestampServer:
+          description: If true, a timestamp from an external server is embedded into the signature.
+          type: boolean
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceSignatureFieldDefinition'
+          description: 'The definition of the signature field.
+
+            It must be specified when the signature field is added.
+
+            It must not be specified when the signature field already exists.'
+    DraftActivityReplaceGeneralPoliciesForSignAction:
+      description: Define the general policies allowed for sign action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+        AllowAdhocPdfAttachments:
+          description: If true, the client is allowed to append adhoc documents.
+          type: boolean
+        AllowRejectWorkstep:
+          description: If true, the client is allowed to reject the workstep.
+          type: boolean
+        AllowUndoLastAction:
+          description: If true, the client is allowed to undo actions.
+          type: boolean
+    DraftActivityReplaceNumberValidationConfiguration:
+      description: The validation rules for numbers.
+      type: object
+      properties:
+        DecimalDigits:
+          description: The expected amount of decimal digits.
+          type: integer
+        Symbol:
+          description: The expected symbol.
+          maxLength: 5
+          minLength: 0
+          type: string
+        SymbolLocation:
+          description: The defined symbol location.
+          enum:
+          - Start
+          - StartWithBlank
+          - End
+          - EndWithBlank
+          type: string
+        GroupSeparator:
+          description: The expected thousands separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - Blank
+          - None
+          type: string
+        DecimalSeparator:
+          description: The expected decimal separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - None
+          type: string
+          x-ms-enum:
+            name: DecimalSeparatorType
+            modelAsString: false
+        Range:
+          $ref: '#/components/schemas/DraftActivityReplaceFieldValidationRange'
+          description: The range of the values.
+    DraftActivityReplaceComboBoxDefinition:
+      description: The configuration of the combo box.
+      required:
+      - Items
+      - Position
+      - Size
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/DraftActivityReplaceTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceChoiceItem'
+        IsEditable:
+          description: If true, the combo box is editable.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceTextFormat:
+      description: The configuration of the text format.
+      type: object
+      properties:
+        TextColor:
+          description: 'The color of the text. The default color is black.
+
+            Six digit hexadecimal color that starts with # in #RRGGBB format according to CSS Color Module Level 4, paragraph 5.2.'
+          maxLength: 7
+          minLength: 7
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: number
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        Bold:
+          description: If true, the bold font is used.
+          type: boolean
+        Italic:
+          description: If true, the italic font is used.
+          type: boolean
+        TextAlign:
+          description: The alignment of the text. The default alignment is left.
+          enum:
+          - Left
+          - Center
+          - Right
+          type: string
+    DraftActivityReplaceLocalCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    DraftActivityReplacePhoneValidationConfiguration:
+      description: The validation rules for phone numbers.
+      type: object
+      properties:
+        Type:
+          description: The format of the phone numbers.
+          enum:
+          - International
+          - InternationalLeadingZeros
+          - InternationalLeadingPlus
+          type: string
+    DraftActivityReplaceFieldValidationRange:
+      description: The validation rules for a value range.
+      type: object
+      properties:
+        From:
+          description: The lower boundary of the range.
+          maxLength: 100
+          minLength: 0
+          type: string
+        To:
+          description: The upper boundary of the range.
+          maxLength: 100
+          minLength: 0
+          type: string
+    DraftActivityReplaceSignatureDataConfiguration:
+      description: The recipient configuration for signing.
+      type: object
+      properties:
+        DisposableCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceDisposableCertificateSignatureData'
+          description: The disposable certificate configuration for the action.
+        RemoteCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceRemoteCertificateSignatureData'
+          description: The remote certificate configuration for the action.
+        SwissComOnDemand:
+          $ref: '#/components/schemas/DraftActivityReplaceSwissComOnDemandSignatureData'
+          description: The Swisscom On-Demand certificate configuration for the action.
+        SmsOneTimePassword:
+          $ref: '#/components/schemas/DraftActivityReplaceSmsOneTimePasswordSignatureData'
+          description: The one time password configuration for the action (SMS-OTP).
+        ATrustCertificate:
+          $ref: '#/components/schemas/DraftActivityReplaceATrustCertificateSignatureData'
+          description: The A-Trust certificate configuration for the action.
+        SwedishBankId:
+          $ref: '#/components/schemas/DraftActivityReplaceSwedishBankIdSignatureData'
+          description: The Swedish BankID configuration for the action.
+        SignaturePluginData:
+          description: The signature plugin configurations for the action.
+          maxItems: 20
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSignaturePluginSignatureData'
+    DraftActivityReplaceGivenName:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedElementDefinition'
+          description: 'The definition of the predefined element.
+
+            It must be specified when the predefined element is added.
+
+            It must not be specified when the predefined element already exists.'
+    DraftActivityReplaceListBox:
+      description: The configuration of the list box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        PreSelectedItems:
+          description: The export values of the items which should be initially selected.
+          maxItems: 50
+          type: array
+          items:
+            maxLength: 500
+            type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceListBoxDefinition'
+          description: 'The definition of the list box field.
+
+            It must be specified when the list box is added.
+
+            It must not be specified when the list box already exists.'
+    DraftActivityReplaceTextBoxDefinition:
+      description: The configuration of the text box.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        MaxLength:
+          description: The maximum length of the text.
+          type: integer
+        IsMultiline:
+          description: If true, the text box can have multiple lines.
+          type: boolean
+        IsPassword:
+          description: If true, the text box behaves like a password input field and does not show the actually entered characters.
+          type: boolean
+        TextFormat:
+          $ref: '#/components/schemas/DraftActivityReplaceTextFormat'
+          description: The configuration of the text format.
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceDateValidationConfiguration:
+      description: The validation rules for dates.
+      type: object
+      properties:
+        DateFormat:
+          description: The format of the dates.
+          maxLength: 50
+          minLength: 0
+          type: string
+        Range:
+          $ref: '#/components/schemas/DraftActivityReplaceFieldValidationRange'
+          description: The range of the values.
+    DraftActivityReplaceRadioButtonGroup:
+      description: The configuration of the radio button group.
+      type: object
+      properties:
+        GroupName:
+          description: The name of the radio button group.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        SelectedItem:
+          description: The export value of the selected item of the radio button group.
+          maxLength: 500
+          minLength: 0
+          type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceRadioButtonGroupDefinition'
+          description: 'The definition of the radio button group.
+
+            It must be specified when the radio button group is added.
+
+            It must not be specified when the radio button group already exists.'
+    DraftActivityReplaceRadioButtonItemDefinition:
+      description: The configuration of the radio button.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the radio button is checked.
+          maxLength: 500
+          minLength: 0
+          type: string
+        IsChecked:
+          description: If true, the radio button is checked by default.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+    DraftActivityReplaceElements:
+      description: The configurable elements of the documents.
+      type: object
+      properties:
+        TextBoxes:
+          description: The text boxes.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceTextBox'
+        CheckBoxes:
+          description: The check boxes.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceCheckBox'
+        ComboBoxes:
+          description: The combo boxes.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceComboBox'
+        RadioButtons:
+          description: The radio buttons.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceRadioButtonGroup'
+        ListBoxes:
+          description: The list boxes.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceListBox'
+        Signatures:
+          description: The signatures.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceSignatureField'
+        Attachments:
+          description: The attachments.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceAttachment'
+        PredefinedFieldElements:
+          $ref: '#/components/schemas/DraftActivityReplacePredefinedFieldElements'
+          description: The predefined field elements.
+        LinkConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceLinkConfiguration'
+          description: The links in the documents.
+        AreaReadConfirmations:
+          description: The areas which have to be read.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceReadAreaConfirmation'
+        PageReadConfirmations:
+          description: The pages which have to be read.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceReadPagesConfirmation'
+        DocumentReadConfirmations:
+          description: The documents which have to be read.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/DraftActivityReplaceReadDocumentConfirmation'
+    DraftActivityReplaceAttachment:
+      description: The configuration of the attachment element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DisplayName:
+          description: The displayed name.
+          maxLength: 500
+          minLength: 0
+          type: string
+        DisplayIconType:
+          description: The type of the displayed icon. If no icon is provided Paperclip will be used.
+          enum:
+          - Paperclip
+          - Graph
+          - PushPin
+          - Tag
+          type: string
+        GuidingOrder:
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/DraftActivityReplaceAttachmentDefinition'
+          description: 'The definition of the attachment element.
+
+            It must be specified when the attachment element is added.
+
+            It must not be specified when the attachment element already exists.'
+    DraftActivityReplaceCheckBoxDefinition:
+      description: The configuration of a check box.
+      required:
+      - Position
+      - Size
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the check box when it is checked.
+          maxLength: 500
+          minLength: 0
+          type: string
+        Position:
+          $ref: '#/components/schemas/DraftActivityReplacePosition'
+          description: The position of the element within the document.
+        Size:
+          $ref: '#/components/schemas/DraftActivityReplaceSize'
+          description: The size of the element.
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+    DraftActivityReplaceView:
+      description: An action to view and acknowledge the documents.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/DraftActivityReplaceRecipientConfiguration'
+          description: The configuration of the recipient.
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/DraftActivityReplaceGeneralPoliciesForViewAction'
+          description: Viewer policy settings for override.
+    DraftActivityReplaceEmailAppLinks:
+      description: Configure if links for our apps should be included in the recipient document signing request email message.
+      type: object
+      properties:
+        Android:
+          description: If true, an Android app link is added to the email message.
+          type: boolean
+        iOS:
+          description: If true, an iOS app link is added to the email message.
+          type: boolean
+        Windows:
+          description: If true, a Windows app link is added to the email message.
+          type: boolean
+    DraftActivityReplaceTimeValidationConfiguration:
+      description: The validation rules for time values.
+      type: object
+      properties:
+        TimeFormat:
+          description: The format of the time values.
+          maxLength: 50
+          minLength: 0
+          type: string
+        Range:
+          $ref: '#/components/schemas/DraftActivityReplaceFieldValidationRange'
+          description: The range of the values.
+    DraftActivityReplaceOneTimePasswordStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          maxLength: 500
+          minLength: 0
+          type: string
+        FontSizeInPt:
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayTransactionToken:
+          description: If true, the transaction token is displayed.
+          type: boolean
+        DisplayPhoneNumber:
+          description: If true, the phone number of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

@@ -1,0 +1,126 @@
+openapi: 3.2.0
+info:
+  title: Namirial Documents API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Documents across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Documents
+  description: Manage documents
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/documents
+paths:
+  /documents/{documentId}:
+    get:
+      tags:
+      - Documents
+      summary: Download the document from eSAW
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: documentId
+        schema:
+          type: string
+        required: true
+        description: Document identifier
+        example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Document in PDF format
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+      operationId: getDocumentsByDocumentId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /documents/urls:
+    get:
+      tags:
+      - Documents
+      summary: Retrieve a list of presigned urls
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fileToUploadNumber:
+                  type: integer
+                  description: Number to object to download
+      responses:
+        '200':
+          description: A list of urls
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getDocumentsUrls
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

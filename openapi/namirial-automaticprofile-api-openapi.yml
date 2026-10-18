@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  title: Namirial Automatic Profile API
+  version: v6
+  description: 'Operations tagged AutomaticProfile across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: AutomaticProfile
+paths:
+  /v6/organization/automaticprofile:
+    get:
+      tags:
+      - AutomaticProfile
+      summary: Get the available automatic signing profiles
+      operationId: AutomaticProfile_GetAll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomaticProfileGetAllResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AutomaticProfileGetAllResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+components:
+  schemas:
+    AutomaticProfileGetAllSignaturePluginDefinition:
+      description: The information about the signature plugins available for automatic signing.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the signature plugin.
+          type: string
+        Profiles:
+          description: The profiles available for automatic signing.
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomaticProfileGetAllProfile'
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    AutomaticProfileGetAllResponse:
+      description: The response model for retrieving the available profiles for automatic signing.
+      type: object
+      properties:
+        RemoteCertificateProfiles:
+          description: The remote certificate profiles available for automatic signing.
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomaticProfileGetAllProfile'
+        SignaturePlugins:
+          description: The signature plugins available for automatic signing.
+          type: array
+          items:
+            $ref: '#/components/schemas/AutomaticProfileGetAllSignaturePluginDefinition'
+    AutomaticProfileGetAllProfile:
+      description: The information about the automatic signing profile.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the profile.
+          type: string
+        Description:
+          description: The unique description of the profile.
+          type: string
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

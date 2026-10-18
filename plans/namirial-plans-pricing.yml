@@ -1,0 +1,80 @@
+generated: '2026-10-18'
+method: searched
+source: https://www.esignanywhere.net/en/pricing/
+name: Namirial eSignAnyWhere pricing
+audience: business-product
+pricing_basis: tiered-subscription
+published: true
+delivery:
+  delivery: managed
+  evidence: SaaS electronic signature platform
+plans:
+  - name: Basic
+    description: Basic electronic signature plan
+    price_text: "300,00€"
+    price: 300
+    currency: EUR
+    billing_period: Not specified (likely annual)
+    features:
+      - "1.000 documents"
+      - Simple signature
+      - Model creation
+      - Advanced signature with SMS OTP (SMS equal to number of files included)"
+      - Remote Signature
+      - Timestamps (equal to number of documents available)
+      - Approval workflow
+      - Inserting text fields
+      - Inserting attachments
+      - Reminders and notifications
+      - Team creation
+      - Audit trail
+    limits:
+      - "1,000 documents included"
+  - name: Premium
+    description: Premium electronic signature plan
+    price_text: "420,00€"
+    price: 420
+    currency: EUR
+    billing_period: Not specified (likely annual)
+    features:
+      - "2.000 documents"
+      - Simple signature
+      - Model creation
+      - Advanced signature with SMS OTP (SMS equal to number of files included)"
+      - Remote Signature
+      - Timestamps (equal to number of documents available)
+      - Approval workflow
+      - Inserting text fields
+      - Inserting attachments
+      - Reminders and notifications
+      - Team creation
+      - Audit trail
+      - Bulk Sending
+      - Batch signing
+    limits:
+      - "2,000 documents included"
+  - name: Corporate
+    description: Customizable corporate plan
+    price_text: "Contact us"
+    features:
+      - Customizable document limits
+      - Simple signature
+      - Model creation
+      - Advanced signature with SMS OTP
+      - Remote Signature
+      - Timestamps
+      - Approval workflow
+      - Inserting text fields
+      - Inserting attachments
+      - Reminders and notifications
+      - Team creation
+      - Audit trail
+      - Bulk Sending
+      - Batch signing
+      - Long term Archiving
+      - Brand customization
+      - Integration via API
+      - Dedicated support
+    limits:
+      - Customizable document limits
+note: Pricing shown for eSignAnyWhere electronic signature service. Other Namirial services (identity verification, digital certificates, etc.) likely have separate pricing.

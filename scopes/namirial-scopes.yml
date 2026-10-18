@@ -1,0 +1,53 @@
+generated: '2026-10-18'
+method: derived
+source: openapi/namirial-connectors-openapi.yml
+schemes:
+- name: oAuth2AuthCode
+  source: openapi/namirial-connectors-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/authorize
+    tokenUrl: /auth/token
+  description: This API uses OAuth 2 with the authorization code grant flow.
+- name: oAuth2ClientCredentials
+  source: openapi/namirial-connectors-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /auth/token
+  description: This API uses OAuth 2 with the client credentials grant flow.
+scopes:
+- scope: auth:read
+  description: Read auth
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- scope: documents:read
+  description: Read documents
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- scope: documents:write
+  description: Modify documents
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- scope: processes:read
+  description: Read processes
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/namirial-connectors-openapi.yml
+- scope: processes:write
+  description: Modify processes
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/namirial-connectors-openapi.yml

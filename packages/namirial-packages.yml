@@ -1,0 +1,36 @@
+generated: '2026-10-18'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=namirial
+packages:
+  - name: "@namirial-spa/synapse-chat-ui"
+    registry: npm
+    url: https://www.npmjs.com/package/@namirial-spa/synapse-chat-ui
+    language: JavaScript
+    official: true
+    version: "1.0.0"
+    published: 2026-06-11
+    note: Web Component for embedding Synapse chat in web applications
+  - name: Android SDK
+    registry: none
+    url: https://doc.namirial.com/android/
+    language: Java/Kotlin
+    official: true
+    version: null
+    published: null
+    note: SDK documentation behind authentication (401 Unauthorized)
+  - name: iOS SDK
+    registry: none
+    url: https://doc.namirial.com/ios
+    language: Swift/Objective-C
+    official: true
+    version: null
+    published: null
+    note: SDK documentation behind authentication (401 Unauthorized)
+  - name: Windows SDK
+    registry: none
+    url: https://doc.namirial.com/windows/
+    language: C#/.NET
+    official: true
+    version: null
+    published: null
+    note: SDK documentation behind authentication (401 Unauthorized)

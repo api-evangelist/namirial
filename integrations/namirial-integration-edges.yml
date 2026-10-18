@@ -1,0 +1,103 @@
+generated: '2026-10-18'
+method: searched
+source:
+- https://zapier.com/apps/namirial/integrations
+- https://n8n.io/integrations/namirial/
+- https://composio.dev/toolkits/namirial
+- https://monid.ai/tools/namirial
+checked:
+- https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4oLUAT
+- https://composio.dev/toolkits/namirial
+- https://monid.ai/tools/namirial
+- https://n8n.io/integrations/namirial/
+- https://www.esignanywhere.net/en/connectors/
+- https://zapier.com/apps/namirial/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner: salesforce
+  partner_name: Salesforce
+  type: marketplace
+  marketplace: Salesforce AppExchange
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4oLUAT
+  operations:
+  - Prepare, send and sign agreements and contracts
+  - Close deals faster
+  note: eSignAnyWhere Connector for Salesforce
+- partner: microsoft-dynamics
+  partner_name: Microsoft Dynamics
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Prepare, send and sign documents without leaving Microsoft Dynamics
+  note: eSignAnyWhere Connector for MS Dynamics
+- partner: microsoft-sharepoint
+  partner_name: Microsoft SharePoint
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Access documents from Microsoft Sharepoint
+  - Prepare and sign documents
+  - Return them to Microsoft Sharepoint
+  note: eSignAnyWhere Connector for SharePoint
+- partner: microsoft-word
+  partner_name: Microsoft Word
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Prepare documents in Microsoft Word
+  - E-sign documents
+  note: eSignAnyWhere Connector for Word (Office 365)
+- partner: microsoft-outlook
+  partner_name: Microsoft Outlook
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Access documents from Microsoft Outlook
+  - Prepare and sign documents
+  - Return them using Microsoft Outlook
+  note: eSignAnyWhere Connector for Outlook (Office 365)
+- partner: box
+  partner_name: Box
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Import documents from Box
+  - Prepare and send for e-signature
+  - File signed documents in Box
+  note: Integration with Box cloud file hosting
+- partner: microsoft-onedrive
+  partner_name: Microsoft OneDrive
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Import documents from Microsoft OneDrive
+  - Prepare and send for e-signature
+  - File signed documents in Microsoft OneDrive
+  note: Integration with Microsoft OneDrive
+- partner: google-drive
+  partner_name: Google Drive
+  type: claimed
+  direction: provider-built
+  relationship: platform-app
+  evidence: https://www.esignanywhere.net/en/connectors/
+  operations:
+  - Import documents from Google Drive
+  - Prepare and send for e-signature
+  - File signed documents in Google Drive
+  note: Integration with Google Drive
+templates: []

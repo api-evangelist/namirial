@@ -1,0 +1,392 @@
+openapi: 3.2.0
+info:
+  title: Namirial Processes API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Processes across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Processes
+  description: Manage process signature
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/processes
+paths:
+  /processes/create/draft:
+    post:
+      tags:
+      - Processes
+      summary: Define the process by creating a draft envelope in eSAW
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      requestBody:
+        description: A JSON object containing **draft envelope** information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessDraftRequest'
+            examples:
+              draft:
+                $ref: '#/components/examples/CreateDraftProcess'
+              template:
+                $ref: '#/components/examples/CreateDraftFromTemplate'
+      responses:
+        '201':
+          description: Process created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProcessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: postProcessesCreateDraft
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /processes/{processId}:
+    get:
+      tags:
+      - Processes
+      summary: Get the process detail
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: processId
+        schema:
+          type: string
+        required: true
+        description: Document identifier
+        example: 0725bfef-c223-4045-a7a0-49f2b54624c2
+      responses:
+        '200':
+          description: Process response in PDF format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProcessResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+      operationId: getProcessesByProcessId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  schemas:
+    EmailAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Action type
+          example: email
+        to:
+          type: string
+          description: List of recipients emails separed by semicolon (;)
+          example: f.last@mail.com;s.name@mail.com
+          maximum: 500
+        cc:
+          type: string
+          description: List of carbon copy emails separed by semicolon (;)
+          example: f.last@mail.com;s.name@mail.com
+          maximum: 500
+        ccn:
+          type: string
+          description: List of blind carbon copy emails separed by semicolon (;)
+          example: f.last@mail.com;s.name@mail.com
+          maximum: 200
+        subject:
+          type: string
+          description: The email subject
+          maximum: 100
+        body:
+          type: string
+          description: The email body
+          maximum: 500
+      required:
+      - type
+      - to
+      - subject
+      - body
+    RecipientsStatus:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The recipient identifier
+        email:
+          type: string
+          description: The recipient email
+        firstName:
+          type: string
+          description: The recipient first name
+        lastName:
+          type: string
+          description: The recipient last name
+        orderIndex:
+          type: integer
+          description: The recipient order index
+        signedDate:
+          type: string
+          description: The recipient signed date
+        status:
+          type: string
+          description: The recipient status
+        workstepRedirectUrl:
+          type: string
+          description: The recipient workstep redirect url
+    CreateProcessDraftRequest:
+      type: object
+      properties:
+        templateId:
+          type: string
+          description: Template Id
+        name:
+          type: string
+          description: Process name
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+        events:
+          type: array
+          maxItems: 2
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/ProcessFinishedEvent'
+            discriminator:
+              propertyName: objectType
+        recipients:
+          type: array
+          maxItems: 5
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/Recipient'
+            discriminator:
+              propertyName: objectType
+        messageData:
+          type: object
+          properties:
+            emailSubject:
+              type: string
+              description: The subject specified in the email message sent to the recipients
+            emailBody:
+              type: string
+              description: The body specified in the email message sent to the recipients
+    HttpAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Action type
+          example: http
+        callbackUrl:
+          type: string
+          description: The url to call
+          example: https://testuri.sample.com
+          maximum: 250
+        method:
+          type: string
+          description: The request HTTP Method (GET, POST are only supported)
+          example: POST
+        envelopeGuidRequired:
+          type: boolean
+          description: Specify if the envelope guid must be add to the callback request
+          example: false
+        documentIds:
+          type: boolean
+          description: Specify if the document guids must be add to the callback request
+          example: true
+      required:
+      - type
+      - callbackUrl
+      - method
+      - envelopeGuidRequired
+      - documentIds
+    Recipient:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: The recipient first name for the draft
+        lastName:
+          type: string
+          description: The recipient last name for the draft
+        email:
+          type: string
+          description: The recipient email for the draft
+        languageCode:
+          type: string
+          description: The recipient language code for the draft
+          example: en
+        disableEmail:
+          type: boolean
+          description: Describe if the recipient receive or not email notification
+        overrideOptions:
+          type: object
+          properties:
+            orderIndex:
+              type: integer
+              description: Recipient to override order index
+            email:
+              type: string
+              description: Recipient to override email
+    CompletedDocuments:
+      type: object
+      properties:
+        auditDocument:
+          type: string
+          description: Audit document
+        documentId:
+          type: string
+          description: The document identifier
+        fileName:
+          type: string
+          description: The file name
+    ProcessFinishedEvent:
+      type: object
+      properties:
+        actions:
+          type: array
+          maxItems: 5
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/EmailAction'
+            - $ref: '#/components/schemas/HttpAction'
+          discriminator:
+            propertyName: type
+            mapping:
+              http: '#/components/schemas/HttpAction'
+              email: '#/components/schemas/EmailAction'
+        eventType:
+          type: string
+          description: 'The Esaw Callback event type (The supported event are : envelopeFinished,workstepFinished)'
+          example: envelopeFinished
+      required:
+      - eventType
+    CreateProcessResponse:
+      type: object
+      properties:
+        signingUri:
+          type: string
+          description: eSAW Viewer Uri
+          example: https://saas.esignanywhere.net/
+        processId:
+          type: string
+          description: Process identifier
+          example: 1c66d972-6eeb-429d-add2-948ccafe58da
+    Document:
+      type: string
+    GetProcessResponse:
+      type: object
+      properties:
+        auditDocument:
+          type: string
+          description: The Audit document of the sign process
+        envelopeJsonStatus:
+          type: string
+          description: The envelope status in Json
+        status:
+          type: string
+          description: The envelope status
+        completedDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompletedDocuments'
+        recipientsStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipientsStatus'
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  examples:
+    CreateDraftFromTemplate:
+      summary: Draft process from template
+      value:
+        name: Draft process from template
+        templateId: fe324172-3353-4f25-bc80-51f7a4d2919c
+        recipients:
+        - firstName: name
+          lastName: surname
+          email: email@email.com
+          languageCode: en
+          disposable:
+            countryResidence: IT
+            documentExpiryDate: '2020-01-01'
+            documentIssuedBy: SINDACO
+            documentIssuedOn: '2014-05-22'
+            documentNumber: B239904074
+            documentType: CI
+            identificationCountry: IT
+            identificationType: ITALIAN_TAX_CODE
+            phoneMobile: '6667788414'
+            serialNumber: SVTLRB23H24H501T
+          overrideOptions:
+            orderIndex: 1
+            email: Placeholder:ToReplace
+        messageData:
+          emailSubject: subject
+          emailBody: body
+    CreateDraftProcess:
+      summary: Draft process - multiple documents
+      value:
+        name: Draft process
+        documents:
+        - a3ec27f2-26a2-493a-974f-3ec6908fae84/fe324172-3353-4f25-bc80-51f7a4d2919c
+        - 57f2aab6-794b-494b-a9f5-1e2de05c2eae/0dbbe5ed-b42e-468c-8cf8-cdf0f6f5b2a0
+        recipients:
+        - firstName: name
+          lastName: surname
+          email: email@email.com
+          languageCode: en
+        messageData:
+          emailSubject: subject
+          emailBody: body
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

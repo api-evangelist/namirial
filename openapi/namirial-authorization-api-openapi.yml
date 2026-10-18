@@ -1,0 +1,137 @@
+openapi: 3.2.0
+info:
+  title: Namirial Authorization API
+  version: v6
+  description: 'Operations tagged Authorization across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: Authorization
+paths:
+  /v6/authorization/whoami:
+    get:
+      tags:
+      - Authorization
+      summary: Get information about the authenticated user
+      operationId: Authorization_WhoAmI
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationWhoAmIResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationWhoAmIResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/authorization/validate:
+    get:
+      tags:
+      - Authorization
+      summary: Check if the authenticated user is authorized to use the API
+      operationId: Authorization_Validate
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+components:
+  schemas:
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    AuthorizationWhoAmIResponse:
+      description: The response model describing the current api user.
+      type: object
+      properties:
+        UserId:
+          description: The identifier of the user.
+          type: string
+        Email:
+          description: The email address of the user.
+          type: string
+        GivenName:
+          description: The given name of the user.
+          type: string
+        Surname:
+          description: The surname of the user.
+          type: string
+        UserName:
+          description: The user name for synchronizing with an external user provider.
+          type: string
+        Sid:
+          description: The security identifier for synchronizing an external user provider.
+          type: string
+        SamlAssignments:
+          description: The SAML providers available for login.
+          type: array
+          items:
+            $ref: '#/components/schemas/AuthorizationWhoAmISamlAssignment'
+        OAuthAssignments:
+          description: The names of the OAuth providers available for login.
+          type: array
+          items:
+            type: string
+        Roles:
+          description: The roles assigned to the user.
+          type: array
+          items:
+            type: string
+    AuthorizationWhoAmISamlAssignment:
+      description: The information about the SAML assignment.
+      type: object
+      properties:
+        ProviderName:
+          description: The name of the SAML provider.
+          type: string
+        IdentificationValue:
+          description: The value to map from a SAML response to this user.
+          type: string
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

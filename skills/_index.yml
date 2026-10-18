@@ -1,0 +1,105 @@
+name: Namirial agent skills
+generated: '2026-10-18'
+method: generated
+source: openapi/namirial-esignanywhere-openapi.yml
+notes: No provider-published skills or AGENTS.md found (documentation.namirial.com/llms.txt lists none). All skills ground in the eSignAnyWhere v6 spec; Connectors APIs ships no operationIds so none are
+  grounded in it.
+skills:
+- file: namirial-bulk-send.md
+  name: bulk-send
+  title: Bulk-send an envelope
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - EnvelopeBulk_Send
+  - EnvelopeBulk_Get
+  - EnvelopeBulk_Find
+  - EnvelopeBulk_Remind
+  - EnvelopeBulk_Cancel
+- file: namirial-download-signed-documents.md
+  name: download-signed-documents
+  title: Track an envelope and download signed documents
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Envelope_Find
+  - Envelope_Get
+  - Envelope_GetHistory
+  - Envelope_GetFiles
+  - File_DownloadCompleted
+- file: namirial-draft-lifecycle.md
+  name: namirial-draft-lifecycle
+  title: Create, configure, and send a draft for signature collection.
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Draft_Create
+  - Draft_Update
+  - Draft_Get
+  - Draft_GetConfiguration
+  - Draft_SendDraft
+- file: namirial-manage-active-envelope.md
+  name: manage-active-envelope
+  title: Manage an in-flight envelope
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Envelope_Get
+  - Envelope_Remind
+  - EnvelopeActivity_Replace
+  - Envelope_RestartExpired
+  - Envelope_Cancel
+- file: namirial-process-file-workflow.md
+  name: namirial-process-file-workflow
+  title: Upload a file, prepare it for processing, download the completed file, and optionally delete it.
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - File_Upload
+  - File_Prepare
+  - File_DownloadCompleted
+  - File_Delete
+- file: namirial-retrieve-envelope-details.md
+  name: namirial-retrieve-envelope-details
+  title: Retrieve comprehensive details about an envelope including its overview, files, history, elements, viewer links, and configuration.
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Envelope_Get
+  - Envelope_GetFiles
+  - Envelope_GetHistory
+  - Envelope_GetElements
+  - Envelope_GetViewerLinks
+  - Envelope_GetConfiguration
+- file: namirial-retrieve-template-information.md
+  name: namirial-retrieve-template-information
+  title: Find a template using filter criteria and retrieve its comprehensive details including overview, files, elements, and configuration.
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Template_Find
+  - Template_GetTemplateById
+  - Template_GetFiles
+  - Template_GetElements
+  - Template_GetConfiguration
+- file: namirial-send-document-for-signature.md
+  name: send-document-for-signature
+  title: Send a document for signature
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - File_Upload
+  - File_Prepare
+  - Envelope_Send
+  - Envelope_Get
+  - Envelope_GetViewerLinks
+- file: namirial-send-envelope-bulk.md
+  name: namirial-send-envelope-bulk
+  title: Create and send an envelope bulk with multiple child envelopes.
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - EnvelopeBulk_Send
+  - EnvelopeBulk_Get
+  - EnvelopeBulk_Find
+- file: namirial-send-from-template.md
+  name: send-from-template
+  title: Send an envelope from a template
+  api: openapi/namirial-esignanywhere-openapi.yml
+  operations:
+  - Template_Find
+  - Template_GetConfiguration
+  - Template_CreateDraft
+  - Draft_Update
+  - Draft_SendDraft

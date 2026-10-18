@@ -1,0 +1,231 @@
+openapi: 3.2.0
+info:
+  title: Namirial Team API
+  version: v6
+  description: 'Operations tagged Team across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: Team
+paths:
+  /v6/organization/team:
+    get:
+      tags:
+      - Team
+      summary: Get the available teams
+      operationId: Team_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamGetAllResponse'
+              example:
+                Teams:
+                - Name: Example Team
+                  ShareEnvelopes: false
+                  ShareTemplates: false
+                  Head:
+                    Email: teamlead@team.com
+                    Members:
+                    - Email: member@team.com
+                    - Email: teamleader@subteam.com
+                      Members:
+                      - Email: member@subteam.com
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TeamGetAllResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/organization/team/replace:
+    post:
+      tags:
+      - Team
+      summary: Replace all existing teams with the provided teams
+      operationId: Team_Replace
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamReplaceRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TeamReplaceRequest'
+        description: The model containing the new teams.
+        required: true
+    servers:
+    - url: /api
+components:
+  schemas:
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    TeamReplaceRequest:
+      description: The request model for replacing the teams.
+      required:
+      - Teams
+      type: object
+      properties:
+        Teams:
+          description: The teams which will replace all the existing teams.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamReplaceTeam'
+      example:
+        Teams:
+        - Name: Example Team
+          ShareEnvelopes: false
+          ShareTemplates: false
+          Head:
+            Email: teamlead@team.com
+            Members:
+            - Email: member@team.com
+            - Email: teamleader@subteam.com
+              Members:
+              - Email: member@subteam.com
+    TeamGetAllTeamMember:
+      description: A member of the team.
+      type: object
+      properties:
+        Email:
+          description: 'The email address of the team member.
+
+            This references a user email address.'
+          type: string
+        Members:
+          description: The members of the subteam.
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamGetAllTeamMember'
+    TeamGetAllTeam:
+      description: A team within the organization.
+      type: object
+      properties:
+        Name:
+          description: The name of the team.
+          type: string
+        ShareEnvelopes:
+          description: If true, envelopes are shared with team members.
+          type: boolean
+        ShareTemplates:
+          description: If true, templates are shared with team members.
+          type: boolean
+        Head:
+          $ref: '#/components/schemas/TeamGetAllTeamMember'
+          description: The leader of the team.
+    TeamGetAllResponse:
+      description: The response model for retrieving the team hierarchy.
+      type: object
+      properties:
+        Teams:
+          description: The teams of the organization.
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamGetAllTeam'
+    TeamReplaceTeam:
+      description: A team within the organization.
+      required:
+      - Name
+      type: object
+      properties:
+        Name:
+          description: The name of the team.
+          maxLength: 500
+          minLength: 0
+          type: string
+        ShareEnvelopes:
+          description: If true, envelopes are shared with team members.
+          type: boolean
+        ShareTemplates:
+          description: If true, templates are shared with team members.
+          type: boolean
+        Head:
+          $ref: '#/components/schemas/TeamReplaceTeamMember'
+          description: The leader of the team.
+    TeamReplaceTeamMember:
+      description: A member of the team.
+      type: object
+      properties:
+        Email:
+          description: 'The email address of the team member.
+
+            This references a user email address.'
+          maxLength: 250
+          minLength: 0
+          pattern: ^[a-zA-Z\u00A0-\uD7FF\uE000-\uFFFF0-9.!#$%&'*+\-\/=?^_`{|}~]+@(?=[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF])(?:[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF]|(?<![.-])\.|(?<!\.)-)*[a-z0-9A-Z\u00A0-\uD7FF\uE000-\uFFFF]$
+          type: string
+        Members:
+          description: The members of the subteam.
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamReplaceTeamMember'
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

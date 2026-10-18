@@ -1,0 +1,103 @@
+generated: '2026-10-18'
+method: searched
+probe: true
+source: https://www.namirial.com/en/privacy-policy/
+signals:
+  data_subject_request:
+    url: https://www.namirial.com/en/privacy-policy/
+    section: EXERCISE OF RIGHTS BY USERS
+    channel: dpo@namirial.com
+    stated_sla: processed by the Controller within 30 days
+    rights_named: [access (Art. 15), erasure (Art. 17), portability (Art. 20), withdrawal of consent, complaint to the Data Protection Authority (Art. 77)]
+    evidence:
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The User may exercise all rights under Articles 15-21 of the GDPR at any time and without unjustified restriction by contacting the Controller at dpo@namirial.com'
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'Requests are filed free of charge and processed by the Controller within 30 days.'
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'Receive copies of personal data held by the Data Controller in a commonly used, machine-readable format; obtain unimpeded transfer to another Data Controller (Art. 20);'
+    note: >-
+      A published GDPR Articles 15-21 request channel (the DPO mailbox) with a stated 30-day handling
+      period, free of charge, including portability. Email only; no request API is documented.
+  data_residency:
+    url: https://www.namirial.com/en/privacy-policy/
+    section: PLACE OF DATA PROCESSING
+    regions: [eu]
+    evidence:
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'Personal data is stored in servers located in the EU and will not be transferred outside the EU under any circumstances.'
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The Data Controller ensures that when using cloud providers established outside the European Economic Area, the processing of personal data by these recipients is carried out in accordance with the principles of the GDPR.'
+    note: >-
+      An EU storage commitment. The same section also contemplates cloud providers outside the EEA under
+      adequacy decisions or SCCs, so the "under any circumstances" claim sits beside a transfer-safeguards
+      clause; both are recorded so a reader can weigh them. This is website/platform privacy-notice language,
+      not a per-product residency selector.
+  data_retention:
+    url: https://www.namirial.com/en/privacy-policy/
+    section: STORAGE AND DELETION OF PERSONAL DATA
+    stated_period: 'deleted after 18 (eighteen) months of non-use of the service; fiscal and accounting data retained for a period of 10 (ten) years'
+    evidence:
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'In any case, the user profile – including the account related to the eSignAnyWhere service – will be deactivated, and all personal data will be deleted after 18 (eighteen) months of non-use of the service.'
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'Data strictly necessary for fiscal and accounting obligations, once the purpose for which they were collected has ceased, will be retained for a period of 10 (ten) years, as required by the applicable regulations.'
+    note: Concrete published retention periods, including an inactivity-based deletion rule for eSignAnyWhere accounts.
+  subprocessors:
+    url: https://www.namirial.com/en/privacy-policy/
+    published_list: false
+    evidence:
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The personal data processed may be disclosed to third parties appointed as external data processors (the complete list is available from the Data Controller), business consultants for administrative and accounting purposes, as well as legal consultants for possible litigation management.'
+    - source: https://www.namirial.com/en/privacy-policy/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The data may be communicated to clients using the eSignAnyWhere service (limited to processing for which they act as Data Controllers), to suppliers appointed as Processors or Sub-processors for infrastructure, support, and maintenance services, as well as to competent authorities where required by law.'
+    note: >-
+      Sub-processors are acknowledged but the list is NOT published; it is available on request from the
+      Data Controller. No public sub-processor page was found.
+  accessibility_conformance:
+    url: https://www.namirial.com/en/accessibility-statement/
+    standard: [WCAG 2.1 AA, WCAG 2.2 AA]
+    statements_published: 20
+    evidence:
+    - source: https://static.namirial.com/accessibility/en/accessibility_statement_namirial_com.pdf
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The Namirial.com website is partially compliant with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA.'
+    - source: https://static.namirial.com/accessibility/en/accessibility_statement_esaw_signer.pdf
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The Namirial Namirial Esaw Signer Part application is compliant with Web Content Accessibility Guidelines (WCAG) 2.2 Level AA.'
+    - source: https://static.namirial.com/accessibility/en/accessibility_statement_namirial_sign.pdf
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'The Namirial Sign application is partially compliant with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA.'
+    - source: https://www.namirial.com/en/accessibility-statement/
+      http_status: 200
+      fetched: '2026-10-18'
+      quote: 'Anyone can report accessibility issues found on Namirial’s websites or mobile applications.'
+    note: >-
+      Per-product accessibility statements (PDFs) for websites and digital services, with a reporting
+      address (accessibility@namirial.com). Three of the statements were read: conformance varies by
+      product (partial WCAG 2.1 AA for namirial.com and Namirial Sign, full WCAG 2.2 AA for the eSAW
+      Signer). The hub page cites the European Accessibility Act (Directive EU 2019/882).
+probe_notes:
+- 'Pages read: privacy-policy (200), security (200), blog/trust (200), cookie-policy (200), accessibility-statement (200), company/certifications (200); /en/accessibility/, /en/legal-notes/ and /en/whistleblowing/ returned 404.'
+- No sub-processor list, AI disclosure, transparency report, SBOM, Global Privacy Control statement or incident-notification SLA was found on these pages.

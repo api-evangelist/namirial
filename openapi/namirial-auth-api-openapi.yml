@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Namirial Auth API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Auth across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Auth
+  description: Access to authentication endpoints
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/auth
+paths:
+  /auth/authorize:
+    get:
+      tags:
+      - Auth
+      summary: Starts an authorization code flow
+      parameters:
+      - in: query
+        name: client_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+        description: Client identifier. Its the application that needs to authenticate a user in eSAW
+        example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      - in: query
+        name: redirect_uri
+        schema:
+          type: string
+        required: true
+        description: Uri to be redirected after eSAW successfull credentials validation
+        example: https://localhost/oauth/callback
+      - in: query
+        name: state
+        schema:
+          type: string
+        required: false
+        description: Parameter used to pass values during authentication redirect flow
+      responses:
+        '302':
+          description: Document identifier
+          headers:
+            Location:
+              description: The redirected Uri
+        '405':
+          description: Invalid input
+      operationId: getAuthAuthorize
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /auth/token:
+    post:
+      tags:
+      - Auth
+      security:
+      - Basic: []
+      summary: Returns the Access and Refresh JWT bearer tokens
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: OAuth2 authentication grant type (authorization_code, client_credentials, refresh_token)
+                redirect_uri:
+                  type: string
+                  description: Redirect Uri. It has to be equal to the one specified at the beginning of the authentication flow
+                code:
+                  type: string
+                  description: Authorization code returned from authorize. Used only with grant_type equal to authorization_code
+                refresh_token:
+                  type: string
+                  description: Refresh token returned from token endpoint. Used only with grant_type equal to refresh_token
+              required:
+              - grant_type
+              - redirect_uri
+      responses:
+        '200':
+          description: JWT Bearer Access and Refresh tokens created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWTBearerResponse'
+        '400':
+          description: Invalid input
+      operationId: postAuthToken
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /auth/instances/find:
+    post:
+      tags:
+      - Auth
+      summary: Return the instance list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organizationId:
+                  type: string
+                  description: The connector organization id
+                clientId:
+                  type: string
+                  description: The client Id
+              required:
+              - clientId
+      responses:
+        '200':
+          description: The instance list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceListResponse'
+        '400':
+          description: Invalid input
+      operationId: postAuthInstancesFind
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /auth/userinfo:
+    get:
+      tags:
+      - Auth
+      summary: Get user information
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      responses:
+        '200':
+          description: User detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDetail'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getAuthUserinfo
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  schemas:
+    InstanceListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    JWTBearerResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: Access token
+        refresh_token:
+          type: string
+          description: Refresh token
+        token_type:
+          type: string
+          description: Token type
+        expires_in:
+          type: integer
+          description: The life time of token in seconds
+    Instance:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        externalIdentifier:
+          type: string
+          description: The instance external identifier
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+    UserDetail:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: The esaw user first name that called the API
+        lastName:
+          type: string
+          description: The esaw user last name that called the API
+        email:
+          type: string
+          description: The esaw user email that called the API
+        id:
+          type: string
+          description: The esaw user id that called the API
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml

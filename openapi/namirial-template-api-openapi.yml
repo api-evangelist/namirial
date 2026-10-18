@@ -1,0 +1,4513 @@
+openapi: 3.2.0
+info:
+  title: Namirial Template API
+  version: v6
+  description: 'Operations tagged Template across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: Template
+paths:
+  /v6/template/{templateId}:
+    get:
+      tags:
+      - Template
+      summary: Get an overview of a template
+      operationId: Template_GetTemplateById
+      parameters:
+      - name: templateId
+        in: path
+        description: The identifier of the template.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/template/{templateId}/files:
+    get:
+      tags:
+      - Template
+      summary: Get the documents of a template
+      operationId: Template_GetFiles
+      parameters:
+      - name: templateId
+        in: path
+        description: The identifier of the template.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetFilesResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetFilesResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/template/{templateId}/elements:
+    get:
+      tags:
+      - Template
+      summary: Get the elements belonging to the documents of a template
+      operationId: Template_GetElements
+      parameters:
+      - name: templateId
+        in: path
+        description: The identifier of the template.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetElementsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetElementsResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/template/{templateId}/configuration:
+    get:
+      tags:
+      - Template
+      summary: Get the configuration of a template and its activities
+      operationId: Template_GetConfiguration
+      parameters:
+      - name: templateId
+        in: path
+        description: The identifier of the template.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetConfigurationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateGetConfigurationResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+  /v6/template/find:
+    post:
+      tags:
+      - Template
+      summary: Get basic information about templates which match your filter criteria
+      operationId: Template_Find
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateFindResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateFindResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateFindRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TemplateFindRequest'
+        description: The filter criteria.
+        required: true
+    servers:
+    - url: /api
+  /v6/template/createdraft:
+    post:
+      tags:
+      - Template
+      summary: Create a new draft from a template
+      operationId: Template_CreateDraft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateCreateDraftResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateCreateDraftResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreateDraftRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TemplateCreateDraftRequest'
+        description: The model containing the create options.
+        required: true
+    servers:
+    - url: /api
+components:
+  schemas:
+    TemplateGetElementsClickToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsClickToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetElementsSign:
+      description: The elements, which are assigned to actions.
+      type: object
+      properties:
+        SequenceMode:
+          description: The sequence mode.
+          enum:
+          - NoSequenceEnforced
+          - SequenceEnforced
+          type: string
+          x-ms-enum:
+            name: ElementSequenceMode
+            modelAsString: false
+        Elements:
+          $ref: '#/components/schemas/TemplateGetElementsElements'
+          description: The definition of the assigned elements.
+    TemplateGetElementsTypeToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetElementsAttachmentDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsDisposableCertificateSignatureType:
+      description: The configuration of the DisposableCertificate signature.
+      type: object
+      properties:
+        IsLongLived:
+          description: If true, the disposable certificate is long lived.
+          type: boolean
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsDisposableCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetConfigurationView:
+      description: The configuration of the action to view and acknowledge the documents.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationRecipientConfiguration'
+          description: The configuration of the recipient.
+        ViewingGroup:
+          format: int32
+          description: The parallel group for view actions.
+          type: integer
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/TemplateGetConfigurationGeneralPoliciesForViewAction'
+          description: Viewer policy settings for override.
+    TemplateGetConfigurationDefaultSignatureTypeConfiguration:
+      description: The configuration of the default signature type for a draft.
+      type: object
+      properties:
+        None:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"None" SignatureType.'
+        ClickToSign:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"click to sign" SignatureType.'
+        DrawToSign:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"draw to sign" SignatureType.'
+        TypeToSign:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"type to sign" SignatureType.'
+        LocalCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"local certificate" SignatureType.'
+        DisposableCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"disposable certificate" SignatureType.'
+        Biometric:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"biometric signature" SignatureType.'
+        RemoteCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"remote certificate" SignatureType.'
+        OneTimePassword:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignature'
+          description: '"one time password (SMS-OTP)" SignatureType.'
+    TemplateGetConfigurationAdvancedRecipientConfiguration:
+      description: The advanced configuration for the recipient.
+      type: object
+      properties:
+        PersonalMessage:
+          description: The personal message for the recipient.
+          type: string
+        NotificationChannel:
+          description: Which channel is used for sending notifications to the recipient.
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+          x-ms-enum:
+            name: RecipientNotificationChannel
+            modelAsString: false
+        AuthenticationConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAuthenticationConfiguration'
+          description: The configuration for the authentication of the recipient.
+        SendEmails:
+          description: 'Obsolete: If true, emails will be sent out for this recipient.
+
+            If NotificationChannel has value None, this will be false, otherwise true.'
+          type: boolean
+        AllowAccessAfterFinish:
+          description: If true, the recipient is allowed to access the action after it has been finished.
+          type: boolean
+        IncludedEmailAppLinks:
+          $ref: '#/components/schemas/TemplateGetConfigurationEmailAppLinks'
+          description: The configuration for mobile app links in email messages.
+        AllowDelegation:
+          description: If true, the recipient may delegate this activity.
+          type: boolean
+        RequireViewContentBeforeFormFilling:
+          description: If true, the signer has to confirm the reading of all documents as first task.
+          type: boolean
+    TemplateGetConfigurationWebFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RedirectUri:
+          description: The redirect uri.
+          type: string
+    TemplateGetElementsBiometricSignatureType:
+      description: The configuration of the Biometric signature.
+      type: object
+      properties:
+        BiometricVerification:
+          description: If true, a biometric verification is performed.
+          type: boolean
+        AllowBiometricStoringOnly:
+          description: If true, the biometric signature might be stored without verification.
+          type: boolean
+        StoreSignedResponseWithoutBioData:
+          description: If true, the signed response is stored without biometric data.
+          type: boolean
+        BiometricServerUserId:
+          description: The identifier of the user on the biometric server.
+          type: string
+        SignaturePositioning:
+          description: The allowed positioning of the biometric signature.
+          enum:
+          - WithinField
+          - OnPage
+          - IntersectsWithField
+          type: string
+          x-ms-enum:
+            name: BiometricSignaturePositioning
+            modelAsString: false
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+    TemplateGetElementsDisposableCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetElementsPredefinedElementDefinition:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/TemplateGetElementsTextFormat'
+          description: The configuration of the text format.
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsListBoxDefinition:
+      description: The configuration of the list box.
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/TemplateGetElementsTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsChoiceItem'
+        IsMultiSelect:
+          description: If true, multiple values of the list box can be selected.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsChoiceItem:
+      description: The configuration of the choice item.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the choice item is selected.
+          type: string
+        DisplayValue:
+          description: The displayed value of the choice item.
+          type: string
+    TemplateGetConfigurationAppFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RemoveDocumentFromRecentDocumentList:
+          description: If true, the document will be removed from the recent document list.
+          type: boolean
+        CallClientActionOnlyAfterSuccessfulSync:
+          description: If true, the client action will be called only after a successful sync.
+          type: boolean
+        CloseApp:
+          description: If true, the app will be closed.
+          type: boolean
+        RedirectUri:
+          description: The redirect uri.
+          type: string
+    TemplateGetElementsPredefinedFieldElements:
+      description: Defines the predefined fields which will be added and filled by the system.
+      type: object
+      properties:
+        TextFields:
+          description: The predefined text fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsPredefinedText'
+        EmailFields:
+          description: The recipient's email fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsEmail'
+        InitialsFields:
+          description: The recipient's initials fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsInitials'
+        GivenNameFields:
+          description: The recipient's given name fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsGivenName'
+        SurnameFields:
+          description: The recipient's surname fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsSurname'
+        FullNameFields:
+          description: The recipient's full name fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsFullName'
+        DateFields:
+          description: The current date fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsDate'
+    TemplateGetConfigurationActionCallbackSelection:
+      description: The selection of events which trigger the callback.
+      type: object
+      properties:
+        ConfirmTransactionCode:
+          description: If true, the callback is triggered when a transaction code was sent. This is only used for legacy disposable certificates, after user accepted issuance of disposable certificate.
+          type: boolean
+        AgreementAccepted:
+          description: If true, the callback is triggered when the user accepted the agreement.
+          type: boolean
+        AgreementRejected:
+          description: If true, the callback is triggered when the user rejected the agreement.
+          type: boolean
+        PrepareAuthenticationSuccess:
+          description: If true, the callback is triggered when the preparation of the authentication process succeeded.
+          type: boolean
+        AuthenticationFailed:
+          description: If true, the callback is triggered when the user failed to authenticate.
+          type: boolean
+        AuthenticationSuccess:
+          description: If true, the callback is triggered when the user succeeded to authenticate.
+          type: boolean
+        AuditTrailRequested:
+          description: If true, the callback is triggered when the audit trail was requested.
+          type: boolean
+        AuditTrailXmlRequested:
+          description: If true, the callback is triggered when the audit trail XML was requested.
+          type: boolean
+        CalledPage:
+          description: If true, the callback is triggered when the SignAnyWhere Viewer was requested.
+          type: boolean
+        DocumentDownloaded:
+          description: If true, the callback is triggered when the document download was requested.
+          type: boolean
+        FlattenedDocumentDownloaded:
+          description: If true, the callback is triggered when the flattened document download was requested.
+          type: boolean
+        AddedAnnotation:
+          description: If true, the callback is triggered when an annotation was added.
+          type: boolean
+        AddedAttachment:
+          description: If true, the callback is triggered when an attachment was added.
+          type: boolean
+        AppendedDocument:
+          description: If true, the callback is triggered when a document was appended.
+          type: boolean
+        FormsFilled:
+          description: If true, the callback is triggered when a form field was filled.
+          type: boolean
+        ConfirmReading:
+          description: If true, the callback is triggered when a reading task was completed.
+          type: boolean
+        SendTransactionCode:
+          description: If true, the callback is triggered when a transaction code for a signature with type TransactionCode was sent using the TransactionCodeSenderPlugin.
+          type: boolean
+        PrepareSignWorkstepDocument:
+          description: If true, the callback is triggered when a signature was prepared for signing.
+          type: boolean
+        SignWorkstepDocument:
+          description: If true, the callback is triggered when a signature was applied.
+          type: boolean
+        UndoAction:
+          description: If true, the callback is triggered when an action was undone.
+          type: boolean
+        WorkstepCreated:
+          description: If true, the callback is triggered when a workstep was created.
+          type: boolean
+        WorkstepFinished:
+          description: If true, the callback is triggered when a workstep was finished.
+          type: boolean
+        WorkstepRejected:
+          description: If true, the callback is triggered when a workstep was rejected.
+          type: boolean
+        DisablePolicyAndValidityChecks:
+          description: If true, the callback is triggered when policy and validity checks were disabled.
+          type: boolean
+        EnablePolicyAndValidityChecks:
+          description: If true, the callback is triggered when policy and validity checks were enabled.
+          type: boolean
+        AppendFileToWorkstep:
+          description: If true, the callback is triggered when a file was appended to the workstep.
+          type: boolean
+        AppendTasksToWorkstep:
+          description: If true, the callback is triggered when a task was added to the workstep.
+          type: boolean
+        SetOptionalDocumentState:
+          description: If true, the callback is triggered when an optional document became either active or inactive.
+          type: boolean
+        PreparePayloadForBatch:
+          description: If true, the callback is triggered when the payload was prepared for batch signing.
+          type: boolean
+    TemplateGetElementsSignatureFieldDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsInitials:
+      description: The configuration of the predefined element showing the initials.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        IncludeMiddleNameInitials:
+          description: "If true, the initials from the middle names are included as well. \nThe initials are read from the given name. Additional names are expected to be separated by a space."
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetElementsResponse:
+      description: The response model for requesting document elements of a draft or template.
+      type: object
+      properties:
+        UnassignedElements:
+          $ref: '#/components/schemas/TemplateGetElementsElements'
+          description: The elements which are not assigned to any action.
+        Activities:
+          description: The steps for the envelope.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsActivity'
+    TemplateGetElementsSignaturePluginSignatureType:
+      description: The configuration of the signature plugin.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the plugin.
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsPluginStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetConfigurationExpirationConfiguration:
+      description: The configuration of the expiration for the envelope.
+      type: object
+      properties:
+        ExpirationInSeconds:
+          format: int64
+          description: The relative expiration in seconds after sending the envelope.
+          type: integer
+        ExpirationDate:
+          format: date-time
+          description: 'The absolute expiration date of the envelope.
+
+            A datetime in the format RFC 3339, section 5.6, ''date-Time'' (e.g. 2017-07-21T17:32:28Z).'
+          type: string
+    TemplateGetConfigurationAccessCodeAuthentication:
+      description: The configuration for authentication with a predefined access code.
+      type: object
+      properties:
+        Code:
+          description: The code for authenticating the recipient.
+          type: string
+    TemplateGetElementsCheckBox:
+      description: The configuration of the check box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        IsChecked:
+          description: If true, the check box is checked.
+          type: boolean
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsCheckBoxDefinition'
+          description: The definition of the check box.
+    TemplateGetElementsEmail:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetConfigurationSwedishBankIdSignatureData:
+      description: The recipient configuration for signing with Swedish BankID.
+      type: object
+      properties:
+        PersonalNumber:
+          description: The personal number for signing.
+          type: string
+        AllowAnyPersonalNumber:
+          description: 'If true, the personal number can be edited by the recipient.
+
+            If the personal number is empty and can be edited, a QR code for scanning is provided.'
+          type: boolean
+    TemplateGetElementsTimeValidationConfiguration:
+      description: The validation rules for time values.
+      type: object
+      properties:
+        TimeFormat:
+          description: The format of the time values.
+          type: string
+        Range:
+          $ref: '#/components/schemas/TemplateGetElementsFieldValidationRange'
+          description: The range of the values.
+    TemplateGetElementsRadioButtonGroup:
+      description: The configuration of the radio button group.
+      type: object
+      properties:
+        GroupName:
+          description: The name of the radio button group.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        SelectedItem:
+          description: The export value of the selected item of the radio button group.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsRadioButtonDefinition'
+          description: The definition of the radio button group.
+    TemplateGetElementsLocalCertificateSignatureType:
+      description: The configuration of the LocalCertificate signature.
+      type: object
+      properties:
+        EnforcePreferredHashAlgorithm:
+          description: If true, the usage of the preferred hash algorithm is enforced.
+          type: boolean
+        PreferredHashAlgorithm:
+          description: The preferred hash algorithm.
+          enum:
+          - Sha256
+          - Sha512
+          type: string
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsLocalCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetElementsSignatureField:
+      description: The configuration of the signature field.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the signature.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          type: string
+        FieldDescription:
+          description: The description of the signature.
+          type: string
+        UseExternalTimestampServer:
+          description: If true, an timestamp from an external server is embedded into the signature.
+          type: boolean
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        AllowedSignatureTypes:
+          $ref: '#/components/schemas/TemplateGetElementsAllowedSignatureTypes'
+          description: The allowed types for the signature.
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsSignatureFieldDefinition'
+          description: The definition of the signature field.
+        TaskConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsSignatureTaskConfiguration'
+          description: The configuration of the task.
+    TemplateGetElementsSwissComOnDemandStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetConfigurationSmsOneTimePasswordAuthentication:
+      description: The configuration for authentication with a one time password sent over SMS.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number to which the one time password will be sent.
+          type: string
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    TemplateGetElementsATrustCertificateSignatureType:
+      description: The configuration of the A-Trust certificate signature.
+      type: object
+      properties:
+        TemplateId:
+          description: The identifier of the A-Trust template.
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+    TemplateGetElementsGivenName:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetSignAsP7M:
+      description: An action to sign documents with P7M.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/TemplateGetContactInformation'
+          description: The contact information of the recipient.
+        SignAsP7MGroup:
+          format: int32
+          description: The parallel group for P7M actions.
+          type: integer
+    TemplateGetElementsDrawToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsDrawToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetConfigurationSignBulk:
+      description: The configuration of a sign action for multiple recipients.
+      type: object
+      properties:
+        RecipientConfigurations:
+          description: The configurations of the recipients that are part of the bulk.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationBulkRecipient'
+        FinishActionConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationFinishAction'
+          description: Defined actions for different clients that will trigger after an action has been finished.
+        BatchConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationBatchConfiguration'
+          description: The configuration of a signing batch.
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/TemplateGetConfigurationGeneralPoliciesForSignAction'
+          description: Viewer policy settings for override.
+    TemplateGetConfigurationGeneralPoliciesForP7MAction:
+      description: Define the general policies allowed for P7M action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+        AllowAdhocPdfAttachments:
+          description: If true, the client is allowed to append adhoc documents.
+          type: boolean
+        AllowRejectWorkstep:
+          description: If true, the client is allowed to reject the workstep.
+          type: boolean
+        AllowUndoLastAction:
+          description: If true, the client is allowed to undo actions.
+          type: boolean
+        AllowDownloadOfSignedP7MFiles:
+          description: If true, the client is allowed to download signed p7m files.
+          type: boolean
+    TemplateGetConfigurationActivity:
+      description: Defines an activity with the possibility of bulk.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the activity.
+          type: string
+        Action:
+          $ref: '#/components/schemas/TemplateGetConfigurationAction'
+          description: The action assigned to the activity.
+        VisibilityOptions:
+          description: The document visibility options for the activity.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationVisibilityOption'
+    TemplateGetConfigurationSwissComOnDemandSignatureData:
+      description: The recipient configuration for signing with a Swisscom On-Demand certificate.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number.
+          type: string
+        CommonName:
+          description: The name of the certificate that is created or checked.
+          type: string
+        Country:
+          description: The country.
+          type: string
+        Locality:
+          description: The locality.
+          type: string
+        OrganizationUnit:
+          description: The organizational unit.
+          type: string
+        Organization:
+          description: The organization.
+          type: string
+        SerialNumber:
+          description: The serial number.
+          type: string
+        StateOrProvince:
+          description: The state or province.
+          type: string
+        Pseudonym:
+          description: A name or key that uniquely identifies the user.
+          type: string
+    TemplateGetConfigurationActivityActionCallbackConfiguration:
+      description: The configuration of the callback for workstep events.
+      type: object
+      properties:
+        Url:
+          description: The callback URL triggered for the selected events.
+          type: string
+        ActionCallbackSelection:
+          $ref: '#/components/schemas/TemplateGetConfigurationActionCallbackSelection'
+          description: The selection of events which trigger the callback.
+    TemplateGetFilesResponse:
+      description: The response model for requesting files of a template.
+      type: object
+      properties:
+        Documents:
+          description: The documents.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetFilesDocument'
+    TemplateGetElementsRemoteCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetView:
+      description: An action to view and acknowledge the documents.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/TemplateGetContactInformation'
+          description: The contact information of the recipient.
+        ViewingGroup:
+          format: int32
+          description: The parallel group for view actions.
+          type: integer
+    TemplateGetElementsActivity:
+      description: Defines an activity in the process.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the activity.
+          type: string
+        Action:
+          $ref: '#/components/schemas/TemplateGetElementsAction'
+          description: The action assigned to the activity.
+    TemplateGetElementsListBox:
+      description: The configuration of the list box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        PreSelectedItems:
+          description: The export values of the items which should be initially selected.
+          type: array
+          items:
+            type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsListBoxDefinition'
+          description: The definition of the list box field.
+    TemplateGetConfigurationATrustCertificateSignatureData:
+      description: The recipient configuration for signing with an A-Trust certificate.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number of the recipient.
+          type: string
+    TemplateGetSignAutomatic:
+      description: An automatic signing action.
+      type: object
+      properties:
+        ProfileId:
+          description: The identifier of the profile for the automatic signatures.
+          type: string
+        RenderingLanguageCode:
+          description: The rendering language for the automatic signatures.
+          enum:
+          - AF
+          - AF_ZA
+          - AR
+          - AR_AE
+          - AR_BH
+          - AR_DZ
+          - AR_EG
+          - AR_IQ
+          - AR_JO
+          - AR_KW
+          - AR_LB
+          - AR_LY
+          - AR_MA
+          - AR_OM
+          - AR_QA
+          - AR_SA
+          - AR_SY
+          - AR_TN
+          - AR_YE
+          - AZ
+          - BE
+          - BE_BY
+          - BG
+          - BG_BG
+          - CA
+          - CA_ES
+          - CS
+          - CS_CZ
+          - CY
+          - CY_GB
+          - DA
+          - DA_DK
+          - DE
+          - DE_AT
+          - DE_CH
+          - DE_DE
+          - DE_LI
+          - DE_LU
+          - DV
+          - DV_MV
+          - EL
+          - EL_GR
+          - EN
+          - EN_AU
+          - EN_BZ
+          - EN_CA
+          - EN_GB
+          - EN_IE
+          - EN_JM
+          - EN_NZ
+          - EN_PH
+          - EN_TT
+          - EN_US
+          - EN_ZA
+          - EN_ZW
+          - ES
+          - ES_AR
+          - ES_BO
+          - ES_CL
+          - ES_CO
+          - ES_CR
+          - ES_DO
+          - ES_EC
+          - ES_ES
+          - ES_GT
+          - ES_HN
+          - ES_MX
+          - ES_NI
+          - ES_PA
+          - ES_PE
+          - ES_PR
+          - ES_PY
+          - ES_SV
+          - ES_UY
+          - ES_VE
+          - ET
+          - ET_EE
+          - EU
+          - EU_ES
+          - FA
+          - FA_IR
+          - FI
+          - FI_FI
+          - FO
+          - FO_FO
+          - FR
+          - FR_BE
+          - FR_CA
+          - FR_CH
+          - FR_FR
+          - FR_LU
+          - FR_MC
+          - GL
+          - GL_ES
+          - GU
+          - GU_IN
+          - HE
+          - HE_IL
+          - HI
+          - HI_IN
+          - HR
+          - HR_BA
+          - HR_HR
+          - HU
+          - HU_HU
+          - HY
+          - HY_AM
+          - ID
+          - ID_ID
+          - IS
+          - IS_IS
+          - IT
+          - IT_CH
+          - IT_IT
+          - JA
+          - JA_JP
+          - KA
+          - KA_GE
+          - KK
+          - KK_KZ
+          - KN
+          - KN_IN
+          - KO
+          - KO_KR
+          - KOK
+          - KOK_IN
+          - KY
+          - KY_KG
+          - LT
+          - LT_LT
+          - LV
+          - LV_LV
+          - MI
+          - MI_NZ
+          - MK
+          - MK_MK
+          - MN
+          - MN_MN
+          - MR
+          - MR_IN
+          - MS
+          - MS_BN
+          - MS_MY
+          - MT
+          - MT_MT
+          - NB
+          - NB_NO
+          - NL
+          - NL_BE
+          - NL_NL
+          - NN_NO
+          - PA
+          - PA_IN
+          - PL
+          - PL_PL
+          - PS
+          - PT
+          - PT_BR
+          - PT_PT
+          - RO
+          - RO_RO
+          - RU
+          - RU_RU
+          - SA
+          - SA_IN
+          - SE
+          - SE_FI
+          - SE_NO
+          - SE_SE
+          - SK
+          - SK_SK
+          - SL
+          - SL_SI
+          - SQ
+          - SQ_AL
+          - SV
+          - SV_FI
+          - SV_SE
+          - SW
+          - SW_KE
+          - SYR
+          - SYR_SY
+          - TA
+          - TA_IN
+          - TE
+          - TE_IN
+          - TH
+          - TH_TH
+          - TN
+          - TN_ZA
+          - TR
+          - TR_TR
+          - TT
+          - TT_RU
+          - TS
+          - UK
+          - UK_UA
+          - UR
+          - UR_PK
+          - UZ
+          - VI
+          - VI_VN
+          - XH
+          - XH_ZA
+          - ZH
+          - ZH_CN
+          - ZH_HK
+          - ZH_MO
+          - ZH_SG
+          - ZH_TW
+          - ZU
+          - ZU_ZA
+          - AM
+          - AM_ET
+          - ARN
+          - ARN_CL
+          - AS
+          - AS_IN
+          - AZ_CYRL
+          - AZ_CYRL_AZ
+          - AZ_LATN
+          - AZ_LATN_AZ
+          - BA
+          - BA_RU
+          - BN
+          - BN_BD
+          - BN_IN
+          - BO
+          - BO_CN
+          - BR
+          - BR_FR
+          - BS
+          - BS_CYRL
+          - BS_CYRL_BA
+          - BS_LATN
+          - BS_LATN_BA
+          - CA_ES_VALENCIA
+          - CHR
+          - CHR_CHER
+          - CHR_CHER_US
+          - CO
+          - CO_FR
+          - DSB
+          - DSB_DE
+          - EN_029
+          - EN_HK
+          - EN_IN
+          - EN_MY
+          - EN_SG
+          - ES_419
+          - ES_US
+          - FF
+          - FF_LATN
+          - FF_LATN_SN
+          - FIL
+          - FIL_PH
+          - FR_CD
+          - FR_CI
+          - FR_CM
+          - FR_HT
+          - FR_MA
+          - FR_ML
+          - FR_RE
+          - FR_SN
+          - FY
+          - FY_NL
+          - GA
+          - GA_IE
+          - GD
+          - GD_GB
+          - GN
+          - GN_PY
+          - GSW
+          - GSW_FR
+          - HA
+          - HA_LATN
+          - HA_LATN_NG
+          - HAW
+          - HAW_US
+          - HSB
+          - HSB_DE
+          - IG
+          - IG_NG
+          - II
+          - II_CN
+          - IU
+          - IU_CANS
+          - IU_CANS_CA
+          - IU_LATN
+          - IU_LATN_CA
+          - JV
+          - JV_LATN
+          - JV_LATN_ID
+          - KL
+          - KL_GL
+          - KM
+          - KM_KH
+          - KU
+          - KU_ARAB
+          - KU_ARAB_IQ
+          - LB
+          - LB_LU
+          - LO
+          - LO_LA
+          - MG
+          - MG_MG
+          - ML
+          - ML_IN
+          - MN_CYRL
+          - MN_MONG
+          - MN_MONG_CN
+          - MN_MONG_MN
+          - MOH
+          - MOH_CA
+          - MY
+          - MY_MM
+          - NE
+          - NE_IN
+          - NE_NP
+          - NN
+          - 'NO'
+          - NQO
+          - NQO_GN
+          - NSO
+          - NSO_ZA
+          - OC
+          - OC_FR
+          - OM
+          - OM_ET
+          - OR
+          - OR_IN
+          - PA_ARAB
+          - PA_ARAB_PK
+          - PRS
+          - PRS_AF
+          - PS_AF
+          - PT_AO
+          - QUT
+          - QUT_GT
+          - QUZ
+          - QUZ_BO
+          - QUZ_EC
+          - QUZ_PE
+          - RM
+          - RM_CH
+          - RO_MD
+          - RW
+          - RW_RW
+          - SAH
+          - SAH_RU
+          - SD
+          - SD_ARAB
+          - SD_ARAB_PK
+          - SI
+          - SI_LK
+          - SMA
+          - SMA_NO
+          - SMA_SE
+          - SMJ
+          - SMJ_NO
+          - SMJ_SE
+          - SMN
+          - SMN_FI
+          - SMS
+          - SMS_FI
+          - SN
+          - SN_LATN
+          - SN_LATN_ZW
+          - SO
+          - SO_SO
+          - SR
+          - SR_CYRL
+          - SR_CYRL_BA
+          - SR_CYRL_CS
+          - SR_CYRL_ME
+          - SR_CYRL_RS
+          - SR_LATN
+          - SR_LATN_BA
+          - SR_LATN_CS
+          - SR_LATN_ME
+          - SR_LATN_RS
+          - ST
+          - ST_ZA
+          - TA_LK
+          - TG
+          - TG_CYRL
+          - TG_CYRL_TJ
+          - TI
+          - TI_ER
+          - TI_ET
+          - TK
+          - TK_TM
+          - TN_BW
+          - TS_ZA
+          - TZM
+          - TZM_LATN
+          - TZM_LATN_DZ
+          - TZM_TFNG
+          - TZM_TFNG_MA
+          - UG
+          - UG_CN
+          - UR_IN
+          - UZ_CYRL
+          - UZ_CYRL_UZ
+          - UZ_LATN
+          - UZ_LATN_UZ
+          - WO
+          - WO_SN
+          - YO
+          - YO_NG
+          - ZGH
+          - ZGH_TFNG
+          - ZGH_TFNG_MA
+          - ZH_HANS
+          - ZH_HANT
+          - ZH_CHS
+          - ZH_CHT
+          type: string
+    TemplateGetConfigurationCallbackConfiguration:
+      description: The configuration of the callbacks for a custom integration.
+      type: object
+      properties:
+        CallbackUrl:
+          description: The callback URL triggered when the envelope has been finished.
+          type: string
+        StatusUpdateCallbackUrl:
+          description: The callback URL triggered for status updates of an envelope.
+          type: string
+        AfterSendCallbackUrl:
+          description: The callback URL triggered after sending the draft.
+          type: string
+        ActivityActionCallbackConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationActivityActionCallbackConfiguration'
+          description: The configuration of the callback for workstep events.
+    TemplateGetConfigurationRemoteCertificateSignatureData:
+      description: The recipient configuration for signing with a remote certificate.
+      type: object
+      properties:
+        UserId:
+          description: The identifier of the user.
+          type: string
+        DeviceId:
+          description: The identifier of the device.
+          type: string
+    TemplateGetConfigurationRecipientConfiguration:
+      description: The configuration of the recipient.
+      type: object
+      properties:
+        PersonalMessage:
+          description: The personal message for the recipient.
+          type: string
+        NotificationChannel:
+          description: Which channel is used for sending notifications to the recipient.
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+          x-ms-enum:
+            name: RecipientNotificationChannel
+            modelAsString: false
+        AuthenticationConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAuthenticationConfiguration'
+          description: The configuration for the authentication of the recipient.
+        SendEmails:
+          description: 'Obsolete: If true, emails will be sent out for this recipient.
+
+            If NotificationChannel has value None, this will be false, otherwise true.'
+          type: boolean
+        AllowAccessAfterFinish:
+          description: If true, the recipient is allowed to access the action after it has been finished.
+          type: boolean
+    TemplateGetElementsNumberValidationConfiguration:
+      description: The validation rules for numbers.
+      type: object
+      properties:
+        DecimalDigits:
+          format: int32
+          description: The expected amount of decimal digits.
+          type: integer
+        Symbol:
+          description: The expected symbol.
+          type: string
+        SymbolLocation:
+          description: The defined symbol location.
+          enum:
+          - Start
+          - StartWithBlank
+          - End
+          - EndWithBlank
+          type: string
+          x-ms-enum:
+            name: SymbolLocationType
+            modelAsString: false
+        GroupSeparator:
+          description: The expected thousands separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - Blank
+          - None
+          type: string
+        DecimalSeparator:
+          description: The expected decimal separator.
+          enum:
+          - Comma
+          - Point
+          - Apostrophe
+          - None
+          type: string
+          x-ms-enum:
+            name: DecimalSeparatorType
+            modelAsString: false
+        Range:
+          $ref: '#/components/schemas/TemplateGetElementsFieldValidationRange'
+          description: The range of the values.
+    TemplateGetConfigurationResponse:
+      description: Configuration shared by all models.
+      type: object
+      properties:
+        MetaData:
+          description: The metadata of the envelope.
+          type: string
+        AddDocumentTimestamp:
+          description: If true, a timestamp is added to all documents of the envelope at the end of each signing activity.
+          type: boolean
+        ShareWithTeam:
+          description: If true, this envelope is shared with your teams.
+          type: boolean
+        LockFormFieldsOnFinish:
+          description: If true, form fields are locked after envelope is finished.
+          type: boolean
+        SendFinishedDocumentsToAllSignersAndMustView:
+          description: If true, every signer and viewer will receive a copy of the finished documents.
+          type: boolean
+        LateIdentification:
+          description: If true, oAuth identification is performed when signing not when opening the document.
+          type: boolean
+        Activities:
+          description: The steps for the envelope.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationActivity'
+        EmailConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationEmailConfiguration'
+          description: The configuration for notifications.
+        ReminderConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationReminderConfiguration'
+          description: The configuration for reminders.
+        ExpirationConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationExpirationConfiguration'
+          description: The configuration of the expiration for the envelope.
+        CallbackConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationCallbackConfiguration'
+          description: The configuration of the callbacks for a custom integration.
+        AgreementConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAgreementConfiguration'
+          description: The configuration of the agreement.
+        AgentRedirectConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAgentRedirectConfiguration'
+          description: The configuration of the redirects for the agent mode.
+        RedirectConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationRedirectConfiguration'
+          description: The configuration of the redirects for the agent mode.
+        DefaultSignatureTypeConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationDefaultSignatureTypeConfiguration'
+          description: Draft default signature type configuration.
+        SealingConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationSealingConfiguration'
+          description: The configuration for sealing.
+    TemplateGetConfigurationSignatureDataConfiguration:
+      description: The recipient configuration for signing.
+      type: object
+      properties:
+        DisposableCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationDisposableCertificateSignatureData'
+          description: The disposable certificate configuration for the action.
+        RemoteCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationRemoteCertificateSignatureData'
+          description: The remote certificate configuration for the action.
+        SwissComOnDemand:
+          $ref: '#/components/schemas/TemplateGetConfigurationSwissComOnDemandSignatureData'
+          description: The Swisscom On-Demand certificate configuration for the action.
+        SmsOneTimePassword:
+          $ref: '#/components/schemas/TemplateGetConfigurationSmsOneTimePasswordSignatureData'
+          description: The one time password configuration for the action (SMS-OTP).
+        ATrustCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationATrustCertificateSignatureData'
+          description: The A-Trust certificate configuration for the action.
+        SwedishBankId:
+          $ref: '#/components/schemas/TemplateGetConfigurationSwedishBankIdSignatureData'
+          description: The Swedish BankID configuration for the action.
+        SignaturePluginData:
+          description: The signature plugin configurations for the action.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationSignaturePluginSignatureData'
+    TemplateGetConfigurationGeneralPoliciesForSignAction:
+      description: Define the general policies allowed for sign action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+        AllowAdhocPdfAttachments:
+          description: If true, the client is allowed to append adhoc documents.
+          type: boolean
+        AllowRejectWorkstep:
+          description: If true, the client is allowed to reject the workstep.
+          type: boolean
+        AllowUndoLastAction:
+          description: If true, the client is allowed to undo actions.
+          type: boolean
+    TemplateGetConfigurationSendCopy:
+      description: The configuration of an action to send a copy of the documents to the recipient.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationBasicRecipientConfiguration'
+          description: The configuration of the recipient.
+        CopyingGroup:
+          format: int32
+          description: The parallel group for copy actions.
+          type: integer
+    TemplateGetElementsOneTimePasswordSignatureType:
+      description: The configuration of the OneTimePassword signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the password in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsOneTimePasswordStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetElementsLinkDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetSignPlaceholder:
+      description: A signing action for a placeholder.
+      type: object
+      properties:
+        SigningGroup:
+          format: int32
+          description: The parallel group for sign actions.
+          type: integer
+        PlaceholderLabel:
+          description: The label of the placeholder.
+          type: string
+    TemplateGetConfigurationSignaturePluginParameter:
+      description: The definition of a signature plugin parameter.
+      type: object
+      properties:
+        Key:
+          description: The identifier of the parameter.
+          type: string
+        Value:
+          description: The value of the parameter.
+          type: string
+    TemplateGetConfigurationAgreementConfiguration:
+      description: The configuration of the agreement.
+      type: object
+      properties:
+        Translations:
+          description: 'The agreement and its translations to be used.
+
+            If no custom agreement is specified, the default organization agreement will be used.'
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationAgreementTranslation'
+    TemplateGetActivity:
+      description: An activity of a template.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the activity.
+          type: string
+        Action:
+          $ref: '#/components/schemas/TemplateGetAction'
+          description: The action assigned to the activity.
+    TemplateGetElementsTextBoxDefinition:
+      description: The configuration of the text box.
+      type: object
+      properties:
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        MaxLength:
+          format: int32
+          description: The maximum length of the text.
+          type: integer
+        IsMultiline:
+          description: If true, the text box can have multiple lines.
+          type: boolean
+        IsPassword:
+          description: If true, the text box behaves like a password input field and does not show the actually entered characters.
+          type: boolean
+        TextFormat:
+          $ref: '#/components/schemas/TemplateGetElementsTextFormat'
+          description: The configuration of the text format.
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsRemoteCertificateSignatureType:
+      description: The configuration of the RemoteCertificate signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The validity of the certificate in seconds.
+          type: integer
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsRemoteCertificateStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetElementsSignBulk:
+      description: The elements, which are assigned to actions.
+      type: object
+      properties:
+        SequenceMode:
+          description: The sequence mode.
+          enum:
+          - NoSequenceEnforced
+          - SequenceEnforced
+          type: string
+          x-ms-enum:
+            name: ElementSequenceMode
+            modelAsString: false
+        Elements:
+          $ref: '#/components/schemas/TemplateGetElementsElements'
+          description: The definition of the assigned elements.
+    TemplateGetConfigurationEmailAppLinks:
+      description: Configure if links for our Apps should be included in the document signing request email message.
+      type: object
+      properties:
+        Android:
+          description: If true, an Android app link is added to the email message.
+          type: boolean
+        iOS:
+          description: If true, an iOS app link is added to the email message.
+          type: boolean
+        Windows:
+          description: If true, a Windows app link is added to the email message.
+          type: boolean
+    TemplateFindTemplate:
+      description: The response model for found envelopes.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the envelope.
+          type: string
+        Name:
+          description: The name of the envelope.
+          type: string
+        MetaData:
+          description: The metadata of the envelope.
+          type: string
+    TemplateGetConfigurationEmailConfiguration:
+      description: The configuration for notifications.
+      type: object
+      properties:
+        Subject:
+          description: The subject of the sign notifications.
+          type: string
+        Message:
+          description: The message of the sign notifications.
+          type: string
+        SenderDisplayName:
+          description: The displayed name of the sender in the notifications.
+          type: string
+    TemplateGetElementsHyperLink:
+      description: The definition of the hyperlink element.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the hyperlink.
+          type: string
+        Uri:
+          description: The URI of the hyperlink.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsLinkDefinition'
+          description: The definition of the hyperlink element.
+    TemplateGetElementsSignAutomatic:
+      description: An automatic signing action.
+      type: object
+      properties:
+        VisibleSignatures:
+          description: 'The visible signatures define the optional visual representations for automatic signatures.
+
+            If none are defined, the automatic signatures are applied to the documents without a visual element.'
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsVisibleSignature'
+    TemplateGetElementsFieldValidation:
+      description: The configuration of the field validation rules.
+      type: object
+      properties:
+        Type:
+          description: The type of the value.
+          enum:
+          - None
+          - Date
+          - Email
+          - Number
+          - Phone
+          - Time
+          type: string
+          x-ms-enum:
+            name: FieldValidationType
+            modelAsString: false
+        DateValidationConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsDateValidationConfiguration'
+          description: The validation rules for dates.
+        NumberValidationConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsNumberValidationConfiguration'
+          description: The validation rules for numbers.
+        PhoneValidationConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsPhoneValidationConfiguration'
+          description: The validation rules for phone numbers.
+        TimeValidationConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsTimeValidationConfiguration'
+          description: The validation rules for time values.
+    TemplateGetElementsVisibleSignature:
+      description: An automatic signature with a visual appearance on the document.
+      type: object
+      properties:
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Id:
+          description: The identifier of the signature field.
+          type: string
+        UseExternalTimestampServer:
+          description: If true, a timestamp from an external server is embedded into the signature.
+          type: boolean
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsSignatureFieldDefinition'
+          description: The definition of the signature field.
+    TemplateGetElementsFieldValidationRange:
+      description: The validation rules for a value range.
+      type: object
+      properties:
+        From:
+          description: The lower boundary of the range.
+          type: string
+        To:
+          description: The upper boundary of the range.
+          type: string
+    TemplateGetSendCopy:
+      description: An action to send a copy of the documents to the recipient.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/TemplateGetContactInformation'
+          description: The contact information of the recipient.
+        CopyingGroup:
+          format: int32
+          description: The parallel group for copy actions.
+          type: integer
+    TemplateGetElementsClickToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetConfigurationSamlAuthentication:
+      description: The configuration for authentication with a SAML provider.
+      type: object
+      properties:
+        ProviderName:
+          description: The name of the SAML provider.
+          type: string
+        Validations:
+          description: The validation rules for the SAML response.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationAuthenticationValidation'
+    TemplateGetConfigurationP7MSignatureMethods:
+      description: The recipient configuration for signing with P7M.
+      type: object
+      properties:
+        LocalCertificate:
+          description: If true, a local certificate can be used.
+          type: boolean
+        DisposableCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationDisposableCertificateSignatureData'
+          description: The disposable certificate configuration for the action.
+        RemoteCertificate:
+          $ref: '#/components/schemas/TemplateGetConfigurationRemoteCertificateSignatureData'
+          description: The remote certificate configuration for the action.
+        SignaturePluginData:
+          description: The signature plugin configurations for the action.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationSignaturePluginSignatureData'
+    TemplateGetConfigurationDisposableCertificateSignatureData:
+      description: The recipient configuration for signing with a disposable certificate.
+      type: object
+      properties:
+        DocumentIssuingCountry:
+          description: 'The issuing country of the document.
+
+            Will be used as country of residence, if lean is disabled.'
+          type: string
+        IdentificationIssuingCountry:
+          description: The issuing country of the identification.
+          type: string
+        IdentificationType:
+          description: The type of identification in use.
+          enum:
+          - None
+          - ForeignTaxCode
+          - PersonalNumber
+          - Passport
+          - NationalIdentityCard
+          - ItalianTaxCode
+          - NoSerialNumber
+          - DrivingLicense
+          - ResidencePermit
+          - TemporaryResidencePermit
+          - EmbassyDocument
+          - AML
+          type: string
+          x-ms-enum:
+            name: DisposableCertificateIdentificationType
+            modelAsString: false
+        PhoneNumber:
+          description: The phone number registered for identification.
+          type: string
+        DocumentType:
+          description: The type of document used for the identification.
+          enum:
+          - IdentityCard
+          - DriverLicense
+          - Passport
+          - ResidencePermit
+          - NationalElectronicIdentityCard
+          - TemporaryResidencePermit
+          - EmbassyDocument
+          type: string
+          x-ms-enum:
+            name: DisposableCertificateDocumentType
+            modelAsString: false
+        DocumentIssuedBy:
+          description: The authority that issued the document.
+          type: string
+        DocumentIssuedOn:
+          format: date
+          description: 'The date when the document has been issued.
+
+            A date in the format RFC 3339, section 5.6, ''full-date'' (e.g. 2017-07-21).'
+          type: string
+        DocumentExpiryDate:
+          format: date
+          description: 'The expiration date of the document.
+
+            A date in the format RFC 3339, section 5.6, ''full-date'' (e.g. 2017-07-21).'
+          type: string
+        SerialNumber:
+          description: The serial number of the certificate.
+          type: string
+        DocumentNumber:
+          description: The identifier of the document.
+          type: string
+    TemplateGetElementsPosition:
+      description: The position of an element on the document.
+      type: object
+      properties:
+        PageNumber:
+          format: int32
+          description: The number of the page where the element is located. It starts with 1.
+          type: integer
+        X:
+          format: double
+          description: The X coordinate in points. It starts from the left.
+          type: number
+        Y:
+          format: double
+          description: The Y coordinate in points. It starts from the bottom.
+          type: number
+    TemplateGetConfigurationAction:
+      description: The action of the activity.
+      type: object
+      properties:
+        SendCopy:
+          $ref: '#/components/schemas/TemplateGetConfigurationSendCopy'
+          description: The configuration of the copy action.
+        Sign:
+          $ref: '#/components/schemas/TemplateGetConfigurationSign'
+          description: The configuration of the sign action.
+        View:
+          $ref: '#/components/schemas/TemplateGetConfigurationView'
+          description: The configuration of the view action.
+        SignAsP7M:
+          $ref: '#/components/schemas/TemplateGetConfigurationSignAsP7M'
+          description: The configuration of the P7M sign action.
+        SignBulk:
+          $ref: '#/components/schemas/TemplateGetConfigurationSignBulk'
+          description: The definition of the bulk.
+    TemplateGetConfigurationFinishAction:
+      description: Defines what happens in the signing clients, after an action has been finished.
+      type: object
+      properties:
+        SignAnyWhereViewer:
+          $ref: '#/components/schemas/TemplateGetConfigurationWebFinishAction'
+          description: The actions for the SAW Viewer.
+        SignificantClientSignatureCaptureForIos:
+          $ref: '#/components/schemas/TemplateGetConfigurationAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for iOS.
+        SignificantClientSignatureCaptureForAndroid:
+          $ref: '#/components/schemas/TemplateGetConfigurationAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for Android.
+        SignificantClientSignatureCaptureForWindows:
+          $ref: '#/components/schemas/TemplateGetConfigurationAppFinishAction'
+          description: The actions for the SIGNificant Client Signature Capture App for Windows.
+        KioskSdk:
+          $ref: '#/components/schemas/TemplateGetConfigurationKioskFinishAction'
+          description: The actions for the SIGNificant Kiosk SDK.
+    TemplateGetElementsReadingAreaDefinition:
+      description: The settings of a positionable element.
+      type: object
+      properties:
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsDrawToSignStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetContactInformation:
+      description: Defines the contact information for the recipient.
+      type: object
+      properties:
+        Email:
+          description: The email address of the recipient.
+          type: string
+        GivenName:
+          description: The given name of the recipient.
+          type: string
+        Surname:
+          description: The surname of the recipient.
+          type: string
+        PhoneNumber:
+          description: The phone number of the recipient.
+          type: string
+        LanguageCode:
+          description: The language of the recipient.
+          enum:
+          - AF
+          - AF_ZA
+          - AR
+          - AR_AE
+          - AR_BH
+          - AR_DZ
+          - AR_EG
+          - AR_IQ
+          - AR_JO
+          - AR_KW
+          - AR_LB
+          - AR_LY
+          - AR_MA
+          - AR_OM
+          - AR_QA
+          - AR_SA
+          - AR_SY
+          - AR_TN
+          - AR_YE
+          - AZ
+          - BE
+          - BE_BY
+          - BG
+          - BG_BG
+          - CA
+          - CA_ES
+          - CS
+          - CS_CZ
+          - CY
+          - CY_GB
+          - DA
+          - DA_DK
+          - DE
+          - DE_AT
+          - DE_CH
+          - DE_DE
+          - DE_LI
+          - DE_LU
+          - DV
+          - DV_MV
+          - EL
+          - EL_GR
+          - EN
+          - EN_AU
+          - EN_BZ
+          - EN_CA
+          - EN_GB
+          - EN_IE
+          - EN_JM
+          - EN_NZ
+          - EN_PH
+          - EN_TT
+          - EN_US
+          - EN_ZA
+          - EN_ZW
+          - ES
+          - ES_AR
+          - ES_BO
+          - ES_CL
+          - ES_CO
+          - ES_CR
+          - ES_DO
+          - ES_EC
+          - ES_ES
+          - ES_GT
+          - ES_HN
+          - ES_MX
+          - ES_NI
+          - ES_PA
+          - ES_PE
+          - ES_PR
+          - ES_PY
+          - ES_SV
+          - ES_UY
+          - ES_VE
+          - ET
+          - ET_EE
+          - EU
+          - EU_ES
+          - FA
+          - FA_IR
+          - FI
+          - FI_FI
+          - FO
+          - FO_FO
+          - FR
+          - FR_BE
+          - FR_CA
+          - FR_CH
+          - FR_FR
+          - FR_LU
+          - FR_MC
+          - GL
+          - GL_ES
+          - GU
+          - GU_IN
+          - HE
+          - HE_IL
+          - HI
+          - HI_IN
+          - HR
+          - HR_BA
+          - HR_HR
+          - HU
+          - HU_HU
+          - HY
+          - HY_AM
+          - ID
+          - ID_ID
+          - IS
+          - IS_IS
+          - IT
+          - IT_CH
+          - IT_IT
+          - JA
+          - JA_JP
+          - KA
+          - KA_GE
+          - KK
+          - KK_KZ
+          - KN
+          - KN_IN
+          - KO
+          - KO_KR
+          - KOK
+          - KOK_IN
+          - KY
+          - KY_KG
+          - LT
+          - LT_LT
+          - LV
+          - LV_LV
+          - MI
+          - MI_NZ
+          - MK
+          - MK_MK
+          - MN
+          - MN_MN
+          - MR
+          - MR_IN
+          - MS
+          - MS_BN
+          - MS_MY
+          - MT
+          - MT_MT
+          - NB
+          - NB_NO
+          - NL
+          - NL_BE
+          - NL_NL
+          - NN_NO
+          - PA
+          - PA_IN
+          - PL
+          - PL_PL
+          - PS
+          - PT
+          - PT_BR
+          - PT_PT
+          - RO
+          - RO_RO
+          - RU
+          - RU_RU
+          - SA
+          - SA_IN
+          - SE
+          - SE_FI
+          - SE_NO
+          - SE_SE
+          - SK
+          - SK_SK
+          - SL
+          - SL_SI
+          - SQ
+          - SQ_AL
+          - SV
+          - SV_FI
+          - SV_SE
+          - SW
+          - SW_KE
+          - SYR
+          - SYR_SY
+          - TA
+          - TA_IN
+          - TE
+          - TE_IN
+          - TH
+          - TH_TH
+          - TN
+          - TN_ZA
+          - TR
+          - TR_TR
+          - TT
+          - TT_RU
+          - TS
+          - UK
+          - UK_UA
+          - UR
+          - UR_PK
+          - UZ
+          - VI
+          - VI_VN
+          - XH
+          - XH_ZA
+          - ZH
+          - ZH_CN
+          - ZH_HK
+          - ZH_MO
+          - ZH_SG
+          - ZH_TW
+          - ZU
+          - ZU_ZA
+          - AM
+          - AM_ET
+          - ARN
+          - ARN_CL
+          - AS
+          - AS_IN
+          - AZ_CYRL
+          - AZ_CYRL_AZ
+          - AZ_LATN
+          - AZ_LATN_AZ
+          - BA
+          - BA_RU
+          - BN
+          - BN_BD
+          - BN_IN
+          - BO
+          - BO_CN
+          - BR
+          - BR_FR
+          - BS
+          - BS_CYRL
+          - BS_CYRL_BA
+          - BS_LATN
+          - BS_LATN_BA
+          - CA_ES_VALENCIA
+          - CHR
+          - CHR_CHER
+          - CHR_CHER_US
+          - CO
+          - CO_FR
+          - DSB
+          - DSB_DE
+          - EN_029
+          - EN_HK
+          - EN_IN
+          - EN_MY
+          - EN_SG
+          - ES_419
+          - ES_US
+          - FF
+          - FF_LATN
+          - FF_LATN_SN
+          - FIL
+          - FIL_PH
+          - FR_CD
+          - FR_CI
+          - FR_CM
+          - FR_HT
+          - FR_MA
+          - FR_ML
+          - FR_RE
+          - FR_SN
+          - FY
+          - FY_NL
+          - GA
+          - GA_IE
+          - GD
+          - GD_GB
+          - GN
+          - GN_PY
+          - GSW
+          - GSW_FR
+          - HA
+          - HA_LATN
+          - HA_LATN_NG
+          - HAW
+          - HAW_US
+          - HSB
+          - HSB_DE
+          - IG
+          - IG_NG
+          - II
+          - II_CN
+          - IU
+          - IU_CANS
+          - IU_CANS_CA
+          - IU_LATN
+          - IU_LATN_CA
+          - JV
+          - JV_LATN
+          - JV_LATN_ID
+          - KL
+          - KL_GL
+          - KM
+          - KM_KH
+          - KU
+          - KU_ARAB
+          - KU_ARAB_IQ
+          - LB
+          - LB_LU
+          - LO
+          - LO_LA
+          - MG
+          - MG_MG
+          - ML
+          - ML_IN
+          - MN_CYRL
+          - MN_MONG
+          - MN_MONG_CN
+          - MN_MONG_MN
+          - MOH
+          - MOH_CA
+          - MY
+          - MY_MM
+          - NE
+          - NE_IN
+          - NE_NP
+          - NN
+          - 'NO'
+          - NQO
+          - NQO_GN
+          - NSO
+          - NSO_ZA
+          - OC
+          - OC_FR
+          - OM
+          - OM_ET
+          - OR
+          - OR_IN
+          - PA_ARAB
+          - PA_ARAB_PK
+          - PRS
+          - PRS_AF
+          - PS_AF
+          - PT_AO
+          - QUT
+          - QUT_GT
+          - QUZ
+          - QUZ_BO
+          - QUZ_EC
+          - QUZ_PE
+          - RM
+          - RM_CH
+          - RO_MD
+          - RW
+          - RW_RW
+          - SAH
+          - SAH_RU
+          - SD
+          - SD_ARAB
+          - SD_ARAB_PK
+          - SI
+          - SI_LK
+          - SMA
+          - SMA_NO
+          - SMA_SE
+          - SMJ
+          - SMJ_NO
+          - SMJ_SE
+          - SMN
+          - SMN_FI
+          - SMS
+          - SMS_FI
+          - SN
+          - SN_LATN
+          - SN_LATN_ZW
+          - SO
+          - SO_SO
+          - SR
+          - SR_CYRL
+          - SR_CYRL_BA
+          - SR_CYRL_CS
+          - SR_CYRL_ME
+          - SR_CYRL_RS
+          - SR_LATN
+          - SR_LATN_BA
+          - SR_LATN_CS
+          - SR_LATN_ME
+          - SR_LATN_RS
+          - ST
+          - ST_ZA
+          - TA_LK
+          - TG
+          - TG_CYRL
+          - TG_CYRL_TJ
+          - TI
+          - TI_ER
+          - TI_ET
+          - TK
+          - TK_TM
+          - TN_BW
+          - TS_ZA
+          - TZM
+          - TZM_LATN
+          - TZM_LATN_DZ
+          - TZM_TFNG
+          - TZM_TFNG_MA
+          - UG
+          - UG_CN
+          - UR_IN
+          - UZ_CYRL
+          - UZ_CYRL_UZ
+          - UZ_LATN
+          - UZ_LATN_UZ
+          - WO
+          - WO_SN
+          - YO
+          - YO_NG
+          - ZGH
+          - ZGH_TFNG
+          - ZGH_TFNG_MA
+          - ZH_HANS
+          - ZH_HANT
+          - ZH_CHS
+          - ZH_CHT
+          type: string
+          x-ms-enum:
+            name: LanguageCode
+            modelAsString: false
+    TemplateGetElementsElements:
+      description: The configurable elements of the documents.
+      type: object
+      properties:
+        TextBoxes:
+          description: The text boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsTextBox'
+        CheckBoxes:
+          description: The check boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsCheckBox'
+        ComboBoxes:
+          description: The combo boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsComboBox'
+        RadioButtons:
+          description: The radio buttons.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsRadioButtonGroup'
+        ListBoxes:
+          description: The list boxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsListBox'
+        Signatures:
+          description: The signatures.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsSignatureField'
+        Attachments:
+          description: The attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsAttachment'
+        PredefinedFieldElements:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedFieldElements'
+          description: The predefined field elements.
+        LinkConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsLinkConfiguration'
+          description: The links in the documents.
+        AreaReadConfirmations:
+          description: The areas which have to be read.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsReadAreaConfirmation'
+        PageReadConfirmations:
+          description: The pages which have to be read.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsReadPagesConfirmation'
+        DocumentReadConfirmations:
+          description: The documents which have to be read.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsReadDocumentConfirmation'
+    TemplateGetFilesDocument:
+      description: The basic information about a document.
+      type: object
+      properties:
+        FileName:
+          description: The name of the file.
+          type: string
+        PageCount:
+          format: int32
+          description: The number of pages.
+          type: integer
+        Pages:
+          description: The pages of the document.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetFilesPage'
+        DocumentNumber:
+          format: int32
+          description: The reference number of the document. It starts with 1.
+          type: integer
+    TemplateGetElementsDate:
+      description: The configuration of the predefined element showing the date.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DateFormat:
+          description: The format of the date.
+          type: string
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateFindRequest:
+      description: The request model for searching templates.
+      type: object
+      properties:
+        SearchText:
+          description: "If set, the given text is searched in following fields:\nenvelope name and description\nnotification subject and message \nsender email address, given name and surname  \nrecipient email address, given name and surname\nNote: Using this search option is very resource intensive! It might take very long."
+          maxLength: 500
+          minLength: 0
+          type: string
+        RecipientEmail:
+          description: If set, envelopes containing a recipient with the given email address are matched.
+          maxLength: 250
+          minLength: 0
+          type: string
+    TemplateGetElementsSwissComOnDemandSignatureType:
+      description: The configuration of the Swisscom On-Demand signature.
+      type: object
+      properties:
+        ValidityInSeconds:
+          format: int32
+          description: The certificate validity in seconds.
+          type: integer
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsSwissComOnDemandStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetConfigurationAgentRedirectConfiguration:
+      description: The configuration of the redirects for the agent mode.
+      type: object
+      properties:
+        Policy:
+          description: Defines the redirect target page which should be opened when the agent mode is active.
+          enum:
+          - Workflow
+          - FormEditor
+          - Summary
+          type: string
+          x-ms-enum:
+            name: RedirectPolicyEnum
+            modelAsString: false
+        Allow:
+          description: If true, the agent mode can be used.
+          type: boolean
+        IFrameAllowList:
+          description: The URLs where the designer interface of eSignAnyWhere may be embedded.
+          type: array
+          items:
+            type: string
+    TemplateGetConfigurationBatchConfiguration:
+      description: The configuration of a signing batch.
+      type: object
+      properties:
+        Mode:
+          description: The mode, that will be used for batch signing.
+          enum:
+          - Basic
+          - OptIn
+          - OptOut
+          - OptOutWithRequiredAlwaysSelected
+          - OptInWithRequiredAlwaysSelected
+          type: string
+          x-ms-enum:
+            name: BatchMode
+            modelAsString: false
+        RequireScrollingOverAllSignaturesBeforeSigning:
+          description: 'If true, the user has to review all signatures in the batch signing dialog before signing.
+
+            This is only applicable when the <code>Mode</code> is set to <code>OptIn</code> or <code>OptOut</code>.'
+          type: boolean
+    TemplateGetConfigurationSealingConfiguration:
+      description: The configuration for sealing.
+      type: object
+      properties:
+        CertificateId:
+          description: Sealing certificate used.
+          type: string
+    TemplateGetElementsDateValidationConfiguration:
+      description: The validation rules for dates.
+      type: object
+      properties:
+        DateFormat:
+          description: The format of the dates.
+          type: string
+        Range:
+          $ref: '#/components/schemas/TemplateGetElementsFieldValidationRange'
+          description: The range of the values.
+    TemplateCreateDraftResponse:
+      description: The response model after creating the draft from a template successfully.
+      type: object
+      properties:
+        DraftId:
+          description: The identifier of the draft.
+          type: string
+    TemplateGetAction:
+      description: The action of the activity with the possibility of a defined bulk.
+      type: object
+      properties:
+        SendCopy:
+          $ref: '#/components/schemas/TemplateGetSendCopy'
+          description: The definition of the copy action.
+        SignBulk:
+          $ref: '#/components/schemas/TemplateGetSignBulk'
+          description: The definition of the bulk.
+        SignAutomatic:
+          $ref: '#/components/schemas/TemplateGetSignAutomatic'
+          description: The definition of the automatic sign action.
+        Sign:
+          $ref: '#/components/schemas/TemplateGetSign'
+          description: The definition of the sign action.
+        View:
+          $ref: '#/components/schemas/TemplateGetView'
+          description: The definition of the view action.
+        SignAsP7M:
+          $ref: '#/components/schemas/TemplateGetSignAsP7M'
+          description: The definition of the P7M sign action.
+        SignPlaceholder:
+          $ref: '#/components/schemas/TemplateGetSignPlaceholder'
+          description: The definition of the signer placeholder.
+    TemplateGetConfigurationSmsOneTimePasswordSignatureData:
+      description: The recipient configuration for signing with a one time password sent via SMS.
+      type: object
+      properties:
+        PhoneNumber:
+          description: The phone number to which the one time password will be sent.
+          type: string
+    TemplateGetSign:
+      description: An action to sign documents.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/TemplateGetContactInformation'
+          description: The contact information of the recipient.
+        SigningGroup:
+          format: int32
+          description: The parallel group for sign actions.
+          type: integer
+    TemplateGetElementsCheckBoxDefinition:
+      description: The configuration of a check box.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the check box when it is checked.
+          type: string
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+    TemplateGetElementsTextBox:
+      description: The configuration of the text box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The value of the text box.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        Validation:
+          $ref: '#/components/schemas/TemplateGetElementsFieldValidation'
+          description: The configuration of the validation rules for the text box value.
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsTextBoxDefinition'
+          description: The definition of the text box.
+    TemplateGetElementsFullName:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetConfigurationGeneralPoliciesForViewAction:
+      description: Define the general policies allowed for view action.
+      type: object
+      properties:
+        AllowSaveDocument:
+          description: If true, the client is allowed to save the workstep document.
+          type: boolean
+        AllowSaveAuditTrail:
+          description: If true, the client is allowed to save the audittrail document.
+          type: boolean
+        AllowPrintDocument:
+          description: If true, the client is allowed to print the workstep document.
+          type: boolean
+    TemplateGetConfigurationVisibilityOption:
+      description: The options defining the document visibility.
+      type: object
+      properties:
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        IsHidden:
+          description: If true, the referenced document is hidden for the activity.
+          type: boolean
+    TemplateGetElementsAction:
+      description: The action of the activity.
+      type: object
+      properties:
+        SignAutomatic:
+          $ref: '#/components/schemas/TemplateGetElementsSignAutomatic'
+          description: The definition of the automatic sign action.
+        Sign:
+          $ref: '#/components/schemas/TemplateGetElementsSign'
+          description: The definition of the sign action.
+        SignBulk:
+          $ref: '#/components/schemas/TemplateGetElementsSignBulk'
+          description: The definition of the bulk.
+    TemplateGetElementsPredefinedText:
+      description: The configuration of the element showing the predefined text.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Value:
+          description: The value of the predefined text.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetConfigurationDefaultSignature:
+      description: The configuration of the default signature type for a draft.
+      type: object
+      properties:
+        IsDefault:
+          description: Indicates if the signature type is the default signature type for draft.
+          type: boolean
+    TemplateGetAdvancedRecipientConfiguration:
+      description: An action with contact information for the recipient.
+      type: object
+      properties:
+        ContactInformation:
+          $ref: '#/components/schemas/TemplateGetContactInformation'
+          description: The contact information of the recipient.
+    TemplateGetElementsReadDocumentConfirmation:
+      description: Define which document has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+    TemplateGetConfigurationAuthenticationValidation:
+      description: A validation rule for an authentication response.
+      type: object
+      properties:
+        FieldReferenceId:
+          description: The identifier of the field.
+          type: string
+        ExpectedValue:
+          description: The expected value of the field.
+          type: string
+    TemplateGetConfigurationSignAsP7M:
+      description: The configuration of an action to sign documents with P7M.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        SignatureMethods:
+          $ref: '#/components/schemas/TemplateGetConfigurationP7MSignatureMethods'
+          description: The configuration of recipient data for P7M signatures.
+        SignAsP7MGroup:
+          format: int32
+          description: The parallel group for P7M actions.
+          type: integer
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/TemplateGetConfigurationGeneralPoliciesForP7MAction'
+          description: Viewer policy settings for override.
+    TemplateGetConfigurationSignaturePluginSignatureData:
+      description: The recipient configuration for signing with a signature plugin.
+      type: object
+      properties:
+        PluginId:
+          description: The identifier of the signature plugin.
+          type: string
+        Fields:
+          description: The plugin parameters referred to as the GSP sender data fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationSignaturePluginParameter'
+    TemplateGetFilesPage:
+      description: The information about a page of a document.
+      type: object
+      properties:
+        PageNumber:
+          format: int32
+          description: The number of the page. It starts with 1.
+          type: integer
+        Width:
+          format: double
+          description: The width of the page in points.
+          type: number
+        Height:
+          format: double
+          description: The height of the page in points.
+          type: number
+    TemplateGetElementsTextFormat:
+      description: The configuration of the text format.
+      type: object
+      properties:
+        TextColor:
+          description: 'The color of the text.
+
+            Six digit hexadecimal color starting with # in #RRGGBB format according to CSS Color Module Level 4, paragraph 5.2.'
+          type: string
+        FontSizeInPt:
+          format: double
+          description: The size of the font in points.
+          type: number
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        Bold:
+          description: If true, the bold font is used.
+          type: boolean
+        Italic:
+          description: If true, the italic font is used.
+          type: boolean
+        TextAlign:
+          description: The alignment of the text. The default alignment is left.
+          enum:
+          - Left
+          - Center
+          - Right
+          type: string
+          x-ms-enum:
+            name: TextAlignment
+            modelAsString: false
+    TemplateGetElementsOneTimePasswordStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayTransactionToken:
+          description: If true, the transaction token is displayed.
+          type: boolean
+        DisplayPhoneNumber:
+          description: If true, the phone number of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetConfigurationOAuthAuthentication:
+      description: The configuration for authentication with an OAuth provider.
+      type: object
+      properties:
+        ProviderName:
+          description: The name of the OAuth provider.
+          type: string
+        Validations:
+          description: The validation rules for the OAuth response.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationAuthenticationValidation'
+    TemplateGetElementsLocalCertificateStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetSignBulk:
+      description: An action for signing for multiple recipients.
+      type: object
+      properties:
+        RecipientConfigurations:
+          description: The contact information of the recipients.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetAdvancedRecipientConfiguration'
+    TemplateCreateDraftRequest:
+      description: The request model for creating a draft from a template.
+      required:
+      - TemplateId
+      type: object
+      properties:
+        TemplateId:
+          description: The identifier of the template.
+          maxLength: 36
+          minLength: 36
+          type: string
+    TemplateGetElementsStampImprintDateConfiguration:
+      description: The configuration of the stamp imprint date
+      type: object
+      properties:
+        UseLocalTimezone:
+          description: If true, the local timezone is used.
+          type: boolean
+        DateTimeFormat:
+          description: The format of the timestamp.
+          type: string
+    TemplateGetElementsPhoneValidationConfiguration:
+      description: The validation rules for phone numbers.
+      type: object
+      properties:
+        Type:
+          description: The format of the phone numbers.
+          enum:
+          - International
+          - InternationalLeadingZeros
+          - InternationalLeadingPlus
+          type: string
+          x-ms-enum:
+            name: PhoneType
+            modelAsString: false
+    TemplateGetConfigurationBasicRecipientConfiguration:
+      description: The configuration of the recipient.
+      type: object
+      properties:
+        PersonalMessage:
+          description: The personal message for the recipient.
+          type: string
+        NotificationChannel:
+          description: Which channel is used for sending notifications to the recipient.
+          enum:
+          - None
+          - Email
+          - Sms
+          - WhatsApp
+          type: string
+          x-ms-enum:
+            name: RecipientNotificationChannel
+            modelAsString: false
+    TemplateGetConfigurationKioskFinishAction:
+      description: Define actions for different clients that will trigger after an action has been finished.
+      type: object
+      properties:
+        RedirectUri:
+          description: The redirect uri.
+          type: string
+    TemplateGetElementsReadPagesConfirmation:
+      description: Define which page has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          type: string
+        PageNumber:
+          format: int32
+          description: The number of the page that needs to be read.
+          type: integer
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+    TemplateGetElementsSignatureTaskConfiguration:
+      description: The configuration of the signature task.
+      type: object
+      properties:
+        StampImprintDateConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsStampImprintDateConfiguration'
+          description: The configuration of the stamp imprint date.
+        BatchGroup:
+          description: The batch group.
+          type: string
+    TemplateGetElementsAllowedSignatureTypes:
+      description: The definition of the allowed signature types for the signature.
+      type: object
+      properties:
+        ClickToSign:
+          $ref: '#/components/schemas/TemplateGetElementsClickToSignSignatureType'
+          description: Allow signing with "click to sign".
+        DrawToSign:
+          $ref: '#/components/schemas/TemplateGetElementsDrawToSignSignatureType'
+          description: Allow signing with "draw to sign".
+        TypeToSign:
+          $ref: '#/components/schemas/TemplateGetElementsTypeToSignSignatureType'
+          description: Allow signing with "type to sign".
+        LocalCertificate:
+          $ref: '#/components/schemas/TemplateGetElementsLocalCertificateSignatureType'
+          description: Allow signing with a local certificate.
+        DisposableCertificate:
+          $ref: '#/components/schemas/TemplateGetElementsDisposableCertificateSignatureType'
+          description: Allow signing with a disposable certificate.
+        SwissComOnDemand:
+          $ref: '#/components/schemas/TemplateGetElementsSwissComOnDemandSignatureType'
+          description: Allow signing with a Swisscom On-Demand certificate.
+        ATrustCertificate:
+          $ref: '#/components/schemas/TemplateGetElementsATrustCertificateSignatureType'
+          description: Allow signing with an A-Trust certificate.
+        Biometric:
+          $ref: '#/components/schemas/TemplateGetElementsBiometricSignatureType'
+          description: Allow signing with a biometric signature.
+        RemoteCertificate:
+          $ref: '#/components/schemas/TemplateGetElementsRemoteCertificateSignatureType'
+          description: Allow signing with a remote certificate.
+        OneTimePassword:
+          $ref: '#/components/schemas/TemplateGetElementsOneTimePasswordSignatureType'
+          description: Allow signing with a one time password (SMS-OTP).
+        SwedishBankId:
+          $ref: '#/components/schemas/TemplateGetElementsSwedishBankIdSignatureType'
+          description: Allow signing with Swedish BankID.
+        SignaturePlugins:
+          description: Allow signing with signature plugins.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsSignaturePluginSignatureType'
+    TemplateGetConfigurationAuthenticationConfiguration:
+      description: The definition of the authentications of the recipient.
+      type: object
+      properties:
+        AccessCode:
+          $ref: '#/components/schemas/TemplateGetConfigurationAccessCodeAuthentication'
+          description: The configuration of the authentication with an access code.
+        SmsOneTimePassword:
+          $ref: '#/components/schemas/TemplateGetConfigurationSmsOneTimePasswordAuthentication'
+          description: The configuration of the authentication with one time password over SMS.
+        SwedishBankId:
+          $ref: '#/components/schemas/TemplateGetConfigurationSwedishBankIdAuthentication'
+          description: The configuration of the authentication with Swedish BankID.
+        OAuthAuthentications:
+          description: The configurations of the authentication with OAuth.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationOAuthAuthentication'
+        SamlAuthentications:
+          description: The configurations of the authentication with SAML.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetConfigurationSamlAuthentication'
+    TemplateGetElementsTypeToSignSignatureType:
+      description: The configuration of the signature image.
+      type: object
+      properties:
+        UseExternalSignatureImage:
+          description: The external signature image mode.
+          enum:
+          - Optional
+          - Required
+          - Disabled
+          type: string
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsTypeToSignStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetElementsPluginStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayEmail:
+          description: If true, the email address of the signer is displayed.
+          type: boolean
+        DisplayIp:
+          description: If true, the IP address of the signer is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetElementsRadioButtonItemDefinition:
+      description: The configuration of the radio button.
+      type: object
+      properties:
+        ExportValue:
+          description: The value of the element when the radio button is checked.
+          type: string
+        IsChecked:
+          description: If true, the radio button is checked by default.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsSize:
+      description: The definition of the size of an element.
+      type: object
+      properties:
+        Width:
+          format: double
+          description: The width of the element in points.
+          type: number
+        Height:
+          format: double
+          description: The height of the element in points.
+          type: number
+    TemplateGetElementsSurname:
+      description: The configuration of the predefined element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsPredefinedElementDefinition'
+          description: The definition of the predefined element.
+    TemplateGetConfigurationSign:
+      description: The configuration of the sign action for the recipient.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        FinishActionConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationFinishAction'
+          description: Defines what happens in the signing clients, after an action has been finished.
+        SignatureDataConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationSignatureDataConfiguration'
+          description: The configuration of recipient data for special signatures.
+        BatchConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationBatchConfiguration'
+          description: The configuration of a signing batch.
+        SigningGroup:
+          format: int32
+          description: The parallel group for sign actions.
+          type: integer
+        GeneralPoliciesOverrides:
+          $ref: '#/components/schemas/TemplateGetConfigurationGeneralPoliciesForSignAction'
+          description: Viewer policy settings for override.
+    TemplateGetElementsComboBox:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        Value:
+          description: The selected value of the combo box.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsComboBoxDefinition'
+          description: The definition of the combo box.
+    TemplateGetConfigurationSwedishBankIdAuthentication:
+      description: The configuration for Swedish BankID authentication.
+      type: object
+      properties:
+        PersonalNumber:
+          description: The personal number for the authentication.
+          type: string
+        AllowAnyPersonalNumber:
+          description: 'If true, the personal number can be edited by the recipient.
+
+            If the personal number is empty and can be edited, a QR code for scanning is provided.'
+          type: boolean
+    TemplateGetElementsSwedishBankIdSignatureType:
+      description: The configuration of the signature.
+      type: object
+      properties:
+        Preferred:
+          description: If true, the signature type is set as preferred.
+          type: boolean
+        StampImprintConfiguration:
+          $ref: '#/components/schemas/TemplateGetElementsSwedishBankIdStampImprint'
+          description: The configuration of the stamp imprint of the signature.
+    TemplateGetConfigurationReminderConfiguration:
+      description: The configuration for reminders.
+      type: object
+      properties:
+        Enabled:
+          description: If true, reminders are sent.
+          type: boolean
+        FirstReminderInDays:
+          format: int32
+          description: The amount of days until a reminder is sent to a signer or a viewer after the initial notification.
+          type: integer
+        ReminderResendIntervalInDays:
+          format: int32
+          description: The amount of days until a reminder is sent again to a signer or a viewer.
+          type: integer
+        BeforeExpirationInDays:
+          format: int32
+          description: The amount of days before the envelope expires and a reminder should be sent.
+          type: integer
+    TemplateGetElementsAttachment:
+      description: The configuration of the attachment element.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        DocumentNumber:
+          format: int32
+          description: The reference number of the containing document. It starts with 1.
+          type: integer
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DisplayName:
+          description: The displayed name.
+          type: string
+        DisplayIconType:
+          description: The type of the displayed icon.
+          enum:
+          - Paperclip
+          - Graph
+          - PushPin
+          - Tag
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        FieldDefinition:
+          $ref: '#/components/schemas/TemplateGetElementsAttachmentDefinition'
+          description: The definition of the attachment element.
+    TemplateGetConfigurationRedirectConfiguration:
+      description: The configuration of the draft redirect URLs.
+      type: object
+      properties:
+        AfterSendRedirectUrl:
+          description: 'The URL to redirect to after the envelope was sent successfully.
+
+            This is only applicable when using the eSAW UI.'
+          type: string
+        BeforeSendRedirectUrl:
+          description: 'The URL to redirect to before the envelope is sent.
+
+            This is only applicable when using the eSAW UI.'
+          type: string
+    TemplateGetElementsRadioButtonDefinition:
+      description: The configuration of the radio button group definition.
+      type: object
+      properties:
+        IsSelectUnison:
+          description: If true, radio buttons with the same <code>ExportValue</code> are checked and unchecked together.
+          type: boolean
+        Items:
+          description: The list of radiobuttons that belong to the same group.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsRadioButtonItemDefinition'
+    TemplateGetConfigurationAgreementTranslation:
+      description: A translation for the agreement.
+      type: object
+      properties:
+        LanguageCode:
+          description: The language of the translated agreement.
+          enum:
+          - AF
+          - AF_ZA
+          - AR
+          - AR_AE
+          - AR_BH
+          - AR_DZ
+          - AR_EG
+          - AR_IQ
+          - AR_JO
+          - AR_KW
+          - AR_LB
+          - AR_LY
+          - AR_MA
+          - AR_OM
+          - AR_QA
+          - AR_SA
+          - AR_SY
+          - AR_TN
+          - AR_YE
+          - AZ
+          - BE
+          - BE_BY
+          - BG
+          - BG_BG
+          - CA
+          - CA_ES
+          - CS
+          - CS_CZ
+          - CY
+          - CY_GB
+          - DA
+          - DA_DK
+          - DE
+          - DE_AT
+          - DE_CH
+          - DE_DE
+          - DE_LI
+          - DE_LU
+          - DV
+          - DV_MV
+          - EL
+          - EL_GR
+          - EN
+          - EN_AU
+          - EN_BZ
+          - EN_CA
+          - EN_GB
+          - EN_IE
+          - EN_JM
+          - EN_NZ
+          - EN_PH
+          - EN_TT
+          - EN_US
+          - EN_ZA
+          - EN_ZW
+          - ES
+          - ES_AR
+          - ES_BO
+          - ES_CL
+          - ES_CO
+          - ES_CR
+          - ES_DO
+          - ES_EC
+          - ES_ES
+          - ES_GT
+          - ES_HN
+          - ES_MX
+          - ES_NI
+          - ES_PA
+          - ES_PE
+          - ES_PR
+          - ES_PY
+          - ES_SV
+          - ES_UY
+          - ES_VE
+          - ET
+          - ET_EE
+          - EU
+          - EU_ES
+          - FA
+          - FA_IR
+          - FI
+          - FI_FI
+          - FO
+          - FO_FO
+          - FR
+          - FR_BE
+          - FR_CA
+          - FR_CH
+          - FR_FR
+          - FR_LU
+          - FR_MC
+          - GL
+          - GL_ES
+          - GU
+          - GU_IN
+          - HE
+          - HE_IL
+          - HI
+          - HI_IN
+          - HR
+          - HR_BA
+          - HR_HR
+          - HU
+          - HU_HU
+          - HY
+          - HY_AM
+          - ID
+          - ID_ID
+          - IS
+          - IS_IS
+          - IT
+          - IT_CH
+          - IT_IT
+          - JA
+          - JA_JP
+          - KA
+          - KA_GE
+          - KK
+          - KK_KZ
+          - KN
+          - KN_IN
+          - KO
+          - KO_KR
+          - KOK
+          - KOK_IN
+          - KY
+          - KY_KG
+          - LT
+          - LT_LT
+          - LV
+          - LV_LV
+          - MI
+          - MI_NZ
+          - MK
+          - MK_MK
+          - MN
+          - MN_MN
+          - MR
+          - MR_IN
+          - MS
+          - MS_BN
+          - MS_MY
+          - MT
+          - MT_MT
+          - NB
+          - NB_NO
+          - NL
+          - NL_BE
+          - NL_NL
+          - NN_NO
+          - PA
+          - PA_IN
+          - PL
+          - PL_PL
+          - PS
+          - PT
+          - PT_BR
+          - PT_PT
+          - RO
+          - RO_RO
+          - RU
+          - RU_RU
+          - SA
+          - SA_IN
+          - SE
+          - SE_FI
+          - SE_NO
+          - SE_SE
+          - SK
+          - SK_SK
+          - SL
+          - SL_SI
+          - SQ
+          - SQ_AL
+          - SV
+          - SV_FI
+          - SV_SE
+          - SW
+          - SW_KE
+          - SYR
+          - SYR_SY
+          - TA
+          - TA_IN
+          - TE
+          - TE_IN
+          - TH
+          - TH_TH
+          - TN
+          - TN_ZA
+          - TR
+          - TR_TR
+          - TT
+          - TT_RU
+          - TS
+          - UK
+          - UK_UA
+          - UR
+          - UR_PK
+          - UZ
+          - VI
+          - VI_VN
+          - XH
+          - XH_ZA
+          - ZH
+          - ZH_CN
+          - ZH_HK
+          - ZH_MO
+          - ZH_SG
+          - ZH_TW
+          - ZU
+          - ZU_ZA
+          - AM
+          - AM_ET
+          - ARN
+          - ARN_CL
+          - AS
+          - AS_IN
+          - AZ_CYRL
+          - AZ_CYRL_AZ
+          - AZ_LATN
+          - AZ_LATN_AZ
+          - BA
+          - BA_RU
+          - BN
+          - BN_BD
+          - BN_IN
+          - BO
+          - BO_CN
+          - BR
+          - BR_FR
+          - BS
+          - BS_CYRL
+          - BS_CYRL_BA
+          - BS_LATN
+          - BS_LATN_BA
+          - CA_ES_VALENCIA
+          - CHR
+          - CHR_CHER
+          - CHR_CHER_US
+          - CO
+          - CO_FR
+          - DSB
+          - DSB_DE
+          - EN_029
+          - EN_HK
+          - EN_IN
+          - EN_MY
+          - EN_SG
+          - ES_419
+          - ES_US
+          - FF
+          - FF_LATN
+          - FF_LATN_SN
+          - FIL
+          - FIL_PH
+          - FR_CD
+          - FR_CI
+          - FR_CM
+          - FR_HT
+          - FR_MA
+          - FR_ML
+          - FR_RE
+          - FR_SN
+          - FY
+          - FY_NL
+          - GA
+          - GA_IE
+          - GD
+          - GD_GB
+          - GN
+          - GN_PY
+          - GSW
+          - GSW_FR
+          - HA
+          - HA_LATN
+          - HA_LATN_NG
+          - HAW
+          - HAW_US
+          - HSB
+          - HSB_DE
+          - IG
+          - IG_NG
+          - II
+          - II_CN
+          - IU
+          - IU_CANS
+          - IU_CANS_CA
+          - IU_LATN
+          - IU_LATN_CA
+          - JV
+          - JV_LATN
+          - JV_LATN_ID
+          - KL
+          - KL_GL
+          - KM
+          - KM_KH
+          - KU
+          - KU_ARAB
+          - KU_ARAB_IQ
+          - LB
+          - LB_LU
+          - LO
+          - LO_LA
+          - MG
+          - MG_MG
+          - ML
+          - ML_IN
+          - MN_CYRL
+          - MN_MONG
+          - MN_MONG_CN
+          - MN_MONG_MN
+          - MOH
+          - MOH_CA
+          - MY
+          - MY_MM
+          - NE
+          - NE_IN
+          - NE_NP
+          - NN
+          - 'NO'
+          - NQO
+          - NQO_GN
+          - NSO
+          - NSO_ZA
+          - OC
+          - OC_FR
+          - OM
+          - OM_ET
+          - OR
+          - OR_IN
+          - PA_ARAB
+          - PA_ARAB_PK
+          - PRS
+          - PRS_AF
+          - PS_AF
+          - PT_AO
+          - QUT
+          - QUT_GT
+          - QUZ
+          - QUZ_BO
+          - QUZ_EC
+          - QUZ_PE
+          - RM
+          - RM_CH
+          - RO_MD
+          - RW
+          - RW_RW
+          - SAH
+          - SAH_RU
+          - SD
+          - SD_ARAB
+          - SD_ARAB_PK
+          - SI
+          - SI_LK
+          - SMA
+          - SMA_NO
+          - SMA_SE
+          - SMJ
+          - SMJ_NO
+          - SMJ_SE
+          - SMN
+          - SMN_FI
+          - SMS
+          - SMS_FI
+          - SN
+          - SN_LATN
+          - SN_LATN_ZW
+          - SO
+          - SO_SO
+          - SR
+          - SR_CYRL
+          - SR_CYRL_BA
+          - SR_CYRL_CS
+          - SR_CYRL_ME
+          - SR_CYRL_RS
+          - SR_LATN
+          - SR_LATN_BA
+          - SR_LATN_CS
+          - SR_LATN_ME
+          - SR_LATN_RS
+          - ST
+          - ST_ZA
+          - TA_LK
+          - TG
+          - TG_CYRL
+          - TG_CYRL_TJ
+          - TI
+          - TI_ER
+          - TI_ET
+          - TK
+          - TK_TM
+          - TN_BW
+          - TS_ZA
+          - TZM
+          - TZM_LATN
+          - TZM_LATN_DZ
+          - TZM_TFNG
+          - TZM_TFNG_MA
+          - UG
+          - UG_CN
+          - UR_IN
+          - UZ_CYRL
+          - UZ_CYRL_UZ
+          - UZ_LATN
+          - UZ_LATN_UZ
+          - WO
+          - WO_SN
+          - YO
+          - YO_NG
+          - ZGH
+          - ZGH_TFNG
+          - ZGH_TFNG_MA
+          - ZH_HANS
+          - ZH_HANT
+          - ZH_CHS
+          - ZH_CHT
+          type: string
+          x-ms-enum:
+            name: LanguageCode
+            modelAsString: false
+        Text:
+          description: The translated agreement.
+          type: string
+        Header:
+          description: The header for the translated agreement.
+          type: string
+        IsDefault:
+          description: If true, this translation is used as default.
+          type: boolean
+    TemplateGetConfigurationBulkRecipient:
+      description: The definition of the recipient including the signature data.
+      type: object
+      properties:
+        RecipientConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationAdvancedRecipientConfiguration'
+          description: The configuration of the recipient.
+        SignatureDataConfiguration:
+          $ref: '#/components/schemas/TemplateGetConfigurationSignatureDataConfiguration'
+          description: The configuration of the signature data for the recipient.
+    TemplateFindResponse:
+      description: The response model for the found templates.
+      type: object
+      properties:
+        Templates:
+          description: The templates matching the search criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateFindTemplate'
+    TemplateGetElementsComboBoxDefinition:
+      description: The configuration of the combo box.
+      type: object
+      properties:
+        TextFormat:
+          $ref: '#/components/schemas/TemplateGetElementsTextFormat'
+          description: The configuration of the text format.
+        Items:
+          description: A list of items that can be selected for the element.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsChoiceItem'
+        IsEditable:
+          description: If true, the combo box is editable.
+          type: boolean
+        ReadOnly:
+          description: If true, the element is readonly.
+          type: boolean
+        Position:
+          $ref: '#/components/schemas/TemplateGetElementsPosition'
+          description: The position of the  within the document.
+        Size:
+          $ref: '#/components/schemas/TemplateGetElementsSize'
+          description: The size of the form field.
+    TemplateGetElementsSwedishBankIdStampImprint:
+      description: The configuration of the stamp imprint used by multiple signature types.
+      type: object
+      properties:
+        DisplayExtraInformation:
+          description: If true, the extra information is displayed.
+          type: boolean
+        FontName:
+          description: "The name of the font. The font needs to be installed on the server. \nIf it is not available on the server, a fallback font is used."
+          type: string
+        FontSizeInPt:
+          format: int32
+          description: The size of the font in points.
+          type: integer
+        DisplayTransactionId:
+          description: If true, the transaction identifier is displayed.
+          type: boolean
+        DisplayName:
+          description: If true, the name of the signer is displayed.
+          type: boolean
+        DisplaySignatureDate:
+          description: If true, the timestamp of signing is displayed.
+          type: boolean
+    TemplateGetElementsReadAreaConfirmation:
+      description: The area that has to be read.
+      type: object
+      properties:
+        ElementId:
+          description: The identifier of the element.
+          type: string
+        Required:
+          description: If true, the element is required.
+          type: boolean
+        DocumentNumber:
+          format: int32
+          description: The document reference number of the element (starting with 1).
+          type: integer
+        DisplayName:
+          description: The displayed name.
+          type: string
+        GuidingOrder:
+          format: int32
+          description: The order of the element.
+          type: integer
+        Source:
+          description: The element source from where a field originates.
+          enum:
+          - Document
+          - AdvancedDocumentTag
+          - UserDefined
+          type: string
+          x-ms-enum:
+            name: FormFieldSource
+            modelAsString: false
+        Definition:
+          $ref: '#/components/schemas/TemplateGetElementsReadingAreaDefinition'
+          description: The definition of the area.
+    TemplateGetElementsLinkConfiguration:
+      description: The configuration of the link elements.
+      type: object
+      properties:
+        HyperLinks:
+          description: The list of hyperlink elements.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetElementsHyperLink'
+    TemplateGetResponse:
+      description: The response model for requesting the template overview.
+      type: object
+      properties:
+        Id:
+          description: The identifier of the template.
+          type: string
+        Name:
+          description: The name of the template.
+          type: string
+        CreationDate:
+          format: date-time
+          description: Date of creation
+          type: string
+        Activities:
+          description: The activities of the template.
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateGetActivity'
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

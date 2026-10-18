@@ -1,0 +1,263 @@
+generated: '2026-10-18'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/namirial-connectors-openapi.yml
+- openapi/namirial-esignanywhere-openapi.yml
+vocabulary:
+  name: Namirial Domain Vocabulary
+  description: 'Terms declared by Namirial''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-18'
+  terms:
+  - term: Auth
+    definition: Access to authentication endpoints
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Clients
+    definition: Manage clients
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: ClientsInstances
+    definition: Manage association between clients and instances
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Documents
+    definition: Manage documents
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Envelopes
+    definition: Manage eSignAnyWhere envelope
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Instances
+    definition: Manage instances
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Processes
+    definition: Manage process signature
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: Organizations
+    definition: Manage connector organizations
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: OrganizationsInstances
+    definition: Manage association between organizations and instances
+    tags:
+    - Resource Group
+    source: openapi/namirial-connectors-openapi.yml
+  - term: EmailAction
+    definition: 'Object declared by the contract with fields: type, to, cc, ccn, subject, body.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/EmailAction
+  - term: UserDetail
+    definition: 'Object declared by the contract with fields: firstName, lastName, email, id.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/UserDetail
+  - term: Client
+    definition: 'Object declared by the contract with fields: id, clientId.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/Client
+  - term: ClientDetail
+    definition: 'Object declared by the contract with fields: id, clientId, instanceList.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/ClientDetail
+  - term: UpdateClient
+    definition: 'Object declared by the contract with fields: clientId, clientSecret.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/UpdateClient
+  - term: CreateClient
+    definition: 'Object declared by the contract with fields: clientId, clientSecret.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/CreateClient
+  - term: Instance
+    definition: 'Object declared by the contract with fields: eSawDomainUri, eSawVersion, description, externalIdentifier, esawClientId, esawClientSecret.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/Instance
+  - term: InstanceNoId
+    definition: 'Object declared by the contract with fields: eSawDomainUri, eSawVersion, description, esawClientId, esawClientSecret.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/InstanceNoId
+  - term: Organization
+    definition: 'Object declared by the contract with fields: externalIdentifier, name, domainIdentifier, secondaryDomainIdentifier.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/Organization
+  - term: OrganizationNoId
+    definition: 'Object declared by the contract with fields: name, domainIdentifier, secondaryDomainIdentifier.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/OrganizationNoId
+  - term: OrganizationResponse
+    definition: 'Object declared by the contract with fields: externalIdentifier.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/OrganizationResponse
+  - term: ClientInstance
+    definition: 'Object declared by the contract with fields: clientId, instanceId.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/ClientInstance
+  - term: OrganizationInstance
+    definition: 'Object declared by the contract with fields: organizationId, instanceId.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/OrganizationInstance
+  - term: HttpAction
+    definition: 'Object declared by the contract with fields: type, callbackUrl, method, envelopeGuidRequired, documentIds.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/HttpAction
+  - term: FindEnvelopeItem
+    definition: 'Object declared by the contract with fields: status, id, name, metaDataXml, bulk.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/FindEnvelopeItem
+  - term: CreateProcessDraftRequest
+    definition: 'Object declared by the contract with fields: templateId, name, documents, events, recipients, messageData.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/CreateProcessDraftRequest
+  - term: Recipient
+    definition: 'Object declared by the contract with fields: firstName, lastName, email, languageCode, disableEmail, overrideOptions.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/Recipient
+  - term: ProcessFinishedEvent
+    definition: 'Object declared by the contract with fields: actions, eventType.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/ProcessFinishedEvent
+  - term: CreateProcessResponse
+    definition: 'Object declared by the contract with fields: signingUri, processId.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/CreateProcessResponse
+  - term: UploadDocumentResponse
+    definition: 'Object declared by the contract with fields: sspIds.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/UploadDocumentResponse
+  - term: EnvelopeDetailResponse
+    definition: 'Object declared by the contract with fields: status, auditDocument, envelopeJsonStatus, completedDocuments, documentList, recipientStatus.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/EnvelopeDetailResponse
+  - term: DocumentDetail
+    definition: 'Object declared by the contract with fields: pageSizesInPoints, docRefNumber, fileName, formFields.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/DocumentDetail
+  - term: PageSizePoint
+    definition: 'Object declared by the contract with fields: height, width.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/PageSizePoint
+  - term: GetProcessResponse
+    definition: 'Object declared by the contract with fields: auditDocument, envelopeJsonStatus, status, completedDocuments, recipientsStatus.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/GetProcessResponse
+  - term: CompletedDocuments
+    definition: 'Object declared by the contract with fields: auditDocument, documentId, fileName.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/CompletedDocuments
+  - term: RecipientsStatus
+    definition: 'Object declared by the contract with fields: id, email, firstName, lastName, orderIndex, signedDate, status, workstepRedirectUrl.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/RecipientsStatus
+  - term: JWTBearerResponse
+    definition: 'Object declared by the contract with fields: access_token, refresh_token, token_type, expires_in.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/JWTBearerResponse
+  - term: ApiResponse
+    definition: 'Object declared by the contract with fields: code, type, message.'
+    tags:
+    - Object
+    source: openapi/namirial-connectors-openapi.yml#/components/schemas/ApiResponse
+  - term: Authorization
+    definition: 'Resource group in the contract; its operation GET /v6/authorization/whoami: Get information about the authenticated user.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: AutomaticProfile
+    definition: 'Resource group in the contract; its operation GET /v6/organization/automaticprofile: Get the available automatic signing profiles.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: Draft
+    definition: 'Resource group in the contract; its operation GET /v6/draft/{draftId}: Get an overview of a draft.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: DraftActivity
+    definition: 'Resource group in the contract; its operation POST /v6/draft/activity/replace: Replace an existing activity of a draft with a
+      new one.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: Envelope
+    definition: 'Resource group in the contract; its operation GET /v6/envelope/{envelopeId}: Get an overview of an envelope.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: EnvelopeActivity
+    definition: 'Resource group in the contract; its operation POST /v6/envelope/activity/delete: Delete an unfinished activity of an active envelope.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: EnvelopeBulk
+    definition: 'Resource group in the contract; its operation GET /v6/envelopebulk/{bulkId}: Get an overview of an envelope bulk and its children.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: File
+    definition: 'Resource group in the contract; its operation GET /v6/file/{fileId}: Download a file belonging to a completed envelope.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: License
+    definition: 'Resource group in the contract; its operation GET /v6/organization/license: Get information about the current license status.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: SealingCertificate
+    definition: 'Resource group in the contract; its operation GET /v6/organization/sealingcertificates: Get the available sealing certificates.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: System
+    definition: 'Resource group in the contract; its operation GET /v6/system/version: Get the current version of eSignAnyWhere.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: Team
+    definition: 'Resource group in the contract; its operation GET /v6/organization/team: Get the available teams.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml
+  - term: Template
+    definition: 'Resource group in the contract; its operation GET /v6/template/{templateId}: Get an overview of a template.'
+    tags:
+    - Resource Group
+    source: openapi/namirial-esignanywhere-openapi.yml

@@ -1,0 +1,6 @@
+generated: '2026-10-18'
+method: none
+source: https://doc.namirial.com/connectors-apis/latest/
+name: Namirial rate limits
+limits: []
+note: No rate limits documented in API documentation. Rate limiting policies may exist but are not publicly documented.

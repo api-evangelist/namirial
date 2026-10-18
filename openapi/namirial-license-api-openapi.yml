@@ -1,0 +1,117 @@
+openapi: 3.2.0
+info:
+  title: Namirial License API
+  version: v6
+  description: 'Operations tagged License across 2 of this provider''s published API definitions: namirial-esignanywhere-v6-swagger.json, namirial-esignanywhere-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /api
+- url: https://saas.esignanywhere.net/api
+tags:
+- name: License
+paths:
+  /v6/organization/license:
+    get:
+      tags:
+      - License
+      summary: Get information about the current license status
+      operationId: License_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseGetResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LicenseGetResponse'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - apiToken: []
+    servers:
+    - url: /api
+components:
+  schemas:
+    LicenseGetAmount:
+      description: The current state of the license.
+      type: object
+      properties:
+        Limit:
+          format: int32
+          description: 'The maximum number of licensable objects.
+
+            The value -1 means unlimited.'
+          type: integer
+        Count:
+          format: int32
+          description: The amount of licensable objects in use.
+          type: integer
+    ErrorResponse:
+      description: Error object that is returned when the api call was not processed successfully.
+      type: object
+      properties:
+        ErrorId:
+          description: Id of the error.
+          type: string
+        Message:
+          description: Message from the error.
+          type: string
+        TraceId:
+          description: Trace identifier.
+          type: string
+    LicenseGetResponse:
+      description: The response model for retrieving the current license status.
+      type: object
+      properties:
+        Type:
+          description: The type of the license.
+          type: string
+        ExpirationDate:
+          format: date-time
+          description: 'The expiration date of the license.
+
+            The value null indicates that it does not expire.
+
+            A datetime in the format RFC 3339, section 5.6, ''date-Time'' (e.g. 2017-07-21T17:32:28Z).'
+          type: string
+        Envelopes:
+          $ref: '#/components/schemas/LicenseGetAmount'
+          description: The license status for the number of envelopes.
+        EnvelopeSenderUsers:
+          $ref: '#/components/schemas/LicenseGetAmount'
+          description: 'The license status for the number of senders.
+
+            If the license type is <code>Trial</code>, <code>EnvelopeSenderUsers</code> and <code>EnvelopeViewerUsers</code> have a combined limit.'
+        EnvelopeViewerUsers:
+          $ref: '#/components/schemas/LicenseGetAmount'
+          description: 'The license status for the number of users which are only able to access their received envelopes.
+
+            If the license type is <code>Trial</code>, <code>EnvelopeSenderUsers</code> and <code>EnvelopeViewerUsers</code> have a combined limit.'
+  securitySchemes:
+    apiToken:
+      type: apiKey
+      description: API Key Authentication
+      name: apiToken
+      in: header
+x-refined-from:
+- namirial-esignanywhere-v6-swagger.json
+- namirial-esignanywhere-openapi.yml

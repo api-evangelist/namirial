@@ -1,0 +1,6 @@
+generated: '2026-10-18'
+method: probed
+generator: harvest-llms.py
+source: https://documentation.namirial.com/llms.txt
+bytes: 11170
+note: saved verbatim; the provider's own document

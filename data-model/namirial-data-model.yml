@@ -1,0 +1,3667 @@
+generated: '2026-10-18'
+method: derived
+generator: derive-data-model.py
+source:
+- openapi/namirial-connectors-openapi.yml
+- openapi/namirial-esignanywhere-openapi.yml
+notation: has_one = property $ref; has_many = array of $ref; belongs_to = <entity>_id field
+summary:
+  entities: 400
+  entities_in_spec: 1156
+  relationships: 615
+entities:
+- name: AutomaticProfileGetAllProfile
+  fields: 2
+  description: The information about the automatic signing profile.
+- name: AutomaticProfileGetAllResponse
+  fields: 2
+  description: The response model for retrieving the available profiles for automatic signing.
+- name: AutomaticProfileGetAllSignaturePluginDefinition
+  fields: 2
+  description: The information about the signature plugins available for automatic signing.
+- name: Client
+  fields: 2
+- name: ClientDetail
+  fields: 3
+- name: ClientInstance
+  fields: 2
+- name: CompletedDocuments
+  fields: 3
+- name: CreateProcessDraftRequest
+  fields: 6
+- name: DocumentDetail
+  fields: 4
+- name: DraftActivityReplaceAction
+  fields: 6
+  description: The action of the activity with the possibility to define a bulk. Exactly one definition must be
+    used!
+- name: DraftActivityReplaceAdvancedRecipientConfiguration
+  fields: 9
+  description: The advanced configuration for the recipient.
+- name: DraftActivityReplaceAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: DraftActivityReplaceAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: DraftActivityReplaceAttachment
+  fields: 7
+  description: The configuration of the attachment element.
+- name: DraftActivityReplaceAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftActivityReplaceAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: DraftActivityReplaceAuthenticationValidation
+  fields: 2
+  description: A validation rule for an authentication response.
+- name: DraftActivityReplaceBasicRecipientConfiguration
+  fields: 3
+  description: The configuration of the recipient.
+- name: DraftActivityReplaceBatchConfiguration
+  fields: 2
+  description: The configuration of a signing batch.
+- name: DraftActivityReplaceBulkRecipient
+  fields: 2
+  description: The definition of the recipient including the signature data.
+- name: DraftActivityReplaceCheckBox
+  fields: 6
+  description: The configuration of the check box.
+- name: DraftActivityReplaceCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: DraftActivityReplaceChoiceItem
+  fields: 2
+  description: The configuration of the choice item.
+- name: DraftActivityReplaceClickToSignSignatureType
+  fields: 3
+  description: The configuration of the signature image.
+- name: DraftActivityReplaceComboBox
+  fields: 6
+  description: The configuration of the combo box.
+- name: DraftActivityReplaceComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: DraftActivityReplaceContactInformation
+  fields: 5
+  description: Define the contact information for the recipient.
+- name: DraftActivityReplaceDate
+  fields: 4
+  description: The configuration of the predefined element showing the date.
+- name: DraftActivityReplaceDateValidationConfiguration
+  fields: 2
+  description: The validation rules for dates.
+- name: DraftActivityReplaceDisposableCertificateSignatureData
+  fields: 10
+  description: The recipient configuration for signing with a disposable certificate.
+- name: DraftActivityReplaceDisposableCertificateSignatureType
+  fields: 5
+  description: The configuration of the DisposableCertificate signature.
+- name: DraftActivityReplaceDrawToSignSignatureType
+  fields: 3
+  description: The configuration of the signature image.
+- name: DraftActivityReplaceElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: DraftActivityReplaceEmail
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftActivityReplaceFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: DraftActivityReplaceFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: DraftActivityReplaceFinishAction
+  fields: 5
+  description: Define what happens in the signing clients, after an action has been finished.
+- name: DraftActivityReplaceFullName
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftActivityReplaceGeneralPoliciesForSignAction
+  fields: 6
+  description: Define the general policies allowed for sign action.
+- name: DraftActivityReplaceGivenName
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftActivityReplaceHyperLink
+  fields: 4
+  description: The definition of the hyperlink element.
+- name: DraftActivityReplaceInitials
+  fields: 4
+  description: The configuration of the predefined element showing the initials.
+- name: DraftActivityReplaceLinkConfiguration
+  fields: 1
+  description: The configuration of the link elements.
+- name: DraftActivityReplaceLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftActivityReplaceListBox
+  fields: 6
+  description: The configuration of the list box.
+- name: DraftActivityReplaceListBoxDefinition
+  fields: 6
+  description: The configuration of the list box.
+- name: DraftActivityReplaceLocalCertificateSignatureType
+  fields: 5
+  description: The configuration of the LocalCertificate signature.
+- name: DraftActivityReplaceNumberValidationConfiguration
+  fields: 6
+  description: The validation rules for numbers.
+- name: DraftActivityReplaceOAuthAuthentication
+  fields: 2
+  description: The configuration for authentication with an OAuth provider.
+- name: DraftActivityReplaceOneTimePasswordSignatureType
+  fields: 4
+  description: The configuration of the OneTimePassword signature.
+- name: DraftActivityReplaceP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: DraftActivityReplacePosition
+  fields: 3
+  description: The position of an element on the document.
+- name: DraftActivityReplacePredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftActivityReplacePredefinedFieldElements
+  fields: 7
+  description: Define the predefined fields which will be added and filled by the system.
+- name: DraftActivityReplacePredefinedText
+  fields: 4
+  description: The configuration of the element showing the predefined text.
+- name: DraftActivityReplaceRadioButtonGroup
+  fields: 6
+  description: The configuration of the radio button group.
+- name: DraftActivityReplaceRadioButtonGroupDefinition
+  fields: 2
+  description: The configuration of the radio button group definition.
+- name: DraftActivityReplaceRadioButtonItemDefinition
+  fields: 5
+  description: The configuration of the radio button.
+- name: DraftActivityReplaceReadAreaConfirmation
+  fields: 6
+  description: The area that has to be read.
+- name: DraftActivityReplaceReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftActivityReplaceRecipientConfiguration
+  fields: 6
+  description: The configuration of the recipient.
+- name: DraftActivityReplaceRemoteCertificateSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a remote certificate.
+- name: DraftActivityReplaceRemoteCertificateSignatureType
+  fields: 4
+  description: The configuration of the RemoteCertificate signature.
+- name: DraftActivityReplaceRequest
+  fields: 3
+  description: Define an activity with the possibility of bulk.
+- name: DraftActivityReplaceSamlAuthentication
+  fields: 2
+  description: The configuration for authentication with a SAML provider.
+- name: DraftActivityReplaceSendCopy
+  fields: 2
+  description: An action to send a copy of the documents to the recipient.
+- name: DraftActivityReplaceSign
+  fields: 7
+  description: A sign action for the recipient.
+- name: DraftActivityReplaceSignAsP7M
+  fields: 3
+  description: An action to sign the documents with P7M.
+- name: DraftActivityReplaceSignAutomatic
+  fields: 3
+  description: An automatic signing action.
+- name: DraftActivityReplaceSignBulk
+  fields: 6
+  description: A sign action for multiple recipients.
+- name: DraftActivityReplaceSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: DraftActivityReplaceSignatureField
+  fields: 10
+  description: The configuration of the signature field.
+- name: DraftActivityReplaceSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftActivityReplaceSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: DraftActivityReplaceSignaturePluginSignatureType
+  fields: 3
+  description: The configuration of the signature plugin.
+- name: DraftActivityReplaceSignatureTaskConfiguration
+  fields: 2
+  description: The configuration of the signature task.
+- name: DraftActivityReplaceSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: DraftActivityReplaceSurname
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftActivityReplaceSwedishBankIdSignatureType
+  fields: 2
+  description: The configuration of the signature.
+- name: DraftActivityReplaceSwissComOnDemandSignatureType
+  fields: 3
+  description: The configuration of the Swisscom On-Demand signature.
+- name: DraftActivityReplaceTextBox
+  fields: 7
+  description: The configuration of the text box.
+- name: DraftActivityReplaceTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: DraftActivityReplaceTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: DraftActivityReplaceTimeValidationConfiguration
+  fields: 2
+  description: The validation rules for time values.
+- name: DraftActivityReplaceTypeToSignSignatureType
+  fields: 3
+  description: The configuration of the signature image.
+- name: DraftActivityReplaceView
+  fields: 2
+  description: An action to view and acknowledge the documents.
+- name: DraftActivityReplaceVisibleSignature
+  fields: 3
+  description: A signature with a visual appearance on the document.
+- name: DraftCreateAction
+  fields: 6
+  description: The action of the activity with the possibility to define a bulk. Exactly one definition must be
+    used!
+- name: DraftCreateActivity
+  fields: 2
+  description: Define an activity with the possibility of bulk.
+- name: DraftCreateActivityActionCallbackConfiguration
+  fields: 2
+  description: The configuration of the callback for workstep events.
+- name: DraftCreateAdvancedRecipientConfiguration
+  fields: 9
+  description: The advanced configuration for the recipient.
+- name: DraftCreateAgreementConfiguration
+  fields: 1
+  description: The configuration of the agreement.
+- name: DraftCreateAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: DraftCreateAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: DraftCreateAttachment
+  fields: 7
+  description: The configuration of the attachment element.
+- name: DraftCreateAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftCreateAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: DraftCreateAuthenticationValidation
+  fields: 2
+  description: A validation rule for an authentication response.
+- name: DraftCreateBasicRecipientConfiguration
+  fields: 3
+  description: The configuration of the recipient.
+- name: DraftCreateBatchConfiguration
+  fields: 2
+  description: The configuration of a signing batch.
+- name: DraftCreateBulkRecipient
+  fields: 2
+  description: The definition of the recipient including the signature data.
+- name: DraftCreateCallbackConfiguration
+  fields: 4
+  description: The configuration of the callbacks for a custom integration.
+- name: DraftCreateCheckBox
+  fields: 6
+  description: The configuration of the check box.
+- name: DraftCreateCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: DraftCreateChoiceItem
+  fields: 2
+  description: The configuration of the choice item.
+- name: DraftCreateClickToSignSignatureType
+  fields: 3
+  description: The configuration of the signature image.
+- name: DraftCreateComboBox
+  fields: 6
+  description: The configuration of the combo box.
+- name: DraftCreateComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: DraftCreateContactInformation
+  fields: 5
+  description: Define the contact information for the recipient.
+- name: DraftCreateDate
+  fields: 4
+  description: The configuration of the predefined element showing the date.
+- name: DraftCreateDateValidationConfiguration
+  fields: 2
+  description: The validation rules for dates.
+- name: DraftCreateDefaultSignature
+  fields: 1
+  description: The configuration of the default signature type for a draft.
+- name: DraftCreateDefaultSignatureTypeConfiguration
+  fields: 9
+  description: The configuration of the default signature type for the draft.
+- name: DraftCreateDisposableCertificateSignatureData
+  fields: 10
+  description: The recipient configuration for signing with a disposable certificate.
+- name: DraftCreateDisposableCertificateSignatureType
+  fields: 5
+  description: The configuration of the DisposableCertificate signature.
+- name: DraftCreateDrawToSignSignatureType
+  fields: 3
+  description: The configuration of the signature image.
+- name: DraftCreateElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: DraftCreateEmail
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftCreateFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: DraftCreateFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: DraftCreateFinishAction
+  fields: 5
+  description: Define what happens in the signing clients, after an action has been finished.
+- name: DraftCreateFullName
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftCreateGeneralPoliciesForSignAction
+  fields: 6
+  description: Define the general policies allowed for sign action.
+- name: DraftCreateGivenName
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftCreateHyperLink
+  fields: 4
+  description: The definition of the hyperlink element.
+- name: DraftCreateLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftCreateListBoxDefinition
+  fields: 6
+  description: The configuration of the list box.
+- name: DraftCreateP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: DraftCreatePosition
+  fields: 3
+  description: The position of an element on the document.
+- name: DraftCreatePredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftCreatePredefinedFieldElements
+  fields: 7
+  description: Define the predefined fields which will be added and filled by the system.
+- name: DraftCreateRadioButtonItemDefinition
+  fields: 5
+  description: The configuration of the radio button.
+- name: DraftCreateReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftCreateRecipientConfiguration
+  fields: 6
+  description: The configuration of the recipient.
+- name: DraftCreateRequest
+  fields: 19
+  description: The model for creating a draft.
+- name: DraftCreateSign
+  fields: 8
+  description: A sign action for the recipient.
+- name: DraftCreateSignAsP7M
+  fields: 4
+  description: An action to sign the documents with P7M.
+- name: DraftCreateSignBulk
+  fields: 6
+  description: A sign action for multiple recipients.
+- name: DraftCreateSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: DraftCreateSignatureField
+  fields: 10
+  description: The configuration of the signature field.
+- name: DraftCreateSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftCreateSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: DraftCreateSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: DraftCreateTextBox
+  fields: 7
+  description: The configuration of the text box.
+- name: DraftCreateTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: DraftCreateTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: DraftCreateView
+  fields: 3
+  description: An action to view and acknowledge the documents.
+- name: DraftGetAction
+  fields: 6
+  description: The action of the activity with the possibility of a defined bulk.
+- name: DraftGetConfigurationAction
+  fields: 5
+  description: The action of the activity.
+- name: DraftGetConfigurationActivity
+  fields: 3
+  description: Defines an activity with the possibility of bulk.
+- name: DraftGetConfigurationAdvancedRecipientConfiguration
+  fields: 8
+  description: The advanced configuration for the recipient.
+- name: DraftGetConfigurationAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: DraftGetConfigurationAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: DraftGetConfigurationBulkRecipient
+  fields: 2
+  description: The definition of the recipient including the signature data.
+- name: DraftGetConfigurationDefaultSignature
+  fields: 1
+  description: The configuration of the default signature type for a draft.
+- name: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  fields: 9
+  description: The configuration of the default signature type for a draft.
+- name: DraftGetConfigurationFinishAction
+  fields: 5
+  description: Defines what happens in the signing clients, after an action has been finished.
+- name: DraftGetConfigurationP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: DraftGetConfigurationResponse
+  fields: 16
+  description: Configuration shared by all models.
+- name: DraftGetConfigurationSign
+  fields: 6
+  description: The configuration of the sign action for the recipient.
+- name: DraftGetConfigurationSignAsP7M
+  fields: 4
+  description: The configuration of an action to sign documents with P7M.
+- name: DraftGetConfigurationSignBulk
+  fields: 4
+  description: The configuration of a sign action for multiple recipients.
+- name: DraftGetConfigurationSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: DraftGetConfigurationSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: DraftGetConfigurationView
+  fields: 3
+  description: The configuration of the action to view and acknowledge the documents.
+- name: DraftGetContactInformation
+  fields: 5
+  description: Defines the contact information for the recipient.
+- name: DraftGetElementsAction
+  fields: 3
+  description: The action of the activity.
+- name: DraftGetElementsAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: DraftGetElementsAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftGetElementsCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: DraftGetElementsComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: DraftGetElementsElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: DraftGetElementsFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: DraftGetElementsFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: DraftGetElementsLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftGetElementsListBoxDefinition
+  fields: 6
+  description: The configuration of the list box.
+- name: DraftGetElementsPosition
+  fields: 3
+  description: The position of an element on the document.
+- name: DraftGetElementsPredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: DraftGetElementsPredefinedFieldElements
+  fields: 7
+  description: Defines the predefined fields which will be added and filled by the system.
+- name: DraftGetElementsRadioButtonItemDefinition
+  fields: 6
+  description: The configuration of the radio button.
+- name: DraftGetElementsReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftGetElementsSignatureField
+  fields: 11
+  description: The configuration of the signature field.
+- name: DraftGetElementsSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: DraftGetElementsSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: DraftGetElementsTextBox
+  fields: 8
+  description: The configuration of the text box.
+- name: DraftGetElementsTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: DraftGetElementsTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: DraftReorderActivitiesAction
+  fields: 4
+  description: The definition of the parallel group for an action of an activity. Only one may be specified.
+- name: DraftUpdateDefaultSignature
+  fields: 1
+  description: The configuration of the default signature type for a draft.
+- name: DraftUpdateDefaultSignatureTypeConfiguration
+  fields: 9
+  description: The configuration of the default signature type for the draft.
+- name: DraftUpdateRequest
+  fields: 17
+  description: The request model for updating a draft.
+- name: EnvelopeActivityReplaceAction
+  fields: 5
+  description: The action of the activity. Exactly one definition must be used!
+- name: EnvelopeActivityReplaceAdvancedRecipientConfiguration
+  fields: 9
+  description: The advanced configuration for the recipient.
+- name: EnvelopeActivityReplaceAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: EnvelopeActivityReplaceAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: EnvelopeActivityReplaceAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeActivityReplaceAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: EnvelopeActivityReplaceContactInformation
+  fields: 5
+  description: Define the contact information for the recipient.
+- name: EnvelopeActivityReplaceElements
+  fields: 12
+  description: The elements of the documents which are assigned to the activity.
+- name: EnvelopeActivityReplaceFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: EnvelopeActivityReplaceFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: EnvelopeActivityReplaceFinishAction
+  fields: 5
+  description: Define what happens in the signing clients, after an action has been finished.
+- name: EnvelopeActivityReplaceLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeActivityReplaceP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: EnvelopeActivityReplacePosition
+  fields: 3
+  description: The position of an element on the document.
+- name: EnvelopeActivityReplacePredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: EnvelopeActivityReplacePredefinedFieldElements
+  fields: 7
+  description: Define the predefined fields which will be added and filled by the system.
+- name: EnvelopeActivityReplaceReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeActivityReplaceRecipientConfiguration
+  fields: 6
+  description: The configuration of the recipient.
+- name: EnvelopeActivityReplaceSign
+  fields: 7
+  description: A sign action for the recipient.
+- name: EnvelopeActivityReplaceSignAsP7M
+  fields: 3
+  description: An action to sign the documents with P7M.
+- name: EnvelopeActivityReplaceSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: EnvelopeActivityReplaceSignatureField
+  fields: 10
+  description: The configuration of the signature field.
+- name: EnvelopeActivityReplaceSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeActivityReplaceSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: EnvelopeActivityReplaceSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: EnvelopeActivityReplaceView
+  fields: 2
+  description: An action to view and acknowledge the documents.
+- name: EnvelopeBulkSendAction
+  fields: 6
+  description: The action of the activity with the possibility to define a bulk. Exactly one definition must be
+    used!
+- name: EnvelopeBulkSendActivity
+  fields: 2
+  description: Define an activity with the possibility of bulk.
+- name: EnvelopeBulkSendAdvancedRecipientConfiguration
+  fields: 9
+  description: The advanced configuration for the recipient.
+- name: EnvelopeBulkSendAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: EnvelopeBulkSendAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: EnvelopeBulkSendAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeBulkSendAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: EnvelopeBulkSendCheckBox
+  fields: 6
+  description: The configuration of the check box.
+- name: EnvelopeBulkSendCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: EnvelopeBulkSendComboBox
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeBulkSendComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeBulkSendContactInformation
+  fields: 5
+  description: Define the contact information for the recipient.
+- name: EnvelopeBulkSendElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: EnvelopeBulkSendFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: EnvelopeBulkSendFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: EnvelopeBulkSendFinishAction
+  fields: 5
+  description: Define what happens in the signing clients, after an action has been finished.
+- name: EnvelopeBulkSendLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeBulkSendListBox
+  fields: 6
+  description: The configuration of the list box.
+- name: EnvelopeBulkSendListBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeBulkSendP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: EnvelopeBulkSendPosition
+  fields: 3
+  description: The position of an element on the document.
+- name: EnvelopeBulkSendPredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: EnvelopeBulkSendPredefinedFieldElements
+  fields: 7
+  description: Define the predefined fields which will be added and filled by the system.
+- name: EnvelopeBulkSendRadioButtonGroup
+  fields: 6
+  description: The configuration of the radio button group.
+- name: EnvelopeBulkSendRadioButtonItemDefinition
+  fields: 5
+  description: The configuration of the radio button.
+- name: EnvelopeBulkSendReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeBulkSendRecipient
+  fields: 2
+  description: The definition of the recipient including the signature data.
+- name: EnvelopeBulkSendRecipientConfiguration
+  fields: 6
+  description: The configuration of the recipient.
+- name: EnvelopeBulkSendRequest
+  fields: 15
+  description: The request model for sending an envelope bulk.
+- name: EnvelopeBulkSendSign
+  fields: 7
+  description: A sign action for the recipient.
+- name: EnvelopeBulkSendSignAsP7M
+  fields: 3
+  description: An action to sign the documents with P7M.
+- name: EnvelopeBulkSendSignBulk
+  fields: 6
+  description: A sign action for multiple recipients.
+- name: EnvelopeBulkSendSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: EnvelopeBulkSendSignatureField
+  fields: 10
+  description: The configuration of the signature field.
+- name: EnvelopeBulkSendSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeBulkSendSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: EnvelopeBulkSendSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: EnvelopeBulkSendTextBox
+  fields: 7
+  description: The configuration of the text box.
+- name: EnvelopeBulkSendTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: EnvelopeBulkSendTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: EnvelopeBulkSendUnassignedElements
+  fields: 5
+  description: The configurable elements of a document, which are also stored within the document.
+- name: EnvelopeBulkSendView
+  fields: 2
+  description: An action to view and acknowledge the documents.
+- name: EnvelopeDetailResponse
+  fields: 6
+- name: EnvelopeGetAction
+  fields: 5
+  description: The action of the activity.
+- name: EnvelopeGetConfigurationAction
+  fields: 4
+  description: The action of the activity.
+- name: EnvelopeGetConfigurationActivity
+  fields: 3
+  description: An activity in the process.
+- name: EnvelopeGetConfigurationAdvancedRecipientConfiguration
+  fields: 8
+  description: The advanced configuration for the recipient.
+- name: EnvelopeGetConfigurationAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: EnvelopeGetConfigurationAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: EnvelopeGetConfigurationFinishAction
+  fields: 5
+  description: Defines what happens in the signing clients, after an action has been finished.
+- name: EnvelopeGetConfigurationP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: EnvelopeGetConfigurationResponse
+  fields: 12
+  description: Configuration shared by all models.
+- name: EnvelopeGetConfigurationSign
+  fields: 6
+  description: The configuration of the sign action for the recipient.
+- name: EnvelopeGetConfigurationSignAsP7M
+  fields: 4
+  description: The configuration of an action to sign documents with P7M.
+- name: EnvelopeGetConfigurationSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: EnvelopeGetConfigurationSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: EnvelopeGetConfigurationView
+  fields: 3
+  description: The configuration of the action to view and acknowledge the documents.
+- name: EnvelopeGetContactInformation
+  fields: 5
+  description: Defines the contact information for the recipient.
+- name: EnvelopeGetElementsAction
+  fields: 2
+  description: The action of the activity.
+- name: EnvelopeGetElementsAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: EnvelopeGetElementsAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeGetElementsCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: EnvelopeGetElementsComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeGetElementsElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: EnvelopeGetElementsFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: EnvelopeGetElementsFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: EnvelopeGetElementsLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeGetElementsListBoxDefinition
+  fields: 6
+  description: The configuration of the list box.
+- name: EnvelopeGetElementsPosition
+  fields: 3
+  description: The position of an element on the document.
+- name: EnvelopeGetElementsPredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: EnvelopeGetElementsPredefinedFieldElements
+  fields: 7
+  description: Defines the predefined fields which will be added and filled by the system.
+- name: EnvelopeGetElementsRadioButtonItemDefinition
+  fields: 6
+  description: The configuration of the radio button.
+- name: EnvelopeGetElementsReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeGetElementsSignatureField
+  fields: 12
+  description: The configuration of the signature field.
+- name: EnvelopeGetElementsSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeGetElementsSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: EnvelopeGetElementsTextBox
+  fields: 8
+  description: The configuration of the text box.
+- name: EnvelopeGetElementsTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: EnvelopeGetElementsTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: EnvelopeGetFilesResponse
+  fields: 3
+  description: The response model for containing the information about the files contained in the envelope.
+- name: EnvelopeGetSign
+  fields: 3
+  description: An action to sign documents.
+- name: EnvelopeSendAction
+  fields: 5
+  description: The action of the activity. Exactly one definition must be used!
+- name: EnvelopeSendActivity
+  fields: 2
+  description: Define an activity in the process.
+- name: EnvelopeSendAdvancedRecipientConfiguration
+  fields: 9
+  description: The advanced configuration for the recipient.
+- name: EnvelopeSendAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: EnvelopeSendAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: EnvelopeSendAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeSendAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: EnvelopeSendCheckBox
+  fields: 6
+  description: The configuration of the check box.
+- name: EnvelopeSendCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: EnvelopeSendComboBox
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeSendComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeSendContactInformation
+  fields: 5
+  description: Define the contact information for the recipient.
+- name: EnvelopeSendElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: EnvelopeSendFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: EnvelopeSendFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: EnvelopeSendFinishAction
+  fields: 5
+  description: Define what happens in the signing clients, after an action has been finished.
+- name: EnvelopeSendLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeSendListBox
+  fields: 6
+  description: The configuration of the list box.
+- name: EnvelopeSendListBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: EnvelopeSendP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: EnvelopeSendPosition
+  fields: 3
+  description: The position of an element on the document.
+- name: EnvelopeSendPredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: EnvelopeSendPredefinedFieldElements
+  fields: 7
+  description: Define the predefined fields which will be added and filled by the system.
+- name: EnvelopeSendRadioButtonGroup
+  fields: 6
+  description: The configuration of the radio button group.
+- name: EnvelopeSendRadioButtonItemDefinition
+  fields: 5
+  description: The configuration of the radio button.
+- name: EnvelopeSendReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeSendRecipientConfiguration
+  fields: 6
+  description: The configuration of the recipient.
+- name: EnvelopeSendRequest
+  fields: 15
+  description: The request model for sending an envelope.
+- name: EnvelopeSendSign
+  fields: 9
+  description: A sign action for the recipient.
+- name: EnvelopeSendSignAsP7M
+  fields: 5
+  description: An action to sign the documents with P7M.
+- name: EnvelopeSendSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: EnvelopeSendSignatureField
+  fields: 10
+  description: The configuration of the signature field.
+- name: EnvelopeSendSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: EnvelopeSendSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: EnvelopeSendSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: EnvelopeSendTextBox
+  fields: 7
+  description: The configuration of the text box.
+- name: EnvelopeSendTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: EnvelopeSendTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: EnvelopeSendUnassignedElements
+  fields: 5
+  description: The configurable elements of a document, which are also stored within the document.
+- name: EnvelopeSendView
+  fields: 3
+  description: An action to view and acknowledge the documents.
+- name: FilePrepareAction
+  fields: 2
+  description: The action of the activity.
+- name: FilePrepareAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: FilePrepareAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: FilePrepareCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: FilePrepareComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: FilePrepareElements
+  fields: 8
+  description: The configurable elements of the documents.
+- name: FilePrepareFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: FilePrepareFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: FilePrepareLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: FilePrepareListBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: FilePreparePosition
+  fields: 3
+  description: The position of an element on the document.
+- name: FilePrepareRadioButtonItemDefinition
+  fields: 6
+  description: The configuration of the radio button.
+- name: FilePrepareSignatureField
+  fields: 12
+  description: The configuration of the signature field.
+- name: FilePrepareSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: FilePrepareSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: FilePrepareTextBox
+  fields: 8
+  description: The configuration of the text box.
+- name: FilePrepareTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: FilePrepareTextFormat
+  fields: 6
+  description: The configuration of the text format.
+- name: Instance
+  fields: 6
+- name: LicenseGetAmount
+  fields: 2
+  description: The current state of the license.
+- name: LicenseGetResponse
+  fields: 5
+  description: The response model for retrieving the current license status.
+- name: ProcessFinishedEvent
+  fields: 2
+- name: TemplateGetAction
+  fields: 7
+  description: The action of the activity with the possibility of a defined bulk.
+- name: TemplateGetConfigurationAction
+  fields: 5
+  description: The action of the activity.
+- name: TemplateGetConfigurationActivity
+  fields: 3
+  description: Defines an activity with the possibility of bulk.
+- name: TemplateGetConfigurationAdvancedRecipientConfiguration
+  fields: 8
+  description: The advanced configuration for the recipient.
+- name: TemplateGetConfigurationAppFinishAction
+  fields: 4
+  description: Define actions for different clients that will trigger after an action has been finished.
+- name: TemplateGetConfigurationAuthenticationConfiguration
+  fields: 5
+  description: The definition of the authentications of the recipient.
+- name: TemplateGetConfigurationBulkRecipient
+  fields: 2
+  description: The definition of the recipient including the signature data.
+- name: TemplateGetConfigurationDefaultSignature
+  fields: 1
+  description: The configuration of the default signature type for a draft.
+- name: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  fields: 9
+  description: The configuration of the default signature type for a draft.
+- name: TemplateGetConfigurationFinishAction
+  fields: 5
+  description: Defines what happens in the signing clients, after an action has been finished.
+- name: TemplateGetConfigurationP7MSignatureMethods
+  fields: 4
+  description: The recipient configuration for signing with P7M.
+- name: TemplateGetConfigurationResponse
+  fields: 16
+  description: Configuration shared by all models.
+- name: TemplateGetConfigurationSign
+  fields: 6
+  description: The configuration of the sign action for the recipient.
+- name: TemplateGetConfigurationSignAsP7M
+  fields: 4
+  description: The configuration of an action to sign documents with P7M.
+- name: TemplateGetConfigurationSignBulk
+  fields: 4
+  description: The configuration of a sign action for multiple recipients.
+- name: TemplateGetConfigurationSignatureDataConfiguration
+  fields: 7
+  description: The recipient configuration for signing.
+- name: TemplateGetConfigurationSignaturePluginSignatureData
+  fields: 2
+  description: The recipient configuration for signing with a signature plugin.
+- name: TemplateGetConfigurationView
+  fields: 3
+  description: The configuration of the action to view and acknowledge the documents.
+- name: TemplateGetContactInformation
+  fields: 5
+  description: Defines the contact information for the recipient.
+- name: TemplateGetElementsAction
+  fields: 3
+  description: The action of the activity.
+- name: TemplateGetElementsAllowedSignatureTypes
+  fields: 12
+  description: The definition of the allowed signature types for the signature.
+- name: TemplateGetElementsAttachmentDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: TemplateGetElementsCheckBoxDefinition
+  fields: 4
+  description: The configuration of a check box.
+- name: TemplateGetElementsComboBoxDefinition
+  fields: 6
+  description: The configuration of the combo box.
+- name: TemplateGetElementsElements
+  fields: 12
+  description: The configurable elements of the documents.
+- name: TemplateGetElementsFieldValidation
+  fields: 5
+  description: The configuration of the field validation rules.
+- name: TemplateGetElementsFieldValidationRange
+  fields: 2
+  description: The validation rules for a value range.
+- name: TemplateGetElementsLinkDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: TemplateGetElementsListBoxDefinition
+  fields: 6
+  description: The configuration of the list box.
+- name: TemplateGetElementsPosition
+  fields: 3
+  description: The position of an element on the document.
+- name: TemplateGetElementsPredefinedElementDefinition
+  fields: 3
+  description: The configuration of the predefined element.
+- name: TemplateGetElementsPredefinedFieldElements
+  fields: 7
+  description: Defines the predefined fields which will be added and filled by the system.
+- name: TemplateGetElementsRadioButtonItemDefinition
+  fields: 6
+  description: The configuration of the radio button.
+- name: TemplateGetElementsReadingAreaDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: TemplateGetElementsSignatureField
+  fields: 11
+  description: The configuration of the signature field.
+- name: TemplateGetElementsSignatureFieldDefinition
+  fields: 2
+  description: The settings of a positionable element.
+- name: TemplateGetElementsSize
+  fields: 2
+  description: The definition of the size of an element.
+- name: TemplateGetElementsTextBox
+  fields: 8
+  description: The configuration of the text box.
+- name: TemplateGetElementsTextBoxDefinition
+  fields: 7
+  description: The configuration of the text box.
+- name: TemplateGetElementsTextFormat
+  fields: 6
+  description: The configuration of the text format.
+relationships:
+- from: ClientDetail
+  to: Client
+  type: belongs_to
+  via: clientId
+- from: ClientDetail
+  to: Instance
+  type: has_many
+  via: instanceList
+- from: ClientInstance
+  to: Client
+  type: belongs_to
+  via: clientId
+- from: ClientInstance
+  to: Instance
+  type: belongs_to
+  via: instanceId
+- from: CreateProcessDraftRequest
+  to: ProcessFinishedEvent
+  type: has_many
+  via: events
+- from: EnvelopeDetailResponse
+  to: CompletedDocuments
+  type: has_many
+  via: completedDocuments
+- from: EnvelopeDetailResponse
+  to: DocumentDetail
+  type: has_many
+  via: documentList
+- from: AutomaticProfileGetAllResponse
+  to: AutomaticProfileGetAllProfile
+  type: has_many
+  via: RemoteCertificateProfiles
+- from: AutomaticProfileGetAllResponse
+  to: AutomaticProfileGetAllSignaturePluginDefinition
+  type: has_many
+  via: SignaturePlugins
+- from: AutomaticProfileGetAllSignaturePluginDefinition
+  to: AutomaticProfileGetAllProfile
+  type: has_many
+  via: Profiles
+- from: DraftGetElementsElements
+  to: DraftGetElementsTextBox
+  type: has_many
+  via: TextBoxes
+- from: DraftGetElementsElements
+  to: DraftGetElementsSignatureField
+  type: has_many
+  via: Signatures
+- from: DraftGetElementsElements
+  to: DraftGetElementsPredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: DraftGetElementsTextBox
+  to: DraftGetElementsFieldValidation
+  type: has_one
+  via: Validation
+- from: DraftGetElementsTextBox
+  to: DraftGetElementsTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftGetElementsSignatureField
+  to: DraftGetElementsAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: DraftGetElementsSignatureField
+  to: DraftGetElementsSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftGetElementsTextBoxDefinition
+  to: DraftGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftGetElementsTextBoxDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsTextBoxDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsCheckBoxDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsCheckBoxDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsComboBoxDefinition
+  to: DraftGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftGetElementsComboBoxDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsComboBoxDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsListBoxDefinition
+  to: DraftGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftGetElementsListBoxDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsListBoxDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsSignatureFieldDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsSignatureFieldDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsAttachmentDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsAttachmentDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsReadingAreaDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsReadingAreaDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsRadioButtonItemDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsRadioButtonItemDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsPredefinedElementDefinition
+  to: DraftGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftGetElementsPredefinedElementDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsPredefinedElementDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetElementsLinkDefinition
+  to: DraftGetElementsPosition
+  type: has_one
+  via: Position
+- from: DraftGetElementsLinkDefinition
+  to: DraftGetElementsSize
+  type: has_one
+  via: Size
+- from: DraftGetConfigurationResponse
+  to: DraftGetConfigurationActivity
+  type: has_many
+  via: Activities
+- from: DraftGetConfigurationResponse
+  to: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  type: has_one
+  via: DefaultSignatureTypeConfiguration
+- from: DraftGetConfigurationActivity
+  to: DraftGetConfigurationAction
+  type: has_one
+  via: Action
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: None
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: ClickToSign
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: DrawToSign
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: TypeToSign
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: LocalCertificate
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: DisposableCertificate
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: Biometric
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: RemoteCertificate
+- from: DraftGetConfigurationDefaultSignatureTypeConfiguration
+  to: DraftGetConfigurationDefaultSignature
+  type: has_one
+  via: OneTimePassword
+- from: DraftGetConfigurationAction
+  to: DraftGetConfigurationSign
+  type: has_one
+  via: Sign
+- from: DraftGetConfigurationAction
+  to: DraftGetConfigurationView
+  type: has_one
+  via: View
+- from: DraftGetConfigurationAction
+  to: DraftGetConfigurationSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: DraftGetConfigurationAction
+  to: DraftGetConfigurationSignBulk
+  type: has_one
+  via: SignBulk
+- from: DraftGetConfigurationSign
+  to: DraftGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftGetConfigurationSign
+  to: DraftGetConfigurationFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftGetConfigurationSign
+  to: DraftGetConfigurationSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftGetConfigurationSignAsP7M
+  to: DraftGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftGetConfigurationSignAsP7M
+  to: DraftGetConfigurationP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: DraftGetConfigurationSignBulk
+  to: DraftGetConfigurationBulkRecipient
+  type: has_many
+  via: RecipientConfigurations
+- from: DraftGetConfigurationSignBulk
+  to: DraftGetConfigurationFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftGetConfigurationAdvancedRecipientConfiguration
+  to: DraftGetConfigurationAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: DraftGetConfigurationFinishAction
+  to: DraftGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: DraftGetConfigurationFinishAction
+  to: DraftGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: DraftGetConfigurationFinishAction
+  to: DraftGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: DraftGetConfigurationSignatureDataConfiguration
+  to: DraftGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftGetConfigurationP7MSignatureMethods
+  to: DraftGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftGetConfigurationBulkRecipient
+  to: DraftGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftGetConfigurationBulkRecipient
+  to: DraftGetConfigurationSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftCreateElements
+  to: DraftCreateTextBox
+  type: has_many
+  via: TextBoxes
+- from: DraftCreateElements
+  to: DraftCreateCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: DraftCreateElements
+  to: DraftCreateComboBox
+  type: has_many
+  via: ComboBoxes
+- from: DraftCreateElements
+  to: DraftCreateSignatureField
+  type: has_many
+  via: Signatures
+- from: DraftCreateElements
+  to: DraftCreateAttachment
+  type: has_many
+  via: Attachments
+- from: DraftCreateElements
+  to: DraftCreatePredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: DraftCreateActivity
+  to: DraftCreateAction
+  type: has_one
+  via: Action
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: None
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: ClickToSign
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: DrawToSign
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: TypeToSign
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: LocalCertificate
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: DisposableCertificate
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: Biometric
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: RemoteCertificate
+- from: DraftCreateDefaultSignatureTypeConfiguration
+  to: DraftCreateDefaultSignature
+  type: has_one
+  via: OneTimePassword
+- from: DraftCreatePredefinedFieldElements
+  to: DraftCreateEmail
+  type: has_many
+  via: EmailFields
+- from: DraftCreatePredefinedFieldElements
+  to: DraftCreateGivenName
+  type: has_many
+  via: GivenNameFields
+- from: DraftCreatePredefinedFieldElements
+  to: DraftCreateFullName
+  type: has_many
+  via: FullNameFields
+- from: DraftCreatePredefinedFieldElements
+  to: DraftCreateDate
+  type: has_many
+  via: DateFields
+- from: DraftCreateAction
+  to: DraftCreateSign
+  type: has_one
+  via: Sign
+- from: DraftCreateAction
+  to: DraftCreateView
+  type: has_one
+  via: View
+- from: DraftCreateAction
+  to: DraftCreateSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: DraftCreateAction
+  to: DraftCreateSignBulk
+  type: has_one
+  via: SignBulk
+- from: DraftCreateFieldValidation
+  to: DraftCreateDateValidationConfiguration
+  type: has_one
+  via: DateValidationConfiguration
+- from: DraftCreateAllowedSignatureTypes
+  to: DraftCreateClickToSignSignatureType
+  type: has_one
+  via: ClickToSign
+- from: DraftCreateAllowedSignatureTypes
+  to: DraftCreateDrawToSignSignatureType
+  type: has_one
+  via: DrawToSign
+- from: DraftCreateAllowedSignatureTypes
+  to: DraftCreateDisposableCertificateSignatureType
+  type: has_one
+  via: DisposableCertificate
+- from: DraftCreateSignatureFieldDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateSignatureFieldDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateAttachment
+  to: DraftCreateAttachmentDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateAttachmentDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateAttachmentDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateEmail
+  to: DraftCreatePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateGivenName
+  to: DraftCreatePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateFullName
+  to: DraftCreatePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateDate
+  to: DraftCreatePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateHyperLink
+  to: DraftCreateLinkDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateReadingAreaDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateReadingAreaDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateView
+  to: DraftCreateRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftCreateSignAsP7M
+  to: DraftCreateAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftCreateSignAsP7M
+  to: DraftCreateP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: DraftCreateDateValidationConfiguration
+  to: DraftCreateFieldValidationRange
+  type: has_one
+  via: Range
+- from: DraftCreatePredefinedElementDefinition
+  to: DraftCreateTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftCreatePredefinedElementDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreatePredefinedElementDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateLinkDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateLinkDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateSignBulk
+  to: DraftCreateBulkRecipient
+  type: has_many
+  via: BulkRecipients
+- from: DraftCreateSignBulk
+  to: DraftCreateElements
+  type: has_one
+  via: Elements
+- from: DraftCreateSignBulk
+  to: DraftCreateFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftCreateSignBulk
+  to: DraftCreateBatchConfiguration
+  type: has_one
+  via: BatchConfiguration
+- from: DraftCreateSignBulk
+  to: DraftCreateGeneralPoliciesForSignAction
+  type: has_one
+  via: GeneralPoliciesOverrides
+- from: DraftCreateFinishAction
+  to: DraftCreateAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: DraftCreateFinishAction
+  to: DraftCreateAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: DraftCreateFinishAction
+  to: DraftCreateAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: DraftCreateSignatureDataConfiguration
+  to: DraftCreateDisposableCertificateSignatureData
+  type: has_one
+  via: DisposableCertificate
+- from: DraftCreateSignatureDataConfiguration
+  to: DraftCreateSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftCreateBulkRecipient
+  to: DraftCreateAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftCreateBulkRecipient
+  to: DraftCreateSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftCreateRecipientConfiguration
+  to: DraftCreateContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftCreateRecipientConfiguration
+  to: DraftCreateAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: DraftCreateP7MSignatureMethods
+  to: DraftCreateDisposableCertificateSignatureData
+  type: has_one
+  via: DisposableCertificate
+- from: DraftCreateP7MSignatureMethods
+  to: DraftCreateSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftCreateAdvancedRecipientConfiguration
+  to: DraftCreateContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftCreateAdvancedRecipientConfiguration
+  to: DraftCreateAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: DraftCreateBasicRecipientConfiguration
+  to: DraftCreateContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftCreateRadioButtonItemDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateRadioButtonItemDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateSign
+  to: DraftCreateAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftCreateSign
+  to: DraftCreateElements
+  type: has_one
+  via: Elements
+- from: DraftCreateSign
+  to: DraftCreateFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftCreateSign
+  to: DraftCreateSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftCreateSign
+  to: DraftCreateBatchConfiguration
+  type: has_one
+  via: BatchConfiguration
+- from: DraftCreateSign
+  to: DraftCreateGeneralPoliciesForSignAction
+  type: has_one
+  via: GeneralPoliciesOverrides
+- from: DraftCreateListBoxDefinition
+  to: DraftCreateTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftCreateListBoxDefinition
+  to: DraftCreateChoiceItem
+  type: has_many
+  via: Items
+- from: DraftCreateListBoxDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateListBoxDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateComboBoxDefinition
+  to: DraftCreateTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftCreateComboBoxDefinition
+  to: DraftCreateChoiceItem
+  type: has_many
+  via: Items
+- from: DraftCreateComboBoxDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateComboBoxDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateCheckBoxDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateCheckBoxDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateTextBoxDefinition
+  to: DraftCreateTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftCreateTextBoxDefinition
+  to: DraftCreatePosition
+  type: has_one
+  via: Position
+- from: DraftCreateTextBoxDefinition
+  to: DraftCreateSize
+  type: has_one
+  via: Size
+- from: DraftCreateSignatureField
+  to: DraftCreateAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: DraftCreateSignatureField
+  to: DraftCreateSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateComboBox
+  to: DraftCreateComboBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateCheckBox
+  to: DraftCreateCheckBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateTextBox
+  to: DraftCreateFieldValidation
+  type: has_one
+  via: Validation
+- from: DraftCreateTextBox
+  to: DraftCreateTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftCreateCallbackConfiguration
+  to: DraftCreateActivityActionCallbackConfiguration
+  type: has_one
+  via: ActivityActionCallbackConfiguration
+- from: DraftCreateRequest
+  to: DraftCreateElements
+  type: has_one
+  via: UnassignedElements
+- from: DraftCreateRequest
+  to: DraftCreateActivity
+  type: has_many
+  via: Activities
+- from: DraftCreateRequest
+  to: DraftCreateCallbackConfiguration
+  type: has_one
+  via: CallbackConfiguration
+- from: DraftCreateRequest
+  to: DraftCreateAgreementConfiguration
+  type: has_one
+  via: AgreementConfiguration
+- from: DraftCreateRequest
+  to: DraftCreateDefaultSignatureTypeConfiguration
+  type: has_one
+  via: DefaultSignatureTypeConfiguration
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: None
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: ClickToSign
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: DrawToSign
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: TypeToSign
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: LocalCertificate
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: DisposableCertificate
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: Biometric
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: RemoteCertificate
+- from: DraftUpdateDefaultSignatureTypeConfiguration
+  to: DraftUpdateDefaultSignature
+  type: has_one
+  via: OneTimePassword
+- from: DraftUpdateRequest
+  to: DraftUpdateDefaultSignatureTypeConfiguration
+  type: has_one
+  via: DefaultSignatureTypeConfiguration
+- from: DraftActivityReplaceRequest
+  to: DraftActivityReplaceAction
+  type: has_one
+  via: Action
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceSendCopy
+  type: has_one
+  via: SendCopy
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceSignAutomatic
+  type: has_one
+  via: SignAutomatic
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceSign
+  type: has_one
+  via: Sign
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceView
+  type: has_one
+  via: View
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: DraftActivityReplaceAction
+  to: DraftActivityReplaceSignBulk
+  type: has_one
+  via: SignBulk
+- from: DraftActivityReplaceSendCopy
+  to: DraftActivityReplaceBasicRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftActivityReplaceView
+  to: DraftActivityReplaceRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftActivityReplaceSignAsP7M
+  to: DraftActivityReplaceAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftActivityReplaceSignAsP7M
+  to: DraftActivityReplaceP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceTextBox
+  type: has_many
+  via: TextBoxes
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceComboBox
+  type: has_many
+  via: ComboBoxes
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceRadioButtonGroup
+  type: has_many
+  via: RadioButtons
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceListBox
+  type: has_many
+  via: ListBoxes
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceSignatureField
+  type: has_many
+  via: Signatures
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceAttachment
+  type: has_many
+  via: Attachments
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplacePredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceLinkConfiguration
+  type: has_one
+  via: LinkConfiguration
+- from: DraftActivityReplaceElements
+  to: DraftActivityReplaceReadAreaConfirmation
+  type: has_many
+  via: AreaReadConfirmations
+- from: DraftActivityReplaceFinishAction
+  to: DraftActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: DraftActivityReplaceFinishAction
+  to: DraftActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: DraftActivityReplaceFinishAction
+  to: DraftActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: DraftActivityReplaceSignatureDataConfiguration
+  to: DraftActivityReplaceDisposableCertificateSignatureData
+  type: has_one
+  via: DisposableCertificate
+- from: DraftActivityReplaceSignatureDataConfiguration
+  to: DraftActivityReplaceRemoteCertificateSignatureData
+  type: has_one
+  via: RemoteCertificate
+- from: DraftActivityReplaceSignatureDataConfiguration
+  to: DraftActivityReplaceSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftActivityReplaceBulkRecipient
+  to: DraftActivityReplaceAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftActivityReplaceBulkRecipient
+  to: DraftActivityReplaceSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftActivityReplaceSignatureFieldDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceSignatureFieldDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceAuthenticationConfiguration
+  to: DraftActivityReplaceOAuthAuthentication
+  type: has_many
+  via: OAuthAuthentications
+- from: DraftActivityReplaceAuthenticationConfiguration
+  to: DraftActivityReplaceSamlAuthentication
+  type: has_many
+  via: SamlAuthentications
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplacePredefinedText
+  type: has_many
+  via: TextFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceEmail
+  type: has_many
+  via: EmailFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceInitials
+  type: has_many
+  via: InitialsFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceGivenName
+  type: has_many
+  via: GivenNameFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceSurname
+  type: has_many
+  via: SurnameFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceFullName
+  type: has_many
+  via: FullNameFields
+- from: DraftActivityReplacePredefinedFieldElements
+  to: DraftActivityReplaceDate
+  type: has_many
+  via: DateFields
+- from: DraftActivityReplaceLinkConfiguration
+  to: DraftActivityReplaceHyperLink
+  type: has_many
+  via: HyperLinks
+- from: DraftActivityReplaceOAuthAuthentication
+  to: DraftActivityReplaceAuthenticationValidation
+  type: has_many
+  via: Validations
+- from: DraftActivityReplaceSamlAuthentication
+  to: DraftActivityReplaceAuthenticationValidation
+  type: has_many
+  via: Validations
+- from: DraftActivityReplaceFieldValidation
+  to: DraftActivityReplaceDateValidationConfiguration
+  type: has_one
+  via: DateValidationConfiguration
+- from: DraftActivityReplaceFieldValidation
+  to: DraftActivityReplaceNumberValidationConfiguration
+  type: has_one
+  via: NumberValidationConfiguration
+- from: DraftActivityReplaceFieldValidation
+  to: DraftActivityReplaceTimeValidationConfiguration
+  type: has_one
+  via: TimeValidationConfiguration
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceClickToSignSignatureType
+  type: has_one
+  via: ClickToSign
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceDrawToSignSignatureType
+  type: has_one
+  via: DrawToSign
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceTypeToSignSignatureType
+  type: has_one
+  via: TypeToSign
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceLocalCertificateSignatureType
+  type: has_one
+  via: LocalCertificate
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceDisposableCertificateSignatureType
+  type: has_one
+  via: DisposableCertificate
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceSwissComOnDemandSignatureType
+  type: has_one
+  via: SwissComOnDemand
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceRemoteCertificateSignatureType
+  type: has_one
+  via: RemoteCertificate
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceOneTimePasswordSignatureType
+  type: has_one
+  via: OneTimePassword
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceSwedishBankIdSignatureType
+  type: has_one
+  via: SwedishBankId
+- from: DraftActivityReplaceAllowedSignatureTypes
+  to: DraftActivityReplaceSignaturePluginSignatureType
+  type: has_many
+  via: SignaturePlugins
+- from: DraftActivityReplaceAttachmentDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceAttachmentDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplacePredefinedText
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceEmail
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceGivenName
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceSurname
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceFullName
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceDate
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceHyperLink
+  to: DraftActivityReplaceLinkDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceReadingAreaDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceReadingAreaDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceDateValidationConfiguration
+  to: DraftActivityReplaceFieldValidationRange
+  type: has_one
+  via: Range
+- from: DraftActivityReplaceTimeValidationConfiguration
+  to: DraftActivityReplaceFieldValidationRange
+  type: has_one
+  via: Range
+- from: DraftActivityReplacePredefinedElementDefinition
+  to: DraftActivityReplaceTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftActivityReplacePredefinedElementDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplacePredefinedElementDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceLinkDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceLinkDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceRadioButtonItemDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceRadioButtonItemDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceNumberValidationConfiguration
+  to: DraftActivityReplaceFieldValidationRange
+  type: has_one
+  via: Range
+- from: DraftActivityReplaceInitials
+  to: DraftActivityReplacePredefinedElementDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceListBoxDefinition
+  to: DraftActivityReplaceTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftActivityReplaceListBoxDefinition
+  to: DraftActivityReplaceChoiceItem
+  type: has_many
+  via: Items
+- from: DraftActivityReplaceListBoxDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceListBoxDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceRadioButtonGroupDefinition
+  to: DraftActivityReplaceRadioButtonItemDefinition
+  type: has_many
+  via: Items
+- from: DraftActivityReplaceComboBoxDefinition
+  to: DraftActivityReplaceTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftActivityReplaceComboBoxDefinition
+  to: DraftActivityReplaceChoiceItem
+  type: has_many
+  via: Items
+- from: DraftActivityReplaceComboBoxDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceComboBoxDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceCheckBoxDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceCheckBoxDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceTextBoxDefinition
+  to: DraftActivityReplaceTextFormat
+  type: has_one
+  via: TextFormat
+- from: DraftActivityReplaceTextBoxDefinition
+  to: DraftActivityReplacePosition
+  type: has_one
+  via: Position
+- from: DraftActivityReplaceTextBoxDefinition
+  to: DraftActivityReplaceSize
+  type: has_one
+  via: Size
+- from: DraftActivityReplaceReadAreaConfirmation
+  to: DraftActivityReplaceReadingAreaDefinition
+  type: has_one
+  via: Definition
+- from: DraftActivityReplaceAttachment
+  to: DraftActivityReplaceAttachmentDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceSignatureField
+  to: DraftActivityReplaceAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: DraftActivityReplaceSignatureField
+  to: DraftActivityReplaceSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceSignatureField
+  to: DraftActivityReplaceSignatureTaskConfiguration
+  type: has_one
+  via: TaskConfiguration
+- from: DraftActivityReplaceListBox
+  to: DraftActivityReplaceListBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceRadioButtonGroup
+  to: DraftActivityReplaceRadioButtonGroupDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceComboBox
+  to: DraftActivityReplaceComboBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceCheckBox
+  to: DraftActivityReplaceCheckBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceTextBox
+  to: DraftActivityReplaceFieldValidation
+  type: has_one
+  via: Validation
+- from: DraftActivityReplaceTextBox
+  to: DraftActivityReplaceTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceP7MSignatureMethods
+  to: DraftActivityReplaceDisposableCertificateSignatureData
+  type: has_one
+  via: DisposableCertificate
+- from: DraftActivityReplaceP7MSignatureMethods
+  to: DraftActivityReplaceRemoteCertificateSignatureData
+  type: has_one
+  via: RemoteCertificate
+- from: DraftActivityReplaceP7MSignatureMethods
+  to: DraftActivityReplaceSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: DraftActivityReplaceRecipientConfiguration
+  to: DraftActivityReplaceContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftActivityReplaceRecipientConfiguration
+  to: DraftActivityReplaceAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: DraftActivityReplaceAdvancedRecipientConfiguration
+  to: DraftActivityReplaceContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftActivityReplaceAdvancedRecipientConfiguration
+  to: DraftActivityReplaceAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: DraftActivityReplaceVisibleSignature
+  to: DraftActivityReplaceSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: DraftActivityReplaceBasicRecipientConfiguration
+  to: DraftActivityReplaceContactInformation
+  type: has_one
+  via: ContactInformation
+- from: DraftActivityReplaceSignBulk
+  to: DraftActivityReplaceBulkRecipient
+  type: has_many
+  via: BulkRecipients
+- from: DraftActivityReplaceSignBulk
+  to: DraftActivityReplaceElements
+  type: has_one
+  via: Elements
+- from: DraftActivityReplaceSignBulk
+  to: DraftActivityReplaceFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftActivityReplaceSignBulk
+  to: DraftActivityReplaceBatchConfiguration
+  type: has_one
+  via: BatchConfiguration
+- from: DraftActivityReplaceSignBulk
+  to: DraftActivityReplaceGeneralPoliciesForSignAction
+  type: has_one
+  via: GeneralPoliciesOverrides
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceElements
+  type: has_one
+  via: Elements
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceBatchConfiguration
+  type: has_one
+  via: BatchConfiguration
+- from: DraftActivityReplaceSign
+  to: DraftActivityReplaceGeneralPoliciesForSignAction
+  type: has_one
+  via: GeneralPoliciesOverrides
+- from: DraftActivityReplaceSignAutomatic
+  to: DraftActivityReplaceVisibleSignature
+  type: has_many
+  via: VisibleSignatures
+- from: EnvelopeGetAction
+  to: EnvelopeGetSign
+  type: has_one
+  via: Sign
+- from: EnvelopeGetSign
+  to: EnvelopeGetContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeGetElementsElements
+  to: EnvelopeGetElementsTextBox
+  type: has_many
+  via: TextBoxes
+- from: EnvelopeGetElementsElements
+  to: EnvelopeGetElementsSignatureField
+  type: has_many
+  via: Signatures
+- from: EnvelopeGetElementsElements
+  to: EnvelopeGetElementsPredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: EnvelopeGetElementsTextBox
+  to: EnvelopeGetElementsFieldValidation
+  type: has_one
+  via: Validation
+- from: EnvelopeGetElementsTextBox
+  to: EnvelopeGetElementsTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeGetElementsSignatureField
+  to: EnvelopeGetElementsAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: EnvelopeGetElementsSignatureField
+  to: EnvelopeGetElementsSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeGetElementsTextBoxDefinition
+  to: EnvelopeGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeGetElementsTextBoxDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsTextBoxDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsCheckBoxDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsCheckBoxDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsComboBoxDefinition
+  to: EnvelopeGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeGetElementsComboBoxDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsComboBoxDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsListBoxDefinition
+  to: EnvelopeGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeGetElementsListBoxDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsListBoxDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsSignatureFieldDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsSignatureFieldDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsAttachmentDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsAttachmentDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsReadingAreaDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsReadingAreaDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsRadioButtonItemDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsRadioButtonItemDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsPredefinedElementDefinition
+  to: EnvelopeGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeGetElementsPredefinedElementDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsPredefinedElementDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetElementsLinkDefinition
+  to: EnvelopeGetElementsPosition
+  type: has_one
+  via: Position
+- from: EnvelopeGetElementsLinkDefinition
+  to: EnvelopeGetElementsSize
+  type: has_one
+  via: Size
+- from: EnvelopeGetConfigurationResponse
+  to: EnvelopeGetConfigurationActivity
+  type: has_many
+  via: Activities
+- from: EnvelopeGetConfigurationActivity
+  to: EnvelopeGetConfigurationAction
+  type: has_one
+  via: Action
+- from: EnvelopeGetConfigurationAction
+  to: EnvelopeGetConfigurationSign
+  type: has_one
+  via: Sign
+- from: EnvelopeGetConfigurationAction
+  to: EnvelopeGetConfigurationView
+  type: has_one
+  via: View
+- from: EnvelopeGetConfigurationAction
+  to: EnvelopeGetConfigurationSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: EnvelopeGetConfigurationSign
+  to: EnvelopeGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeGetConfigurationSign
+  to: EnvelopeGetConfigurationFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: EnvelopeGetConfigurationSign
+  to: EnvelopeGetConfigurationSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: EnvelopeGetConfigurationSignAsP7M
+  to: EnvelopeGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeGetConfigurationSignAsP7M
+  to: EnvelopeGetConfigurationP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: EnvelopeGetConfigurationAdvancedRecipientConfiguration
+  to: EnvelopeGetConfigurationAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeGetConfigurationFinishAction
+  to: EnvelopeGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: EnvelopeGetConfigurationFinishAction
+  to: EnvelopeGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: EnvelopeGetConfigurationFinishAction
+  to: EnvelopeGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: EnvelopeGetConfigurationSignatureDataConfiguration
+  to: EnvelopeGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeGetConfigurationP7MSignatureMethods
+  to: EnvelopeGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeSendUnassignedElements
+  to: EnvelopeSendTextBox
+  type: has_many
+  via: TextBoxes
+- from: EnvelopeSendUnassignedElements
+  to: EnvelopeSendCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: EnvelopeSendUnassignedElements
+  to: EnvelopeSendComboBox
+  type: has_many
+  via: ComboBoxes
+- from: EnvelopeSendUnassignedElements
+  to: EnvelopeSendRadioButtonGroup
+  type: has_many
+  via: RadioButtons
+- from: EnvelopeSendUnassignedElements
+  to: EnvelopeSendListBox
+  type: has_many
+  via: ListBoxes
+- from: EnvelopeSendActivity
+  to: EnvelopeSendAction
+  type: has_one
+  via: Action
+- from: EnvelopeSendAction
+  to: EnvelopeSendSign
+  type: has_one
+  via: Sign
+- from: EnvelopeSendAction
+  to: EnvelopeSendView
+  type: has_one
+  via: View
+- from: EnvelopeSendAction
+  to: EnvelopeSendSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: EnvelopeSendView
+  to: EnvelopeSendRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeSendSignAsP7M
+  to: EnvelopeSendAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeSendSignAsP7M
+  to: EnvelopeSendP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: EnvelopeSendElements
+  to: EnvelopeSendTextBox
+  type: has_many
+  via: TextBoxes
+- from: EnvelopeSendElements
+  to: EnvelopeSendCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: EnvelopeSendElements
+  to: EnvelopeSendComboBox
+  type: has_many
+  via: ComboBoxes
+- from: EnvelopeSendElements
+  to: EnvelopeSendRadioButtonGroup
+  type: has_many
+  via: RadioButtons
+- from: EnvelopeSendElements
+  to: EnvelopeSendListBox
+  type: has_many
+  via: ListBoxes
+- from: EnvelopeSendElements
+  to: EnvelopeSendSignatureField
+  type: has_many
+  via: Signatures
+- from: EnvelopeSendElements
+  to: EnvelopeSendPredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: EnvelopeSendFinishAction
+  to: EnvelopeSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: EnvelopeSendFinishAction
+  to: EnvelopeSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: EnvelopeSendFinishAction
+  to: EnvelopeSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: EnvelopeSendSignatureDataConfiguration
+  to: EnvelopeSendSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeSendSignatureFieldDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendSignatureFieldDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendAttachmentDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendAttachmentDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendReadingAreaDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendReadingAreaDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendPredefinedElementDefinition
+  to: EnvelopeSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeSendPredefinedElementDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendPredefinedElementDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendLinkDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendLinkDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendSignatureField
+  to: EnvelopeSendAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: EnvelopeSendSignatureField
+  to: EnvelopeSendSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeSendP7MSignatureMethods
+  to: EnvelopeSendSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeSendRecipientConfiguration
+  to: EnvelopeSendContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeSendRecipientConfiguration
+  to: EnvelopeSendAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeSendAdvancedRecipientConfiguration
+  to: EnvelopeSendContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeSendAdvancedRecipientConfiguration
+  to: EnvelopeSendAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeSendRadioButtonItemDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendRadioButtonItemDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendSign
+  to: EnvelopeSendAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeSendSign
+  to: EnvelopeSendElements
+  type: has_one
+  via: Elements
+- from: EnvelopeSendSign
+  to: EnvelopeSendFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: EnvelopeSendSign
+  to: EnvelopeSendSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: EnvelopeSendListBoxDefinition
+  to: EnvelopeSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeSendListBoxDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendListBoxDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendComboBoxDefinition
+  to: EnvelopeSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeSendComboBoxDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendComboBoxDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendCheckBoxDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendCheckBoxDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendTextBoxDefinition
+  to: EnvelopeSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeSendTextBoxDefinition
+  to: EnvelopeSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeSendTextBoxDefinition
+  to: EnvelopeSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeSendListBox
+  to: EnvelopeSendListBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeSendComboBox
+  to: EnvelopeSendComboBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeSendCheckBox
+  to: EnvelopeSendCheckBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeSendTextBox
+  to: EnvelopeSendFieldValidation
+  type: has_one
+  via: Validation
+- from: EnvelopeSendTextBox
+  to: EnvelopeSendTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeSendRequest
+  to: EnvelopeSendUnassignedElements
+  type: has_one
+  via: UnassignedElements
+- from: EnvelopeSendRequest
+  to: EnvelopeSendActivity
+  type: has_many
+  via: Activities
+- from: EnvelopeActivityReplaceAction
+  to: EnvelopeActivityReplaceSign
+  type: has_one
+  via: Sign
+- from: EnvelopeActivityReplaceAction
+  to: EnvelopeActivityReplaceView
+  type: has_one
+  via: View
+- from: EnvelopeActivityReplaceAction
+  to: EnvelopeActivityReplaceSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: EnvelopeActivityReplaceView
+  to: EnvelopeActivityReplaceRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeActivityReplaceSignAsP7M
+  to: EnvelopeActivityReplaceAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeActivityReplaceSignAsP7M
+  to: EnvelopeActivityReplaceP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: EnvelopeActivityReplaceElements
+  to: EnvelopeActivityReplaceSignatureField
+  type: has_many
+  via: Signatures
+- from: EnvelopeActivityReplaceElements
+  to: EnvelopeActivityReplacePredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: EnvelopeActivityReplaceFinishAction
+  to: EnvelopeActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: EnvelopeActivityReplaceFinishAction
+  to: EnvelopeActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: EnvelopeActivityReplaceFinishAction
+  to: EnvelopeActivityReplaceAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: EnvelopeActivityReplaceSignatureDataConfiguration
+  to: EnvelopeActivityReplaceSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeActivityReplaceSignatureFieldDefinition
+  to: EnvelopeActivityReplacePosition
+  type: has_one
+  via: Position
+- from: EnvelopeActivityReplaceSignatureFieldDefinition
+  to: EnvelopeActivityReplaceSize
+  type: has_one
+  via: Size
+- from: EnvelopeActivityReplaceAttachmentDefinition
+  to: EnvelopeActivityReplacePosition
+  type: has_one
+  via: Position
+- from: EnvelopeActivityReplaceAttachmentDefinition
+  to: EnvelopeActivityReplaceSize
+  type: has_one
+  via: Size
+- from: EnvelopeActivityReplaceReadingAreaDefinition
+  to: EnvelopeActivityReplacePosition
+  type: has_one
+  via: Position
+- from: EnvelopeActivityReplaceReadingAreaDefinition
+  to: EnvelopeActivityReplaceSize
+  type: has_one
+  via: Size
+- from: EnvelopeActivityReplacePredefinedElementDefinition
+  to: EnvelopeActivityReplacePosition
+  type: has_one
+  via: Position
+- from: EnvelopeActivityReplacePredefinedElementDefinition
+  to: EnvelopeActivityReplaceSize
+  type: has_one
+  via: Size
+- from: EnvelopeActivityReplaceLinkDefinition
+  to: EnvelopeActivityReplacePosition
+  type: has_one
+  via: Position
+- from: EnvelopeActivityReplaceLinkDefinition
+  to: EnvelopeActivityReplaceSize
+  type: has_one
+  via: Size
+- from: EnvelopeActivityReplaceSignatureField
+  to: EnvelopeActivityReplaceAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: EnvelopeActivityReplaceSignatureField
+  to: EnvelopeActivityReplaceSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeActivityReplaceP7MSignatureMethods
+  to: EnvelopeActivityReplaceSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeActivityReplaceRecipientConfiguration
+  to: EnvelopeActivityReplaceContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeActivityReplaceRecipientConfiguration
+  to: EnvelopeActivityReplaceAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeActivityReplaceAdvancedRecipientConfiguration
+  to: EnvelopeActivityReplaceContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeActivityReplaceAdvancedRecipientConfiguration
+  to: EnvelopeActivityReplaceAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeActivityReplaceSign
+  to: EnvelopeActivityReplaceAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeActivityReplaceSign
+  to: EnvelopeActivityReplaceElements
+  type: has_one
+  via: Elements
+- from: EnvelopeActivityReplaceSign
+  to: EnvelopeActivityReplaceFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: EnvelopeActivityReplaceSign
+  to: EnvelopeActivityReplaceSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: EnvelopeBulkSendUnassignedElements
+  to: EnvelopeBulkSendTextBox
+  type: has_many
+  via: TextBoxes
+- from: EnvelopeBulkSendUnassignedElements
+  to: EnvelopeBulkSendCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: EnvelopeBulkSendUnassignedElements
+  to: EnvelopeBulkSendComboBox
+  type: has_many
+  via: ComboBoxes
+- from: EnvelopeBulkSendUnassignedElements
+  to: EnvelopeBulkSendRadioButtonGroup
+  type: has_many
+  via: RadioButtons
+- from: EnvelopeBulkSendUnassignedElements
+  to: EnvelopeBulkSendListBox
+  type: has_many
+  via: ListBoxes
+- from: EnvelopeBulkSendActivity
+  to: EnvelopeBulkSendAction
+  type: has_one
+  via: Action
+- from: EnvelopeBulkSendAction
+  to: EnvelopeBulkSendSign
+  type: has_one
+  via: Sign
+- from: EnvelopeBulkSendAction
+  to: EnvelopeBulkSendView
+  type: has_one
+  via: View
+- from: EnvelopeBulkSendAction
+  to: EnvelopeBulkSendSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: EnvelopeBulkSendAction
+  to: EnvelopeBulkSendSignBulk
+  type: has_one
+  via: SignBulk
+- from: EnvelopeBulkSendView
+  to: EnvelopeBulkSendRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeBulkSendSignAsP7M
+  to: EnvelopeBulkSendAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeBulkSendSignAsP7M
+  to: EnvelopeBulkSendP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendTextBox
+  type: has_many
+  via: TextBoxes
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendCheckBox
+  type: has_many
+  via: CheckBoxes
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendComboBox
+  type: has_many
+  via: ComboBoxes
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendRadioButtonGroup
+  type: has_many
+  via: RadioButtons
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendListBox
+  type: has_many
+  via: ListBoxes
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendSignatureField
+  type: has_many
+  via: Signatures
+- from: EnvelopeBulkSendElements
+  to: EnvelopeBulkSendPredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: EnvelopeBulkSendFinishAction
+  to: EnvelopeBulkSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: EnvelopeBulkSendFinishAction
+  to: EnvelopeBulkSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: EnvelopeBulkSendFinishAction
+  to: EnvelopeBulkSendAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: EnvelopeBulkSendSignatureDataConfiguration
+  to: EnvelopeBulkSendSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeBulkSendRecipient
+  to: EnvelopeBulkSendAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeBulkSendRecipient
+  to: EnvelopeBulkSendSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: EnvelopeBulkSendSignatureFieldDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendSignatureFieldDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendAttachmentDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendAttachmentDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendReadingAreaDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendReadingAreaDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendPredefinedElementDefinition
+  to: EnvelopeBulkSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeBulkSendPredefinedElementDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendPredefinedElementDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendLinkDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendLinkDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendSignatureField
+  to: EnvelopeBulkSendAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: EnvelopeBulkSendSignatureField
+  to: EnvelopeBulkSendSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeBulkSendP7MSignatureMethods
+  to: EnvelopeBulkSendSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: EnvelopeBulkSendRecipientConfiguration
+  to: EnvelopeBulkSendContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeBulkSendRecipientConfiguration
+  to: EnvelopeBulkSendAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeBulkSendAdvancedRecipientConfiguration
+  to: EnvelopeBulkSendContactInformation
+  type: has_one
+  via: ContactInformation
+- from: EnvelopeBulkSendAdvancedRecipientConfiguration
+  to: EnvelopeBulkSendAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: EnvelopeBulkSendRadioButtonItemDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendRadioButtonItemDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendSignBulk
+  to: EnvelopeBulkSendRecipient
+  type: has_many
+  via: BulkRecipients
+- from: EnvelopeBulkSendSignBulk
+  to: EnvelopeBulkSendElements
+  type: has_one
+  via: Elements
+- from: EnvelopeBulkSendSignBulk
+  to: EnvelopeBulkSendFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: EnvelopeBulkSendSign
+  to: EnvelopeBulkSendAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: EnvelopeBulkSendSign
+  to: EnvelopeBulkSendElements
+  type: has_one
+  via: Elements
+- from: EnvelopeBulkSendSign
+  to: EnvelopeBulkSendFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: EnvelopeBulkSendSign
+  to: EnvelopeBulkSendSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: EnvelopeBulkSendListBoxDefinition
+  to: EnvelopeBulkSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeBulkSendListBoxDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendListBoxDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendComboBoxDefinition
+  to: EnvelopeBulkSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeBulkSendComboBoxDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendComboBoxDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendCheckBoxDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendCheckBoxDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendTextBoxDefinition
+  to: EnvelopeBulkSendTextFormat
+  type: has_one
+  via: TextFormat
+- from: EnvelopeBulkSendTextBoxDefinition
+  to: EnvelopeBulkSendPosition
+  type: has_one
+  via: Position
+- from: EnvelopeBulkSendTextBoxDefinition
+  to: EnvelopeBulkSendSize
+  type: has_one
+  via: Size
+- from: EnvelopeBulkSendListBox
+  to: EnvelopeBulkSendListBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeBulkSendComboBox
+  to: EnvelopeBulkSendComboBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeBulkSendCheckBox
+  to: EnvelopeBulkSendCheckBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeBulkSendTextBox
+  to: EnvelopeBulkSendFieldValidation
+  type: has_one
+  via: Validation
+- from: EnvelopeBulkSendTextBox
+  to: EnvelopeBulkSendTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: EnvelopeBulkSendRequest
+  to: EnvelopeBulkSendUnassignedElements
+  type: has_one
+  via: UnassignedElements
+- from: EnvelopeBulkSendRequest
+  to: EnvelopeBulkSendActivity
+  type: has_many
+  via: Activities
+- from: FilePrepareElements
+  to: FilePrepareTextBox
+  type: has_many
+  via: TextBoxes
+- from: FilePrepareElements
+  to: FilePrepareSignatureField
+  type: has_many
+  via: Signatures
+- from: FilePrepareTextBox
+  to: FilePrepareFieldValidation
+  type: has_one
+  via: Validation
+- from: FilePrepareTextBox
+  to: FilePrepareTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: FilePrepareSignatureField
+  to: FilePrepareAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: FilePrepareSignatureField
+  to: FilePrepareSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: FilePrepareTextBoxDefinition
+  to: FilePrepareTextFormat
+  type: has_one
+  via: TextFormat
+- from: FilePrepareTextBoxDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareTextBoxDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareCheckBoxDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareCheckBoxDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareComboBoxDefinition
+  to: FilePrepareTextFormat
+  type: has_one
+  via: TextFormat
+- from: FilePrepareComboBoxDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareComboBoxDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareListBoxDefinition
+  to: FilePrepareTextFormat
+  type: has_one
+  via: TextFormat
+- from: FilePrepareListBoxDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareListBoxDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareSignatureFieldDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareSignatureFieldDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareAttachmentDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareAttachmentDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareRadioButtonItemDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareRadioButtonItemDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: FilePrepareLinkDefinition
+  to: FilePreparePosition
+  type: has_one
+  via: Position
+- from: FilePrepareLinkDefinition
+  to: FilePrepareSize
+  type: has_one
+  via: Size
+- from: LicenseGetResponse
+  to: LicenseGetAmount
+  type: has_one
+  via: Envelopes
+- from: LicenseGetResponse
+  to: LicenseGetAmount
+  type: has_one
+  via: EnvelopeSenderUsers
+- from: LicenseGetResponse
+  to: LicenseGetAmount
+  type: has_one
+  via: EnvelopeViewerUsers
+- from: TemplateGetElementsElements
+  to: TemplateGetElementsTextBox
+  type: has_many
+  via: TextBoxes
+- from: TemplateGetElementsElements
+  to: TemplateGetElementsSignatureField
+  type: has_many
+  via: Signatures
+- from: TemplateGetElementsElements
+  to: TemplateGetElementsPredefinedFieldElements
+  type: has_one
+  via: PredefinedFieldElements
+- from: TemplateGetElementsTextBox
+  to: TemplateGetElementsFieldValidation
+  type: has_one
+  via: Validation
+- from: TemplateGetElementsTextBox
+  to: TemplateGetElementsTextBoxDefinition
+  type: has_one
+  via: FieldDefinition
+- from: TemplateGetElementsSignatureField
+  to: TemplateGetElementsAllowedSignatureTypes
+  type: has_one
+  via: AllowedSignatureTypes
+- from: TemplateGetElementsSignatureField
+  to: TemplateGetElementsSignatureFieldDefinition
+  type: has_one
+  via: FieldDefinition
+- from: TemplateGetElementsTextBoxDefinition
+  to: TemplateGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: TemplateGetElementsTextBoxDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsTextBoxDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsCheckBoxDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsCheckBoxDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsComboBoxDefinition
+  to: TemplateGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: TemplateGetElementsComboBoxDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsComboBoxDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsListBoxDefinition
+  to: TemplateGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: TemplateGetElementsListBoxDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsListBoxDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsSignatureFieldDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsSignatureFieldDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsAttachmentDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsAttachmentDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsReadingAreaDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsReadingAreaDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsRadioButtonItemDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsRadioButtonItemDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsPredefinedElementDefinition
+  to: TemplateGetElementsTextFormat
+  type: has_one
+  via: TextFormat
+- from: TemplateGetElementsPredefinedElementDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsPredefinedElementDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetElementsLinkDefinition
+  to: TemplateGetElementsPosition
+  type: has_one
+  via: Position
+- from: TemplateGetElementsLinkDefinition
+  to: TemplateGetElementsSize
+  type: has_one
+  via: Size
+- from: TemplateGetConfigurationResponse
+  to: TemplateGetConfigurationActivity
+  type: has_many
+  via: Activities
+- from: TemplateGetConfigurationResponse
+  to: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  type: has_one
+  via: DefaultSignatureTypeConfiguration
+- from: TemplateGetConfigurationActivity
+  to: TemplateGetConfigurationAction
+  type: has_one
+  via: Action
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: None
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: ClickToSign
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: DrawToSign
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: TypeToSign
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: LocalCertificate
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: DisposableCertificate
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: Biometric
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: RemoteCertificate
+- from: TemplateGetConfigurationDefaultSignatureTypeConfiguration
+  to: TemplateGetConfigurationDefaultSignature
+  type: has_one
+  via: OneTimePassword
+- from: TemplateGetConfigurationAction
+  to: TemplateGetConfigurationSign
+  type: has_one
+  via: Sign
+- from: TemplateGetConfigurationAction
+  to: TemplateGetConfigurationView
+  type: has_one
+  via: View
+- from: TemplateGetConfigurationAction
+  to: TemplateGetConfigurationSignAsP7M
+  type: has_one
+  via: SignAsP7M
+- from: TemplateGetConfigurationAction
+  to: TemplateGetConfigurationSignBulk
+  type: has_one
+  via: SignBulk
+- from: TemplateGetConfigurationSign
+  to: TemplateGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: TemplateGetConfigurationSign
+  to: TemplateGetConfigurationFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: TemplateGetConfigurationSign
+  to: TemplateGetConfigurationSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration
+- from: TemplateGetConfigurationSignAsP7M
+  to: TemplateGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: TemplateGetConfigurationSignAsP7M
+  to: TemplateGetConfigurationP7MSignatureMethods
+  type: has_one
+  via: SignatureMethods
+- from: TemplateGetConfigurationSignBulk
+  to: TemplateGetConfigurationBulkRecipient
+  type: has_many
+  via: RecipientConfigurations
+- from: TemplateGetConfigurationSignBulk
+  to: TemplateGetConfigurationFinishAction
+  type: has_one
+  via: FinishActionConfiguration
+- from: TemplateGetConfigurationAdvancedRecipientConfiguration
+  to: TemplateGetConfigurationAuthenticationConfiguration
+  type: has_one
+  via: AuthenticationConfiguration
+- from: TemplateGetConfigurationFinishAction
+  to: TemplateGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForIos
+- from: TemplateGetConfigurationFinishAction
+  to: TemplateGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForAndroid
+- from: TemplateGetConfigurationFinishAction
+  to: TemplateGetConfigurationAppFinishAction
+  type: has_one
+  via: SignificantClientSignatureCaptureForWindows
+- from: TemplateGetConfigurationSignatureDataConfiguration
+  to: TemplateGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: TemplateGetConfigurationP7MSignatureMethods
+  to: TemplateGetConfigurationSignaturePluginSignatureData
+  type: has_many
+  via: SignaturePluginData
+- from: TemplateGetConfigurationBulkRecipient
+  to: TemplateGetConfigurationAdvancedRecipientConfiguration
+  type: has_one
+  via: RecipientConfiguration
+- from: TemplateGetConfigurationBulkRecipient
+  to: TemplateGetConfigurationSignatureDataConfiguration
+  type: has_one
+  via: SignatureDataConfiguration

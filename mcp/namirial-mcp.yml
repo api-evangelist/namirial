@@ -1,0 +1,702 @@
+generated: '2026-10-18'
+method: derived
+status: candidate
+source: openapi/namirial-esignanywhere-openapi.yml, openapi/namirial-connectors-openapi.yml
+search:
+  query: Namirial eSignAnyWhere MCP server Model Context Protocol
+  date: '2026-10-18'
+  result: 'No official Namirial MCP server found. Namirial documentation index (https://documentation.namirial.com/llms.txt, 200, 120 pages) does not mention MCP. Pre-flight mcp_tool_table empty. Only third-party:
+    Zapier eSignAnyWhere MCP (https://zapier.com/mcp/esignanywhere), not provider-operated.'
+third_party:
+- name: Zapier eSignAnyWhere MCP
+  url: https://zapier.com/mcp/esignanywhere
+  official: false
+  note: Zapier-hosted action bridge; not a Namirial product. Not verified beyond search listing.
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+auth:
+  esignanywhere: apiToken header (securityDefinitions.apiToken)
+  connectors: OAuth 2 authorization code / client credentials (scopes documents:read|write, processes:read|write, auth:read); basic auth for /auth/token
+tool_count: 81
+tools:
+- name: authorization_who_am_i
+  category: Authorization
+  description: Get information about the authenticated user.
+  api: Namirial eSignAnyWhere API
+  operationId: Authorization_WhoAmI
+  method: GET
+  path: /v6/authorization/whoami
+  read_only: true
+- name: authorization_validate
+  category: Authorization
+  description: Check if the authenticated user is authorized to use the API.
+  api: Namirial eSignAnyWhere API
+  operationId: Authorization_Validate
+  method: GET
+  path: /v6/authorization/validate
+  read_only: true
+- name: automatic_profile_get_all
+  category: AutomaticProfile
+  description: Get the available automatic signing profiles.
+  api: Namirial eSignAnyWhere API
+  operationId: AutomaticProfile_GetAll
+  method: GET
+  path: /v6/organization/automaticprofile
+  read_only: true
+- name: draft_get
+  category: Draft
+  description: Get an overview of a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_Get
+  method: GET
+  path: /v6/draft/{draftId}
+  read_only: true
+- name: draft_get_files
+  category: Draft
+  description: Get the documents of a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_GetFiles
+  method: GET
+  path: /v6/draft/{draftId}/files
+  read_only: true
+- name: draft_get_elements
+  category: Draft
+  description: Get the elements belonging to the documents of a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_GetElements
+  method: GET
+  path: /v6/draft/{draftId}/elements
+  read_only: true
+- name: draft_get_configuration
+  category: Draft
+  description: Get the configuration of a draft and its activities.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_GetConfiguration
+  method: GET
+  path: /v6/draft/{draftId}/configuration
+  read_only: true
+- name: draft_find
+  category: Draft
+  description: Get basic information about drafts which match your filter criteria.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_Find
+  method: POST
+  path: /v6/draft/find
+  read_only: false
+- name: draft_send_draft
+  category: Draft
+  description: Send a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_SendDraft
+  method: POST
+  path: /v6/draft/send
+  read_only: false
+- name: draft_create
+  category: Draft
+  description: Create a new draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_Create
+  method: POST
+  path: /v6/draft/create
+  read_only: false
+- name: draft_delete
+  category: Draft
+  description: Delete a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_Delete
+  method: POST
+  path: /v6/draft/delete
+  read_only: false
+- name: draft_update
+  category: Draft
+  description: Update the configuration of the draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_Update
+  method: POST
+  path: /v6/draft/update
+  read_only: false
+- name: draft_reorder_activities
+  category: Draft
+  description: Reorder the activities of a draft.
+  api: Namirial eSignAnyWhere API
+  operationId: Draft_ReorderActivities
+  method: POST
+  path: /v6/draft/reorderactivities
+  read_only: false
+- name: draft_activity_replace
+  category: DraftActivity
+  description: Replace an existing activity of a draft with a new one.
+  api: Namirial eSignAnyWhere API
+  operationId: DraftActivity_Replace
+  method: POST
+  path: /v6/draft/activity/replace
+  read_only: false
+- name: envelope_get
+  category: Envelope
+  description: Get an overview of an envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Get
+  method: GET
+  path: /v6/envelope/{envelopeId}
+  read_only: true
+- name: envelope_get_files
+  category: Envelope
+  description: Get the documents and related files of an envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_GetFiles
+  method: GET
+  path: /v6/envelope/{envelopeId}/files
+  read_only: true
+- name: envelope_get_history
+  category: Envelope
+  description: Get the event history of an envelope
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_GetHistory
+  method: GET
+  path: /v6/envelope/{envelopeId}/history
+  read_only: true
+- name: envelope_get_elements
+  category: Envelope
+  description: Get the elements belonging to the documents of an envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_GetElements
+  method: GET
+  path: /v6/envelope/{envelopeId}/elements
+  read_only: true
+- name: envelope_get_viewer_links
+  category: Envelope
+  description: Get the available links to access the SignAnyWhere Viewer for active activities.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_GetViewerLinks
+  method: GET
+  path: /v6/envelope/{envelopeId}/viewerlinks
+  read_only: true
+- name: envelope_get_configuration
+  category: Envelope
+  description: Get the configuration of an envelope and its activities.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_GetConfiguration
+  method: GET
+  path: /v6/envelope/{envelopeId}/configuration
+  read_only: true
+- name: envelope_find
+  category: Envelope
+  description: Get basic information about envelopes which match your filter criteria..
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Find
+  method: POST
+  path: /v6/envelope/find
+  read_only: false
+- name: envelope_send
+  category: Envelope
+  description: Create and send an envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Send
+  method: POST
+  path: /v6/envelope/send
+  read_only: false
+- name: envelope_cancel
+  category: Envelope
+  description: Cancel an active envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Cancel
+  method: POST
+  path: /v6/envelope/cancel
+  read_only: false
+- name: envelope_delete
+  category: Envelope
+  description: Delete an envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Delete
+  method: POST
+  path: /v6/envelope/delete
+  read_only: false
+- name: envelope_remind
+  category: Envelope
+  description: Send a reminder to active activities.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Remind
+  method: POST
+  path: /v6/envelope/remind
+  read_only: false
+- name: envelope_unlock
+  category: Envelope
+  description: Unlock an envelope which is locked due to a started parallel activity.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_Unlock
+  method: POST
+  path: /v6/envelope/unlock
+  read_only: false
+- name: envelope_restart_expired
+  category: Envelope
+  description: Restart an expired envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: Envelope_RestartExpired
+  method: POST
+  path: /v6/envelope/restartexpired
+  read_only: false
+- name: envelope_activity_delete
+  category: EnvelopeActivity
+  description: Delete an unfinished activity of an active envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeActivity_Delete
+  method: POST
+  path: /v6/envelope/activity/delete
+  read_only: false
+- name: envelope_activity_replace
+  category: EnvelopeActivity
+  description: Replace an unfinished activity of an active envelope with a new one.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeActivity_Replace
+  method: POST
+  path: /v6/envelope/activity/replace
+  read_only: false
+- name: envelope_bulk_get
+  category: EnvelopeBulk
+  description: Get an overview of an envelope bulk and its children.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Get
+  method: GET
+  path: /v6/envelopebulk/{bulkId}
+  read_only: true
+- name: envelope_bulk_find
+  category: EnvelopeBulk
+  description: Get basic information about envelope bulks which match your filter criteria.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Find
+  method: POST
+  path: /v6/envelopebulk/find
+  read_only: false
+- name: envelope_bulk_send
+  category: EnvelopeBulk
+  description: Create and send an envelope bulk.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Send
+  method: POST
+  path: /v6/envelopebulk/send
+  read_only: false
+- name: envelope_bulk_cancel
+  category: EnvelopeBulk
+  description: Cancel all active BulkChild envelopes.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Cancel
+  method: POST
+  path: /v6/envelopebulk/cancel
+  read_only: false
+- name: envelope_bulk_delete
+  category: EnvelopeBulk
+  description: Delete an envelope bulk and its children.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Delete
+  method: POST
+  path: /v6/envelopebulk/delete
+  read_only: false
+- name: envelope_bulk_remind
+  category: EnvelopeBulk
+  description: Send a reminder to active activities of all BulkChild envelopes.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_Remind
+  method: POST
+  path: /v6/envelopebulk/remind
+  read_only: false
+- name: envelope_bulk_restart_expired
+  category: EnvelopeBulk
+  description: Restart all expired BulkChild envelopes.
+  api: Namirial eSignAnyWhere API
+  operationId: EnvelopeBulk_RestartExpired
+  method: POST
+  path: /v6/envelopebulk/restartexpired
+  read_only: false
+- name: file_download_completed
+  category: File
+  description: Download a file belonging to a completed envelope.
+  api: Namirial eSignAnyWhere API
+  operationId: File_DownloadCompleted
+  method: GET
+  path: /v6/file/{fileId}
+  read_only: true
+- name: file_delete
+  category: File
+  description: Delete an uploaded file.
+  api: Namirial eSignAnyWhere API
+  operationId: File_Delete
+  method: POST
+  path: /v6/file/delete
+  read_only: false
+- name: file_upload
+  category: File
+  description: Upload a file for temporary use.
+  api: Namirial eSignAnyWhere API
+  operationId: File_Upload
+  method: POST
+  path: /v6/file/upload
+  read_only: false
+- name: file_prepare
+  category: File
+  description: Prepare uploaded files by extracting contained elements, advanced document tags and SigStrings.
+  api: Namirial eSignAnyWhere API
+  operationId: File_Prepare
+  method: POST
+  path: /v6/file/prepare
+  read_only: false
+- name: license_get
+  category: License
+  description: Get information about the current license status.
+  api: Namirial eSignAnyWhere API
+  operationId: License_Get
+  method: GET
+  path: /v6/organization/license
+  read_only: true
+- name: sealing_certificate_get_all
+  category: SealingCertificate
+  description: Get the available sealing certificates.
+  api: Namirial eSignAnyWhere API
+  operationId: SealingCertificate_GetAll
+  method: GET
+  path: /v6/organization/sealingcertificates
+  read_only: true
+- name: system_version
+  category: System
+  description: Get the current version of eSignAnyWhere.
+  api: Namirial eSignAnyWhere API
+  operationId: System_Version
+  method: GET
+  path: /v6/system/version
+  read_only: true
+- name: team_get
+  category: Team
+  description: Get the available teams.
+  api: Namirial eSignAnyWhere API
+  operationId: Team_Get
+  method: GET
+  path: /v6/organization/team
+  read_only: true
+- name: team_replace
+  category: Team
+  description: Replace all existing teams with the provided teams.
+  api: Namirial eSignAnyWhere API
+  operationId: Team_Replace
+  method: POST
+  path: /v6/organization/team/replace
+  read_only: false
+- name: template_get_template_by_id
+  category: Template
+  description: Get an overview of a template.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_GetTemplateById
+  method: GET
+  path: /v6/template/{templateId}
+  read_only: true
+- name: template_get_files
+  category: Template
+  description: Get the documents of a template.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_GetFiles
+  method: GET
+  path: /v6/template/{templateId}/files
+  read_only: true
+- name: template_get_elements
+  category: Template
+  description: Get the elements belonging to the documents of a template.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_GetElements
+  method: GET
+  path: /v6/template/{templateId}/elements
+  read_only: true
+- name: template_get_configuration
+  category: Template
+  description: Get the configuration of a template and its activities.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_GetConfiguration
+  method: GET
+  path: /v6/template/{templateId}/configuration
+  read_only: true
+- name: template_find
+  category: Template
+  description: Get basic information about templates which match your filter criteria.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_Find
+  method: POST
+  path: /v6/template/find
+  read_only: false
+- name: template_create_draft
+  category: Template
+  description: Create a new draft from a template.
+  api: Namirial eSignAnyWhere API
+  operationId: Template_CreateDraft
+  method: POST
+  path: /v6/template/createdraft
+  read_only: false
+- name: connectors_get_auth_authorize
+  category: Auth
+  description: Starts an authorization code flow
+  api: Namirial Connectors APIs
+  operationId: get_auth_authorize
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /auth/authorize
+  read_only: true
+- name: connectors_post_auth_token
+  category: Auth
+  description: Returns the Access and Refresh JWT bearer tokens
+  api: Namirial Connectors APIs
+  operationId: post_auth_token
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /auth/token
+  read_only: false
+- name: connectors_post_auth_instances_find
+  category: Auth
+  description: Return the instance list
+  api: Namirial Connectors APIs
+  operationId: post_auth_instances_find
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /auth/instances/find
+  read_only: false
+- name: connectors_get_auth_userinfo
+  category: Auth
+  description: Get user information
+  api: Namirial Connectors APIs
+  operationId: get_auth_userinfo
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /auth/userinfo
+  read_only: true
+- name: connectors_get_clients
+  category: Clients
+  description: Get the client list
+  api: Namirial Connectors APIs
+  operationId: get_clients
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /clients
+  read_only: true
+- name: connectors_post_clients
+  category: Clients
+  description: Create new client
+  api: Namirial Connectors APIs
+  operationId: post_clients
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /clients
+  read_only: false
+- name: connectors_get_clients_by_clientid
+  category: Clients
+  description: Get client detail
+  api: Namirial Connectors APIs
+  operationId: get_clients_by_clientid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /clients/{clientId}
+  read_only: true
+- name: connectors_put_clients_by_clientid
+  category: Clients
+  description: Edit password of selected Client
+  api: Namirial Connectors APIs
+  operationId: put_clients_by_clientid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: PUT
+  path: /clients/{clientId}
+  read_only: false
+- name: connectors_delete_clients_by_clientid
+  category: Clients
+  description: Delete selected Client
+  api: Namirial Connectors APIs
+  operationId: delete_clients_by_clientid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: DELETE
+  path: /clients/{clientId}
+  read_only: false
+- name: connectors_get_instances
+  category: Instances
+  description: Get the instance list
+  api: Namirial Connectors APIs
+  operationId: get_instances
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /instances
+  read_only: true
+- name: connectors_post_instances
+  category: Instances
+  description: Create new instance
+  api: Namirial Connectors APIs
+  operationId: post_instances
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /instances
+  read_only: false
+- name: connectors_get_instances_by_instanceid
+  category: Instances
+  description: Get instance detail
+  api: Namirial Connectors APIs
+  operationId: get_instances_by_instanceid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /instances/{instanceId}
+  read_only: true
+- name: connectors_put_instances_by_instanceid
+  category: Instances
+  description: Edit selected Instance
+  api: Namirial Connectors APIs
+  operationId: put_instances_by_instanceid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: PUT
+  path: /instances/{instanceId}
+  read_only: false
+- name: connectors_delete_instances_by_instanceid
+  category: Instances
+  description: Delete selected Instance
+  api: Namirial Connectors APIs
+  operationId: delete_instances_by_instanceid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: DELETE
+  path: /instances/{instanceId}
+  read_only: false
+- name: connectors_post_clients_instances
+  category: ClientsInstances
+  description: Assign an instance to a client
+  api: Namirial Connectors APIs
+  operationId: post_clients_instances
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /clientsInstances
+  read_only: false
+- name: connectors_delete_clients_instances_by_clientid_by_instanceid
+  category: ClientsInstances
+  description: Remove instance from a client
+  api: Namirial Connectors APIs
+  operationId: delete_clients_instances_by_clientid_by_instanceid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: DELETE
+  path: /clientsInstances/{clientId}/{instanceId}
+  read_only: false
+- name: connectors_get_documents_by_documentid
+  category: Documents
+  description: Download the document from eSAW
+  api: Namirial Connectors APIs
+  operationId: get_documents_by_documentid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /documents/{documentId}
+  read_only: true
+- name: connectors_get_documents_urls
+  category: Documents
+  description: Retrieve a list of presigned urls
+  api: Namirial Connectors APIs
+  operationId: get_documents_urls
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /documents/urls
+  read_only: true
+- name: connectors_get_organizations
+  category: Organizations
+  description: Get The organization by Email
+  api: Namirial Connectors APIs
+  operationId: get_organizations
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /organizations
+  read_only: true
+- name: connectors_get_auth_organizations
+  category: Organizations
+  description: Get the organization list
+  api: Namirial Connectors APIs
+  operationId: get_auth_organizations
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /auth/organizations
+  read_only: true
+- name: connectors_post_auth_organizations
+  category: Organizations
+  description: Create new organization
+  api: Namirial Connectors APIs
+  operationId: post_auth_organizations
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /auth/organizations
+  read_only: false
+- name: connectors_get_auth_organizations_by_organizationid
+  category: Organizations
+  description: Get organization detail
+  api: Namirial Connectors APIs
+  operationId: get_auth_organizations_by_organizationid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /auth/organizations/{organizationId}
+  read_only: true
+- name: connectors_put_auth_organizations_by_organizationid
+  category: Organizations
+  description: Edit selected organization
+  api: Namirial Connectors APIs
+  operationId: put_auth_organizations_by_organizationid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: PUT
+  path: /auth/organizations/{organizationId}
+  read_only: false
+- name: connectors_delete_auth_organizations_by_organizationid
+  category: Organizations
+  description: Delete selected organization
+  api: Namirial Connectors APIs
+  operationId: delete_auth_organizations_by_organizationid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: DELETE
+  path: /auth/organizations/{organizationId}
+  read_only: false
+- name: connectors_post_auth_organizations_instances
+  category: OrganizationsInstances
+  description: Assign an instance to an organization
+  api: Namirial Connectors APIs
+  operationId: post_auth_organizations_instances
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /auth/organizationsInstances
+  read_only: false
+- name: connectors_delete_auth_organizations_instances_by_organizationid_by_instanceid
+  category: OrganizationsInstances
+  description: Remove an instance from an organization
+  api: Namirial Connectors APIs
+  operationId: delete_auth_organizations_instances_by_organizationid_by_instanceid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: DELETE
+  path: /auth/organizationsInstances/{organizationId}/{instanceId}
+  read_only: false
+- name: connectors_post_envelopes
+  category: Envelopes
+  description: Get the envelope list
+  api: Namirial Connectors APIs
+  operationId: post_envelopes
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /envelopes
+  read_only: false
+- name: connectors_get_envelopes_by_envelopeid
+  category: Envelopes
+  description: Get the envelope detail
+  api: Namirial Connectors APIs
+  operationId: get_envelopes_by_envelopeid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /envelopes/{envelopeId}
+  read_only: true
+- name: connectors_post_processes_create_draft
+  category: Processes
+  description: Define the process by creating a draft envelope in eSAW
+  api: Namirial Connectors APIs
+  operationId: post_processes_create_draft
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: POST
+  path: /processes/create/draft
+  read_only: false
+- name: connectors_get_processes_by_processid
+  category: Processes
+  description: Get the process detail
+  api: Namirial Connectors APIs
+  operationId: get_processes_by_processid
+  operationId_source: overlays/namirial-connectors-overlay.yaml
+  method: GET
+  path: /processes/{processId}
+  read_only: true
+notes: Candidate tool list derived one-to-one from OpenAPI operations; nobody ships this server. Connectors operationIds are not in the provider spec and come from the API Evangelist overlay.

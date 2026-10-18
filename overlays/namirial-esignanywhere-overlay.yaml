@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Namirial eSignAnyWhere API v6
+  version: 1.0.0
+extends: ../openapi/_original/namirial-esignanywhere-openapi.yml
+x-generated: '2026-10-18'
+x-method: generated
+x-source: openapi/namirial-esignanywhere-openapi.yml (original openapi/_original/namirial-esignanywhere-v6-swagger.json)
+actions:
+- target: $
+  description: Add a root security requirement for the `apiToken` header scheme the spec defines in securityDefinitions but never requires at the root.
+  update:
+    security:
+    - apiToken: []
+- target: $
+  description: Record the documented sandbox host and the canonical public documentation.
+  update:
+    x-sandbox-host: demo.esignanywhere.net
+    externalDocs:
+      description: eSignAnyWhere API documentation
+      url: https://www.esignanywhere.net/en/esignature-api/
+- target: $.info
+  description: 'Tag the API for agent consumption: identify the surface and the MCP status.'
+  update:
+    x-api-evangelist-mcp: No official MCP server published by Namirial (searched 2026-10-18); see mcp/namirial-mcp.yml for the derived candidate tool list.

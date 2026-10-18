@@ -1,0 +1,288 @@
+openapi: 3.2.0
+info:
+  title: Namirial Clients API
+  version: 1.5.1
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: 'Operations tagged Clients across 2 of this provider''s published API definitions: namirial-connectors-apis.yaml, namirial-connectors-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://esaw-conn-test.namirialtsp.com
+  description: (Development)
+tags:
+- name: Clients
+  description: Manage clients
+  externalDocs:
+    description: Documentation
+    url: https://doc.namirial.com/esaw-connectors/clients
+paths:
+  /clients:
+    get:
+      tags:
+      - Clients
+      summary: Get the client list
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: query
+        name: pageSize
+        schema:
+          type: string
+        required: false
+        description: Number of items per page
+        example: 10
+      - in: query
+        name: pageNumber
+        schema:
+          type: string
+        required: false
+        description: Number of selected page
+        example: 1
+      responses:
+        '200':
+          description: The client list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientListResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getClients
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Clients
+      summary: Create new client
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      responses:
+        '201':
+          description: New Client created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateClient'
+              examples:
+                detail:
+                  $ref: '#/components/examples/CreateClient'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '400':
+          $ref: '#/components/responses/EntityFoundError'
+      operationId: postClients
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+  /clients/{clientId}:
+    get:
+      tags:
+      - Clients
+      summary: Get client detail
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: clientId
+        schema:
+          type: string
+        required: true
+        description: Client Id
+        example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: The client detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientDetail'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: getClientsByClientId
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Clients
+      summary: Edit password of selected Client
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: clientId
+        schema:
+          type: string
+        required: true
+        description: Client Id
+        example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: Client with new password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClient'
+              examples:
+                detail:
+                  $ref: '#/components/examples/CreateClient'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: putClientsByClientId
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Clients
+      summary: Delete selected Client
+      security:
+      - oAuth2AuthCode: []
+      - oAuth2ClientCredentials: []
+      parameters:
+      - in: path
+        name: clientId
+        schema:
+          type: string
+        required: true
+        description: Client Id
+        example: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+      responses:
+        '200':
+          description: Client Deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/EntityNotFoundError'
+        '400':
+          $ref: '#/components/responses/InvalidInputError'
+      operationId: deleteClientsByClientId
+      x-operation-id-source: derived
+    servers:
+    - url: https://esaw-conn-test.namirialtsp.com
+      description: (Development)
+components:
+  schemas:
+    ClientDetail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Client Identifier
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+        instanceList:
+          type: array
+          description: Instance list associated to client
+          items:
+            $ref: '#/components/schemas/Instance'
+    Client:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Client Identifier
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+    Instance:
+      type: object
+      properties:
+        eSawDomainUri:
+          type: string
+          description: The instance eSaw uri
+        eSawVersion:
+          type: string
+          description: The instance eSaw version
+        description:
+          type: string
+          description: The instance description
+        externalIdentifier:
+          type: string
+          description: The instance external identifier
+        esawClientId:
+          type: string
+          description: The eSaw clientId
+        esawClientSecret:
+          type: string
+          description: The eSaw clientSecret
+    CreateClient:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+        clientSecret:
+          type: string
+          description: Client Secret
+    ClientListResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Client'
+    UpdateClient:
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: Connector OAuth Client Id
+        clientSecret:
+          type: string
+          description: Client Secret
+  examples:
+    CreateClient:
+      value:
+        clientId: 8d8e5b6f-aa41-4cfe-ad1f-f82bf6789618
+        clientSecret: $2a$11$PX5SxBCr.KXbQRIJdDhy4eBowj0fbJHAsMnqsL5nNKDh30k3G7qCe
+  responses:
+    EntityNotFoundError:
+      description: Entity described by identifier not found
+    EntityFoundError:
+      description: Entity described by identifier already exists
+    UnauthorizedError:
+      description: Access token is missing or invalid
+    InvalidInputError:
+      description: Input Entity is invalid
+  securitySchemes:
+    oAuth2AuthCode:
+      type: oauth2
+      description: This API uses OAuth 2 with the authorization code grant flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/authorize
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    oAuth2ClientCredentials:
+      type: oauth2
+      description: This API uses OAuth 2 with the client credentials grant flow.
+      flows:
+        clientCredentials:
+          tokenUrl: /auth/token
+          scopes:
+            documents:read: Read documents
+            documents:write: Modify documents
+            processes:read: Read processes
+            processes:write: Modify processes
+            auth:read: Read auth
+    basicAuth:
+      type: http
+      scheme: basic
+externalDocs:
+  description: Official eSAW Connectors
+  url: https://doc.namirial.com/connectors-apis/latest/
+x-refined-from:
+- namirial-connectors-apis.yaml
+- namirial-connectors-openapi.yml
