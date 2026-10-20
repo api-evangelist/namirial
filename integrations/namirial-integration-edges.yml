@@ -5,12 +5,20 @@ source:
 - https://n8n.io/integrations/namirial/
 - https://composio.dev/toolkits/namirial
 - https://monid.ai/tools/namirial
+- https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
+- https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
 checked:
 - https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000FR4oLUAT
+- https://aws.amazon.com/marketplace/
 - https://composio.dev/toolkits/namirial
+- https://ec.europa.eu/tools/lotl/eu-lotl.xml
+- https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
 - https://monid.ai/tools/namirial
 - https://n8n.io/integrations/namirial/
+- https://peppol.org/members/peppol-certified-service-providers/
 - https://www.esignanywhere.net/en/connectors/
+- https://www.impots.gouv.fr/je-consulte-la-liste-des-plateformes-agreees
+- https://www.streamlinedsalestax.org/certified-service-providers/certified-service-providers-list
 - https://zapier.com/apps/namirial/integrations
 summary: null
 marketplace_apps: []
@@ -100,4 +108,102 @@ edges:
   - Prepare and send for e-signature
   - File signed documents in Google Drive
   note: Integration with Google Drive
+- partner_name: OpenPeppol (certified service providers)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://peppol.org/members/peppol-certified-service-providers/
+  category: Peppol service provider
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: OpenPeppol certified service providers (peppol.org/members/peppol-certified-service-providers)
+    spec_file: null
+    standard: Peppol
+    role: peppol-certified-service-provider
+    registered_name: Namirial S.p.A.
+    legal_name: Namirial S.p.A.
+    matched_domain: namirial.com
+    matched_by: domain
+    domain_source: contact email domain
+    peppol_authorities:
+    - AGID
+    countries:
+    - Italy
+    certified_products:
+    - product: Access Point
+      lapsed: false
+    signal_note: certified_products = one entry per Peppol-certified SERVICE (Access Point, SMP); authorities and
+      countries are context, never read
+    detected_by: sweep-einvoicing-tax.py
+    detected: '2026-10-19'
+  detected_by: sweep-einvoicing-tax.py
+  first_seen: '2026-10-19'
+- partner_name: OpenPeppol (certified service providers)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://peppol.org/members/peppol-certified-service-providers/
+  category: Peppol service provider
+  channel: standard-directory
+  relationship: compatible
+  shape: peppol
+  evidence_kind: conformance-register
+  degree: certified
+  report_only: true
+  contract_reference:
+    register: OpenPeppol certified service providers (peppol.org/members/peppol-certified-service-providers)
+    spec_file: null
+    standard: Peppol
+    role: peppol-certified-service-provider
+    registered_name: Namirial S.p.A.
+    matched_domain: namirial.com
+    detected_by: sweep-einvoicing-tax.py
+    detected: '2026-10-19'
+  detected_by: sweep-einvoicing-tax.py
+  first_seen: '2026-10-19'
+- partner_name: EU Trusted List (eIDAS)
+  partner: null
+  partner_match: register
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
+  contract_reference:
+    register: EU List of Trusted Lists (eIDAS qualified trust service providers)
+    spec_file: null
+    role: qualified-trust-service-provider
+    registered_name: NAMIRIAL
+    member_state: FR
+    trusted_list: https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
+    services:
+    - QSeal-certificates
+    lotl: https://ec.europa.eu/tools/lotl/eu-lotl.xml
+    matched_domain: namirial.com
+    detected_by: sweep-legal.py
+    detected: '2026-10-19'
+  source: eutl
+  detected_by: sweep-legal.py
+  first_seen: '2026-10-19'
+- partner_name: AWS Marketplace
+  partner: amazon-web-services
+  partner_match: aggregator
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  relationship: distribution-channel
+  direction: third-party
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=38c87fa0-97a7-4305-a6eb-8c6289fa4024
+  listing_count: 4
+  apps:
+  - Certified Notification EviNotice
+  - Xyzmo Kiosk
+  - Certified Notification EviSMS
+  - Certified Email EviMail
+  seller_name: Namirial
+  detected_by: sweep-cloud-marketplaces.py
+  detected: '2026-10-19'
 templates: []

@@ -84,3 +84,70 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: namirial-openpeppol-certified-service-providers
+  label: OpenPeppol (certified service providers)
+  partner_name: OpenPeppol (certified service providers)
+  category: Peppol service provider
+  type: register
+  channel: standard-directory
+  evidence: https://peppol.org/members/peppol-certified-service-providers/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: OpenPeppol certified service providers (peppol.org/members/peppol-certified-service-providers)
+    spec_file: null
+    standard: Peppol
+    role: peppol-certified-service-provider
+    registered_name: Namirial S.p.A.
+    legal_name: Namirial S.p.A.
+    matched_domain: namirial.com
+    matched_by: domain
+    domain_source: contact email domain
+    peppol_authorities:
+    - AGID
+    countries:
+    - Italy
+    certified_products:
+    - product: Access Point
+      lapsed: false
+    signal_note: certified_products = one entry per Peppol-certified SERVICE (Access Point, SMP); authorities and
+      countries are context, never read
+    detected_by: sweep-einvoicing-tax.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: namirial-eu-trusted-list-eidas
+  label: EU Trusted List (eIDAS)
+  partner_name: EU Trusted List (eIDAS)
+  type: contract
+  channel: regulator-register
+  evidence: https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: EU List of Trusted Lists (eIDAS qualified trust service providers)
+    spec_file: null
+    role: qualified-trust-service-provider
+    registered_name: NAMIRIAL
+    member_state: FR
+    trusted_list: https://messervices.cyber.gouv.fr/visas/tl-fr_v6.xml
+    services:
+    - QSeal-certificates
+    lotl: https://ec.europa.eu/tools/lotl/eu-lotl.xml
+    matched_domain: namirial.com
+    detected_by: sweep-legal.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: namirial-aws-marketplace
+  label: AWS Marketplace
+  partner: amazon-web-services
+  partner_name: AWS Marketplace
+  type: marketplace
+  marketplace: aws-marketplace
+  channel: distribution
+  evidence: https://aws.amazon.com/marketplace/seller-profile?id=38c87fa0-97a7-4305-a6eb-8c6289fa4024
+  source: edge
+  relationship: distribution-channel
+  status: not-a-workflow
+  arazzo: null
